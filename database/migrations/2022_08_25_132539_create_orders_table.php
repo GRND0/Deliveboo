@@ -16,8 +16,8 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->double('total_price' , 6 ,2)->unsigned()->default(0);
-            // $table->bigInteger('restaurant_id')->unsigned();
-            $table->foreignId('restaurant_id')->constrained();
+            // $table->bigInteger('user_id')->unsigned();
+            $table->foreignId('user_id')->constrained();
             $table->boolean('payment')->default(false);
             $table->dateTime('date');
             $table->string('customer_name');

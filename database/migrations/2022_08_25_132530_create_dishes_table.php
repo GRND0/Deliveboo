@@ -19,8 +19,8 @@ class CreateDishesTable extends Migration
             $table->text('description')->nullable();
             $table->text('ingredients')->nullable();
             $table->double('price', 5 ,2)->unsigned()->default(0);
-            // $table->bigInteger('restaurant_id')->unsigned();
-            $table->foreignId('restaurant_id')->constrained();
+            // $table->bigInteger('user_id')->unsigned();
+            $table->foreignId('user_id')->constrained();
             $table->text('image')->nullable();
             $table->boolean('avaible')->default(true);
             $table->timestamps();
