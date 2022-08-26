@@ -6,7 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dish extends Model
 {
+
+    protected $fillable = [
+        'name',
+        'description',
+        'ingredients',
+        'price',
+        'user_id',
+        'available',
+        'image'
+    ];
+
+    // relazione 1 (user) a molti (dish)
     public function user() {
-        return $this->belongsToMany('App\User');
+        return $this->belongsTo('App\User');
+    }
+
+    // relazione molti a molti con Order
+    public function orders() {
+        return $this->belongsTo('App\Order');
     }
 }

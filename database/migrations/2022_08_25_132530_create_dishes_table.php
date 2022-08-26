@@ -22,7 +22,7 @@ class CreateDishesTable extends Migration
             // $table->bigInteger('user_id')->unsigned();
             $table->foreignId('user_id')->constrained();
             $table->text('image')->nullable();
-            $table->boolean('avaible')->default(true);
+            $table->boolean('available')->default(true);
             $table->timestamps();
         });
     }
