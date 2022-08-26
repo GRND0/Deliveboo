@@ -16,8 +16,7 @@ class UsersTableSeeder extends Seeder
     {
         for ($i = 1; $i <= 10; $i++) {
             $user = new User();
-            $user->user_name = $faker->firstName();
-            $user->user_lastname = $faker->lastName();
+            $user->name = $faker->name();
             $user->restaurant_name = $faker->company();
             $user->restaurant_phone = $faker->phoneNumber();
             $user->address = $faker->address();
