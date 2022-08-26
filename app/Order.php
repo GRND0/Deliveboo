@@ -22,4 +22,9 @@ class Order extends Model
     public function dishes() {
         return $this->belongsToMany('App\Dish');
     }
+
+    // relazione 1 a molti con user
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
 }

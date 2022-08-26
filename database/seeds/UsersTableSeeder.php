@@ -14,10 +14,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             $user = new User();
-            $user->user_name = $faker->name();
-            $user->user_lastname = $faker->name();
+            $user->user_name = $faker->firstName();
+            $user->user_lastname = $faker->lastName();
             $user->restaurant_name = $faker->company();
             $user->restaurant_phone = $faker->phoneNumber();
             $user->address = $faker->address();
@@ -28,8 +28,6 @@ class UsersTableSeeder extends Seeder
             $user->password = $faker->password();
             $user->remember_token = Str::random(10);
             $user->save();
-
-
         }
     }
 }

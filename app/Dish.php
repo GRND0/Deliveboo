@@ -24,6 +24,6 @@ class Dish extends Model
 
     // relazione molti a molti con Order
     public function orders() {
-        return $this->belongsTo('App\Order');
+        return $this->belongsToMany('App\Order');
     }
 }

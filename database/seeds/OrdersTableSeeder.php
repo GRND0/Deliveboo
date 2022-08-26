@@ -13,10 +13,10 @@ class OrdersTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             $order = new Order();
             $order->total_price = $faker->randomFloat(2, 1, 900);
-            $order->user_id = $faker->numberBetween(1, 10);
+            $order->user_id = $i;
             $order->payment = $faker->boolean();
             $order->date = $faker->dateTime();
             $order->customer_name = $faker->name();
