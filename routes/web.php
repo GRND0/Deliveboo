@@ -14,10 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('layouts.main-layout');
 });
 
-Auth::routes();
+Route::get('register', 'Auth\RegisterController@chooseCategory')->name('register');
 
 Route::get('/home', 'HomeController@index')->name('home');
