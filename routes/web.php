@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('layouts.main-layout');
-});
+Route::get('/', 'GuestController@index');
 
 Route::get('register', 'Auth\RegisterController@chooseCategory')->name('register');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('{any?}', function() {
+    return view('guest.index');
+})->where('any', '.*');

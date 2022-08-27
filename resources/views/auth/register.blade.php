@@ -11,7 +11,7 @@
                     <form method="POST" action="{{ route('register', $user) }}" enctype="multipart/form-data">
                         @csrf
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-1">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail*') }}</label>
 
                             <div class="col-md-6">
@@ -25,7 +25,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-1">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password*') }}</label>
 
                             <div class="col-md-6">
@@ -39,7 +39,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-1">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password*') }}</label>
 
                             <div class="col-md-6">
@@ -47,7 +47,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-1">
                             <label for="name"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Nome*') }}</label>
 
@@ -66,7 +66,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-1">
                             <label for="restaurant_name"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Nome Ristorante') }}</label>
 
@@ -85,7 +85,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-1">
                             <label for="restaurant_phone"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Telefono Ristorante') }}</label>
 
@@ -104,7 +104,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-1">
                             <label for="address"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo') }}</label>
 
@@ -122,7 +122,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-1">
                             <label for="p_iva"
                                 class="col-md-4 col-form-label text-md-right">{{ __('P. IVA') }}</label>
 
@@ -141,7 +141,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-1">
                             <label for="image"
                                 class="col-md-4 col-form-label text-md-right">{{ __('image (.png)') }}</label>
 
@@ -158,7 +158,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-1">
                             <label for="link_social_media"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Link social media') }}</label>
 
@@ -176,7 +176,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-1">
                             <label for="types"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Categorie*') }}</label>
 
