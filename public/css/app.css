@@ -12727,20 +12727,18 @@ footer .nav-footer .footer-card ul a {
 
 footer .nav-footer .footer-card ul a:hover {
   color: #00ccbc;
-  text-decoration: none;
 }
 
-footer .nav-footer .footer-card ul .register-btn {
-  color: #fff;
+footer .nav-footer .footer-card ul .btn-info {
   background: #00ccbc;
+  color: white;
   padding: 14px 24px;
-  border-radius: 4%;
   margin-top: 20px;
 }
 
-footer .nav-footer .footer-card ul .register-btn:hover {
-  color: #fff;
-  background-color: #05b7a8;
+footer .nav-footer .footer-card ul .btn-info:hover {
+  background-color: white;
+  color: #00ccbc;
 }
 
 footer .nav-footer .footer-card ul .subscribe {

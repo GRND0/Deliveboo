@@ -14,7 +14,7 @@
 
         {{-- voci menu --}}
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav d-flex align-items-end hamb-menu-clicked">
+          <div class="navbar-nav d-flex align-items-end">
             <a class="nav-link" href="">Collabora con noi</a>
             <a class="nav-link" href="">Menu</a>
 

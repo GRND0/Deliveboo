@@ -95,20 +95,17 @@ footer {
 
           &:hover {
             color: #00ccbc;
-            text-decoration: none;
           }
         }
 
-        .register-btn {
-          color: #fff;
+        .btn-info {
           background: #00ccbc;
+          color: white;
           padding: 14px 24px;
-          border-radius: 4%;
           margin-top: 20px;
-
           &:hover {
-            color: #fff;
-            background-color: #05b7a8;
+            background-color: white;
+            color: #00ccbc;
           }
         }
 

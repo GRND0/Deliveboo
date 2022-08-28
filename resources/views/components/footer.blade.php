@@ -15,7 +15,6 @@
             <li><a href="">Programmazione</a></li>
             <li><a href="">Design</a></li>
             <li><a href="">Lavora con noi</a></li>
-            <li><a href="">Diventa nostro partner</a></li>
           </ul>
         </div>
       </div>
@@ -51,7 +50,7 @@
           @else
             <h5>Diventa nostro partner</h5>
             <ul>
-                <li class="subscribe"><a class="register-btn" href="{{route('register')}}">Iscriviti</a></li>
+                <li class="subscribe"><a class="btn btn-info register-btn" href="{{route('register')}}">Iscriviti</a></li>
             </ul>
           @endauth
         </div>
