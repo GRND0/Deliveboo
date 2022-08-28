@@ -18,22 +18,19 @@ Auth::routes();
 
 Route::get('register', 'Auth\RegisterController@chooseCategory')->name('register');
 
-Route::middleware('auth')
-    ->namespace('Admin')
-    ->name('admin.')
-    ->prefix('admin')
-    ->group(function() {
-        Route::get('/', 'HomeController@index')->name('home');
-        Route::resource('posts', 'PostController');
+// Route::middleware('auth')
+//     ->namespace('Admin')
+//     ->name('admin.')
+//     ->prefix('admin')
+//     ->group(function() {
+//         Route::get('/', 'HomeController@index')->name('home');
+//         Route::resource('posts', 'PostController');
 
-        Route::get('posts/{slug}', 'PostController@show')->name('posts.show');
+//         Route::get('posts/{slug}', 'PostController@show')->name('posts.show');
         
-        Route::get('categories', 'CategoryController@index')->name('categories.index');
-        Route::get('categories/{slug}', 'CategoryController@show')->name('categories.show');
-
-        Route::get('tags', 'TagController@index')->name('tags.index');
-        Route::get('tags/{slug}', 'TagController@show')->name('tags.show');
-    });
+//         Route::get('categories', 'CategoryController@index')->name('categories.index');
+//         Route::get('categories/{slug}', 'CategoryController@show')->name('categories.show');
+//     });
 
 
 Route::get('/', 'GuestController@index');
