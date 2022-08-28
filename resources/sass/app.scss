@@ -6,3 +6,136 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+header { 
+  background: #fff;
+  width: 100%;
+  // min-height: 80px;
+  // DEBUG
+  height: 500px;
+  display: flex;
+  
+  .navbar {
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    z-index: 300;
+    border-bottom: 1px solid lightgray;
+  }
+
+  .navbar-collapse {
+    justify-content: right;
+  }
+
+  .img-logo {
+    width: 100%;
+    object-fit: contain;      
+  }
+
+  .navbar-brand {
+    width: 9%;
+  }
+  
+  a {
+    font-size: 17px;
+
+    a:hover {
+      color: #00ccbc;
+    }
+  }
+
+  .btn-info {
+    background: #00ccbc;
+    color: white;
+    &:hover {
+      background-color: white;
+      color: #00ccbc;
+    }
+  }
+}
+
+footer {
+  min-height: 400px;
+  color: white;
+  background-color: #2e3333;
+
+  .nav-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 25px;
+
+    .footer-card {
+      padding: 25px 20px;
+      background-color: #434848;
+      border-radius: 5px;
+      height: 100%;
+      margin-bottom: 10px;
+
+      h5 {
+        font-weight: 600;
+      }
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        a {
+          color: white;
+
+          &:hover {
+            color: #00ccbc;
+          }
+        }
+
+        .btn-info {
+          background: #00ccbc;
+          color: white;
+          padding: 14px 24px;
+          margin-top: 20px;
+          &:hover {
+            background-color: white;
+            color: #00ccbc;
+          }
+        }
+
+        .subscribe {
+          margin-top: 20px;
+        }
+      }
+
+      .app-store {
+        width: 200px;
+      }
+    }
+  }
+
+  .social-channels {
+    display: flex;
+    justify-content: space-between;
+
+    ul {
+      padding-left: 0;
+
+      li {
+        display: inline;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+    }
+
+    p {
+      color: white;
+    }
+  }
+}
