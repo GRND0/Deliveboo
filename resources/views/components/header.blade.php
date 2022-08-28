@@ -17,6 +17,7 @@
           <div class="navbar-nav d-flex align-items-end">
             <a class="nav-link" href="">Collabora con noi</a>
             <a class="nav-link" href="">Menu</a>
+            <a class="nav-link" href="/search">Cerca</a>
 
             @auth
               {{-- voci menu visibili se loggati --}}

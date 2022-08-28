@@ -1,6 +1,6 @@
-<div id="hero" class="position-relative bg-dark">
-    <img  src="/img/search_ok.jpg" alt="">
-    <div id="text-hero" class="text-center my-py-13 text-white position-absolute">
+<div class="bg-dark container">
+    <img  src="" alt="">
+    <div class="text-center text-white">
 
         <h1>Cerca</h1>
         <p>Scegli e ordina subito i tuoi piatti preferiti!</p>
