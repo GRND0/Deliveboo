@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
@@ -45,7 +46,8 @@ class GuestController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('guest.show', compact('user'));
     }
 
     /**
@@ -80,5 +82,9 @@ class GuestController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function restaurants(){
+        return view('guest.restaurants');
     }
 }

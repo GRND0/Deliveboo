@@ -1,4 +1,4 @@
-@extends('layouts.main-layout')
+@extends('layouts.main')
 @section('content')
-    ciao
+    admin home
 @endsection
