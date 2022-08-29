@@ -43,14 +43,14 @@ class DishController extends Controller
         
         if (isset($data['image'])) {
             $image_path = Storage::put('uploads', $data['image']);
-            $data['thumb'] = $image_path;
+            $data['image'] = $image_path;
         }
 
         $dish = new Dish();
         $dish->fill($data);
         $dish->save();
 
-        return redirect()->route('admin.dishes.index')->with('message', 'Piatto creato con successo!');
+        return redirect()->route('admin.dishes.index');
     }
 
     /**
@@ -88,9 +88,20 @@ class DishController extends Controller
     {
         $request->validate($this->getValidationRules());
         $data = $request->all();
+
+        $dish = Dish::findOrFail($dish->id);
+        if (isset($data['image'])) {
+            if ($dish->image) {
+                Storage::delete($dish->image);
+            }
+            $image_path = Storage::put('uploads', $data['image']);
+            $data['image'] = $image_path;
+        }
+
+
         $dish->fill($data);
         $dish->save();
-        return redirect()->route('admin.dishes.index')->with('message', 'Piatto modificato con successo!');
+        return redirect()->route('admin.dishes.index');
     }
 
     /**
@@ -103,7 +114,7 @@ class DishController extends Controller
     {
         $dish = Dish::findOrFail($id);
         $dish->delete();
-        return redirect()->route('admin.dishes.index')->with('message', 'Piatto eliminato');
+        return redirect()->route('admin.dishes.index');
     }
 
     private function getValidationRules()

@@ -67,7 +67,7 @@
 
 
                 </form>
-                <form action="{{ route('admin.dishes.destroy', ['dish' => $dish->id]) }}" method="POST">
+                <form class="mt-3" action="{{ route('admin.dishes.destroy', ['dish' => $dish->id]) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger" type="submit"

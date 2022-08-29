@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="price">Prezzo del piatto € (max 50.00)</label>
+                        <label for="price">Prezzo del piatto € (max 50,00)</label>
                         <input type="number" min="1" max="50" step=".01" class="form-control"
                             id="price" name="price" value="{{ old('price') }}">
                     </div>
