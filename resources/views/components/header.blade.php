@@ -18,6 +18,7 @@
             <a class="nav-link" href="">Collabora con noi</a>
             <a class="nav-link" href="">Menu</a>
             <a class="nav-link" href="/search">Cerca</a>
+            <a class="nav-link" href="/admin/dishes/">I tuoi piatti</a>
 
             @auth
               {{-- voci menu visibili se loggati --}}

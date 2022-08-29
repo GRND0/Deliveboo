@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Dish;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class DishController extends Controller
 {
@@ -39,6 +40,11 @@ class DishController extends Controller
     {
         $request->validate($this->getValidationRules());
         $data = $request->all();
+        
+        if (isset($data['image'])) {
+            $image_path = Storage::put('uploads', $data['image']);
+            $data['thumb'] = $image_path;
+        }
 
         $dish = new Dish();
         $dish->fill($data);
@@ -65,8 +71,10 @@ class DishController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
+
     {
-        
+        $dish = Dish::findOrFail($id);
+        return view('admin.dishes.edit', compact('dish'));
     }
 
     /**
@@ -76,9 +84,13 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dish $dish)
     {
-        //
+        $request->validate($this->getValidationRules());
+        $data = $request->all();
+        $dish->fill($data);
+        $dish->save();
+        return redirect()->route('admin.dishes.index')->with('message', 'Piatto modificato con successo!');
     }
 
     /**
@@ -89,7 +101,9 @@ class DishController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dish = Dish::findOrFail($id);
+        $dish->delete();
+        return redirect()->route('admin.dishes.index')->with('message', 'Piatto eliminato');
     }
 
     private function getValidationRules()
