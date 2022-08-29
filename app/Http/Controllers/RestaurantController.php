@@ -23,7 +23,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

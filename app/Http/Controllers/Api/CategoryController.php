@@ -14,11 +14,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-
-        /* $id = $request->id;
-        @dump($id);
-        @dump($request); */
+    {        
         $categories = Category::all();
         return response()->json($categories);
     }

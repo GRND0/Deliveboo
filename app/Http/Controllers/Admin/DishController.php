@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Dish;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DishController extends Controller
 {
@@ -13,7 +15,8 @@ class DishController extends Controller
      */
     public function index()
     {
-        //
+        $dishes = Dish::all();
+        return view('admin.dishes.index', compact('dishes'));
     }
 
     /**
@@ -23,7 +26,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.dishes.create');
     }
 
     /**
@@ -34,7 +37,14 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->getValidationRules());
+        $data = $request->all();
+
+        $dish = new Dish();
+        $dish->fill($data);
+        $dish->save();
+
+        return redirect()->route('admin.dishes.index')->with('message', 'Piatto creato con successo!');
     }
 
     /**
@@ -56,7 +66,7 @@ class DishController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -80,5 +90,17 @@ class DishController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function getValidationRules()
+    {
+        return [
+            'name' => 'required | max:255',
+            'description' => 'nullable |max:10000',
+            'ingredients' => 'nullable |max:10000',
+            'price' => 'numeric|required',
+            'available' => 'boolean | required',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
     }
 }
