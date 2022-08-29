@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
 <div class="container">
-    <h1 class="mb-1">Elenco dei tuoi piatti</h1>
+    <h1 class="mt-2 mb-1">Elenco dei tuoi piatti</h1>
     <a class="btn btn-success mb-3" href="/admin/dishes/create">Crea un nuovo piatto</a>
     <div class="row row-cols-4">
         @foreach ($dishes as $dish)

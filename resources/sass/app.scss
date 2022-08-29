@@ -25,10 +25,10 @@ a {
 header { 
   background: #fff;
   width: 100%;
-  // min-height: 80px;
+  min-height: 80px;
   // DEBUG
-  height: 500px;
-  display: flex;
+  // height: 300px;
+  padding-bottom: 80px;
   
   .navbar {
     width: 100%;
@@ -67,6 +67,10 @@ header {
       color: #00ccbc;
     }
   }
+}
+
+main {
+  min-height: calc(100vh - 498px);
 }
 
 footer {

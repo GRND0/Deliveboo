@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light position-fixed ">
+  <nav class="navbar navbar-expand-lg navbar-light position-fixed">
     <div class="container-fluid d-flex align-items-center">
 
         {{-- logo --}}
@@ -20,7 +20,7 @@
 
             @auth
               {{-- voci menu visibili se loggati --}}
-              <a class="nav-link" href="">
+              <a class="nav-link" href="/admin/">
                 {{ Auth::user()->name }}
               </a>
               <a class="btn btn-info mx-2" href="/admin/">Ritorna al tuo ristorante</a>
@@ -33,6 +33,7 @@
               
               @else
               {{-- voce menu visibile se non loggati --}}
+              <a class="nav-link" href="{{ route('login') }}">Login</a>
               <a class="nav-link" href="{{ route('register') }}">Diventa nostro partner</a>
             @endauth
           </div>

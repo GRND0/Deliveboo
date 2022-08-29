@@ -12652,8 +12652,8 @@ a {
 header {
   background: #fff;
   width: 100%;
-  height: 500px;
-  display: flex;
+  min-height: 80px;
+  padding-bottom: 80px;
 }
 
 header .navbar {
@@ -12694,6 +12694,10 @@ header .btn-info {
 header .btn-info:hover {
   background-color: white;
   color: #00ccbc;
+}
+
+main {
+  min-height: calc(100vh - 498px);
 }
 
 footer {

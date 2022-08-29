@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
     <div class="container">
@@ -6,7 +6,7 @@
 
             <div class="col-md-8">
 
-                <h1>Crea un nuovo piatto</h1>
+                <h1 class="mt-2">Crea un nuovo piatto</h1>
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
