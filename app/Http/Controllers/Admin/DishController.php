@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Dish;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class DishController extends Controller
@@ -16,7 +17,7 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::all();
+        $dishes = Dish::where('user_id', Auth::user()->id)->get();
         return view('admin.dishes.index', compact('dishes'));
     }
 
@@ -40,6 +41,7 @@ class DishController extends Controller
     {
         $request->validate($this->getValidationRules());
         $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
         
         if (isset($data['image'])) {
             $image_path = Storage::put('uploads', $data['image']);
@@ -125,7 +127,7 @@ class DishController extends Controller
             'ingredients' => 'nullable |max:10000',
             'price' => 'numeric|required',
             'available' => 'boolean | required',
-            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ];
     }
 }

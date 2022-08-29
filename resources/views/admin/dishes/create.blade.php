@@ -43,12 +43,6 @@
                             id="price" name="price" value="{{ old('price') }}">
                     </div>
 
-                    <div class="form-group">
-                        <label for="user_id">user id</label>
-                        <input type="number" class="form-control"
-                            id="user_id" name="user_id" value="{{ old('user_id') }}">
-                    </div>
-
                     <div class="mt-2">
                         <label for="image">Immagine</label>
                         <input type="file" name="image" id="image">

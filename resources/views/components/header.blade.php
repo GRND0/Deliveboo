@@ -15,8 +15,6 @@
         {{-- voci menu --}}
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav d-flex align-items-end">
-            <a class="nav-link" href="">Collabora con noi</a>
-            <a class="nav-link" href="">Menu</a>
             <a class="nav-link" href="/search">Cerca</a>
             <a class="nav-link" href="/admin/dishes/">I tuoi piatti</a>
 
@@ -25,7 +23,7 @@
               <a class="nav-link" href="">
                 {{ Auth::user()->name }}
               </a>
-              <a class="btn btn-info" href="">Ritorna al tuo ristorante</a>
+              <a class="btn btn-info mx-2" href="/admin/">Ritorna al tuo ristorante</a>
               <a class="btn btn-danger exit-btn" href="{{ route('logout') }}"onclick="event.preventDefault(); 
                 document.getElementById('logout-form').submit();"
                 > {{ __('Logout') }} </a>
