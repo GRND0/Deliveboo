@@ -64,6 +64,7 @@ class DishController extends Controller
     public function show($slug)
     {
         $dish = Dish::where('slug', '=', $slug)->first();
+        $this->authorize('show', $dish);
 
         return view('admin.dishes.show', compact('dish'));
     }
@@ -76,8 +77,9 @@ class DishController extends Controller
      */
     public function edit($id)
 
-    {
+    {        
         $dish = Dish::findOrFail($id);
+        $this->authorize('edit', $dish);
         return view('admin.dishes.edit', compact('dish'));
     }
 
@@ -90,6 +92,7 @@ class DishController extends Controller
      */
     public function update(Request $request, Dish $dish)
     {
+        $this->authorize('update', $dish);
         $request->validate($this->getValidationRules());
         $data = $request->all();
 
@@ -117,6 +120,7 @@ class DishController extends Controller
     public function destroy($id)
     {
         $dish = Dish::findOrFail($id);
+        $this->authorize('destroy', $dish);
         $dish->delete();
         return redirect()->route('admin.dishes.index');
     }
