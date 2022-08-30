@@ -16,10 +16,10 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav d-flex align-items-end">
             <a class="nav-link" href="/search">Cerca</a>
-            <a class="nav-link" href="/admin/dishes/">I tuoi piatti</a>
 
             @auth
               {{-- voci menu visibili se loggati --}}
+              <a class="nav-link" href="/admin/dishes/">I tuoi piatti</a>
               <a class="nav-link" href="/admin/">
                 {{ Auth::user()->name }}
               </a>

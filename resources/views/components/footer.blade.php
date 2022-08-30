@@ -60,9 +60,9 @@
     {{-- social channels  --}}
     <nav class="social-channels">
       <ul>
-        <li><a href=""><img src="" alt="facebook logo"></a></li>
-        <li><a href=""><img src="" alt="twitter logo"></a></li>
-        <li><a href=""><img src="" alt="instagram logo"></a></li>
+        <li><a class="h6"><i class="fab fa-facebook h2 mr-2"></i> Facebook</a></li>
+        <li><a class="h6 mr-2"><i class="fab fa-twitter h2 mr-2"></i> Twitter</a></li>
+        <li><a class="h6 mr-2"><i class="fab fa-linkedin-in h2 mr-2"></i> Linkedin</a></li>
       </ul>
       <p>2022 DeliveBoo - Classe 62 Team 3 with &hearts;</p>
     </nav>

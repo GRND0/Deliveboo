@@ -42,5 +42,5 @@ Route::post('/update', 'SearchController@update')->name('search.update');
 Route::get('/{id}', 'GuestController@show');
 
 Route::get('{any?}', function () {
-    return view('guest.index');
+    return view('guest.home');
 })->where('any', '.*');
