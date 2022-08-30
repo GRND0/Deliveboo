@@ -56,12 +56,18 @@
                     </div>
 
                     <div class="form-group mt-2">
-                        <input type="radio" id="available" name="available" value="1">
-                        <label for="available">Disponibile</label>
-                        <input type="radio" id="available" name="available" value="0">
-                        <label for="available">Non disponibile</label>
+                        @if ($dish->available)
+                            <input type="radio" id="available" name="available" checked value="1">
+                            <label for="available">Disponibile</label>
+                            <input type="radio" id="available" name="available" value="0">
+                            <label for="available">Non disponibile</label>
+                        @else
+                            <input type="radio" id="available" name="available"  value="1">
+                            <label for="available">Disponibile</label>
+                            <input type="radio" id="available" name="available" checked value="0">
+                            <label for="available">Non disponibile</label>
+                        @endif
                     </div>
-
 
                     <button type="submit" class="btn btn-primary mt-3">Modifica</button>
 

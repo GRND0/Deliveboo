@@ -13,10 +13,10 @@
                 @endif
                 <div class="card-body">
                     <h5 class="card-title mb-2">{{ $dish->name }}</h5>
-                    <a class="btn btn-sm btn-secondary mb-2" href="{{ route('admin.dishes.edit', $dish)}}">Modifica</a>
                     <p class="text-success mb-2">€ {{ $dish->price }}</p>
                     <p class="text-info text-truncate">{{ $dish->ingredients }}</p>
                     <p class="text-muted text-truncate">{{ $dish->description }}</p>
+                    <a href="{{ route('admin.dishes.show', ['slug' =>$dish->slug]) }}" class="btn btn-primary">Dettagli piatto</a>
                 </div>
             </div>
             </div>

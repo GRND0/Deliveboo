@@ -12649,6 +12649,10 @@ a {
      object-fit: cover;
 }
 
+.show-img {
+  width: 30vw;
+}
+
 header {
   background: #fff;
   width: 100%;

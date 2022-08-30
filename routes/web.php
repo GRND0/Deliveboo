@@ -24,7 +24,12 @@ Route::middleware('auth')
     ->prefix('admin')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
+
+        // dishes
         Route::resource('dishes', 'DishController');
+        Route::get('dishes/{slug}', 'DishController@show')->name('dishes.show');
+
+        // categories
         Route::get('categories', 'CategoryController@index')->name('categories.index');
         Route::get('categories/{slug}', 'CategoryController@show')->name('categories.show');
     });
