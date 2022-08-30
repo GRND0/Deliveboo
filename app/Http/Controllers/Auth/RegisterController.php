@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -55,7 +56,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:4', 'confirmed'],
             'name' => ['required', 'string', 'max:255'],
             'restaurant_name' => ['nullable', 'string', 'max:255'],
             'restaurant_phone' => ['unique:users', 'nullable', 'string', 'max:255'],
@@ -67,7 +68,7 @@ class RegisterController extends Controller
         ], [
             'email.unique' => 'L\'email inserita è già in uso',
             'password.confirmed' => 'Le password non corrispondono',
-            'password.min' => 'Le password deve essere di almeno 8 caratteri',
+            'password.min' => 'Le password deve essere di almeno 4 caratteri',
             'p_iva.unique' => 'La Partita IVA inserità è già in uso',
             'p_iva.min' => 'La Partita IVA deve essere di 13 caratteri',
             'p_iva.max' => 'La Partita IVA deve essere di 13 caratteri',
@@ -94,6 +95,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'p_iva' => $data['p_iva'],
             'image' => Storage::put('uploads', $data['image']),
+            'slug' => Str::slug($data['restaurant_name'], '-'),
         ]);
 
         $category = $data['category'];
@@ -101,6 +103,19 @@ class RegisterController extends Controller
 
         return $user;
     }
+
+    // private function generateSlugFromName($restaurant_name) {
+    //     $base_slug = Str::slug($restaurant_name, '-');
+    //     $slug = $base_slug;
+    //     $i = 1;
+    //     $restaurant_same_name = User::where('slug', '=', $slug)->first();
+    //     while ($restaurant_same_name) {
+    //         $slug = $base_slug . '-' . $i;
+    //         $restaurant_same_name = User::where('slug', '=', $slug)->first();
+    //         $i++;
+    //     }
+    //     return $slug;
+    // }
 
     public function chooseCategory(User $user){
 

@@ -51,7 +51,7 @@ class DishController extends Controller
 
         $dish = new Dish();
         $dish->fill($data);
-        $dish->slug = $this->generateSlugFromTitle($dish->name);
+        $dish->slug = $this->generateSlugFromName($dish->name);
         $dish->save();
 
         return redirect()->route('admin.dishes.index');
@@ -127,7 +127,7 @@ class DishController extends Controller
         return redirect()->route('admin.dishes.index');
     }
 
-    private function generateSlugFromTitle($name) {
+    private function generateSlugFromName($name) {
         $base_slug = Str::slug($name, '-');
         $slug = $base_slug;
         $i = 1;
