@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DishController extends Controller
 {
@@ -50,6 +51,7 @@ class DishController extends Controller
 
         $dish = new Dish();
         $dish->fill($data);
+        $dish->slug = $this->generateSlugFromTitle($dish->name);
         $dish->save();
 
         return redirect()->route('admin.dishes.index');
@@ -123,6 +125,19 @@ class DishController extends Controller
         $this->authorize('destroy', $dish);
         $dish->delete();
         return redirect()->route('admin.dishes.index');
+    }
+
+    private function generateSlugFromTitle($name) {
+        $base_slug = Str::slug($name, '-');
+        $slug = $base_slug;
+        $i = 1;
+        $dish_same_name = Dish::where('slug', '=', $slug)->first();
+        while ($dish_same_name) {
+            $slug = $base_slug . '-' . $i;
+            $dish_same_name = Dish::where('slug', '=', $slug)->first();
+            $i++;
+        }
+        return $slug;
     }
 
     private function getValidationRules()
