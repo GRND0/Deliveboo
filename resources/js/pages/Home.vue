@@ -14,6 +14,7 @@
               {{ category.name }}
             </option>
           </select>
+          <RestaurantsList />
         </div>
       </div>
     </div>
@@ -24,10 +25,12 @@
 
 <script>
 import axios from "axios";
+import RestaurantsList from "../components/RestaurantsList.vue";
+
 
 export default {
   name: "Home",
-  components: {},
+  components: { RestaurantsList },
   data() {
     return {
       categories: [],
