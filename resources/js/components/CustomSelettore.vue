@@ -1,13 +1,14 @@
 <template>
     <div>
         <div>
-            <label for="selettore-genere">Filtra per categoria</label>
+            <label for="categories">Filtra per categoria</label>
 
-            <select v-model="selezione" @change="$emit('opzione', selezione)" id="selettore-categoria">
+            <select 
+            name="categories" id="categories"
+            v-model="category" @change="$emit('opzione', category)" >
                 <option :value="category.id"
                     v-for="(category, index) in categories"
-                    :key="index"
-            >
+                    :key="index">
               {{ category.name }}
             </option>
             </select>
@@ -24,7 +25,8 @@ export default {
     name: "CustomSelettore",
     data: function () {
         return {
-            selezione: "",
+            categories: [],
+            category: null,
         };
     },
     methods: {},

@@ -5,16 +5,16 @@
       <div class="container py-5">
         <h2 class="text-center pb-3">Cerca tra i migliori ristoranti nella tua zona!</h2>
         <div>
-          <span>Filtra i ristoranti per categoria</span>
-          <select name="categories" id="categories" @change="sendCategories">
+          <!-- <label for="categories">Filtra i ristoranti per categoria</label>
+          <select name="categories" id="categories" @change="categoriaSelezionata">
             <option :value="category.id"
                     v-for="(category, index) in categories"
                     :key="index"
             >
               {{ category.name }}
             </option>
-          </select>
-          <RestaurantsList />
+          </select> -->
+          <ListaRistoranti />
         </div>
       </div>
     </div>
@@ -25,12 +25,12 @@
 
 <script>
 import axios from "axios";
-import RestaurantsList from "../components/RestaurantsList.vue";
+import ListaRistoranti from "../components/ListaRistoranti.vue";
 
 
 export default {
   name: "Home",
-  components: { RestaurantsList },
+  components: { ListaRistoranti },
   data() {
     return {
       categories: [],
@@ -38,8 +38,9 @@ export default {
     };
   },
   methods: {
-    sendCategories(e) {
-      console.log(e.target.value);
+    categoriaSelezionata(categoria) {
+      this.categoriaRistorante = categoria;
+      console.log("categoria id", categoria);
     },
   },
   created() {

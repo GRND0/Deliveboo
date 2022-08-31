@@ -2,7 +2,7 @@
     <main>
         <CustomSelettore @opzione="categoriaSelezionata($event)" />
         <div>
-            <SingleRestaurantCard v-for="(item,index) in ristorantiFiltrati" :key="index" :ristoranti="item" />
+            <SingleRestaurantCard v-for="(item,index) in ristorantiFiltrati" :key="index" :item="item" />
         </div>
 
     </main>
@@ -23,8 +23,8 @@
 
         data: function () {
             return {
-                ristoranti: [],
-                categoria: "",
+                item: [],
+                categoriaRistorante: "",
             };
         },
 
@@ -32,7 +32,8 @@
             axios
             .get("/api/users")
             .then((resp) => {
-                this.ristoranti = resp.data.restaurant_name
+                this.item = resp.data;
+                console.log("risposta axios lista ristoranti", this.item);
             }
              );
 
@@ -42,15 +43,16 @@
         methods: {
             categoriaSelezionata(categoria) {
                 this.categoriaRistorante = categoria;
+                console.log("categoria id", categoria);
             },
         },
 
         computed: {
             ristorantiFiltrati() {
-                return this.ristoranti.filter((item) => {
-                    return item.category.includes(this.categoriaRistorante);
-                }
-                );
+                return this.item.filter((item) => {
+                    item.category.includes(this.categoriaRistorante);
+                    console.log("categoria filtrata", this.categoriaRistorante);
+                });
             }
         }
     };
