@@ -45,12 +45,13 @@
         <div class="footer-card">
           @auth
             <h5>Porta Deliveboo con te</h5>
-            <img class="app-store" src="" alt="apple store logo">
-            <img class="app-store" src="" alt="play store logo">
+            <a href="">
+              <img class="app-store" src="https://png.monster/wp-content/uploads/2022/01/png.monster-281.png" alt="download app logo">
+            </a>     
           @else
             <h5>Diventa nostro partner</h5>
             <ul>
-                <li class="subscribe"><a class="btn btn-info register-btn" href="{{route('register')}}">Iscriviti</a></li>
+              <li class="subscribe"><a class="btn btn-info register-btn" href="{{route('register')}}">Iscriviti</a></li>
             </ul>
           @endauth
         </div>

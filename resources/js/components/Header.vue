@@ -2,7 +2,7 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <span class="navbar-brand" href="#">Deliveboo</span>
+        <span class="navbar-brand">Deliveboo</span>
         <button
           class="navbar-toggler"
           type="button"
@@ -52,10 +52,6 @@ export default {
           name: "about",
           title: "Chi Siamo"
         },
-        {
-          name: "contacts",
-          title: "Contattaci"
-        }
       ]
     }
   }

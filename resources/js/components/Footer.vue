@@ -45,8 +45,9 @@
       <div class="col-md-6 p-2 col-lg-3">
         <div class="footer-card">
             <h5>Porta Deliveboo con te</h5>
-            <img class="app-store" src="" alt="apple store logo">
-            <img class="app-store" src="" alt="play store logo">
+            <a href="">
+              <img class="app-store" src="https://png.monster/wp-content/uploads/2022/01/png.monster-281.png" alt="download app logo">
+            </a>            
         </div>
       </div>
     </div>

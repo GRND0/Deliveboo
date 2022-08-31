@@ -5175,9 +5175,6 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         name: "about",
         title: "Chi Siamo"
-      }, {
-        name: "contacts",
-        title: "Contattaci"
       }]
     };
   }
@@ -5318,25 +5315,25 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   data: function data() {
     return {
-      users: []
+      categories: [],
+      category: null
     };
-  } // mounted() {
-  //   axios
-  //        .get('/api/users/') // <-- problema con auth ? controllare route list
-  //       .then((response) => {
-  //         this.users = response.data;
-  //         console.log(this.users);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
+  },
+  // methods: {
+  //   sendCategories(e) {
+  //     console.log(e.target.value);
+  //   },
   // },
-  // computed: {
-  //     listRestaurants() {
-  //       return this.users;
-  //     },
-  // },
+  created: function created() {
+    var _this = this;
 
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/categories").then(function (response) {
+      _this.categories = response.data;
+      console.log(response.data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }
 });
 
 /***/ }),
@@ -5526,19 +5523,17 @@ var staticRenderFns = [function () {
     staticClass: "col-md-6 p-2 col-lg-3"
   }, [_c("div", {
     staticClass: "footer-card"
-  }, [_c("h5", [_vm._v("Porta Deliveboo con te")]), _vm._v(" "), _c("img", {
+  }, [_c("h5", [_vm._v("Porta Deliveboo con te")]), _vm._v(" "), _c("a", {
+    attrs: {
+      href: ""
+    }
+  }, [_c("img", {
     staticClass: "app-store",
     attrs: {
-      src: "",
-      alt: "apple store logo"
+      src: "https://png.monster/wp-content/uploads/2022/01/png.monster-281.png",
+      alt: "download app logo"
     }
-  }), _vm._v(" "), _c("img", {
-    staticClass: "app-store",
-    attrs: {
-      src: "",
-      alt: "play store logo"
-    }
-  })])])]), _vm._v(" "), _c("nav", {
+  })])])])]), _vm._v(" "), _c("nav", {
     staticClass: "social-channels"
   }, [_c("ul", [_c("li", [_c("a", {
     staticClass: "h6"
@@ -5579,10 +5574,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "container-fluid"
   }, [_c("span", {
-    staticClass: "navbar-brand",
-    attrs: {
-      href: "#"
-    }
+    staticClass: "navbar-brand"
   }, [_vm._v("Deliveboo")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "collapse navbar-collapse",
     attrs: {
@@ -5910,24 +5902,19 @@ var render = function render() {
     staticClass: "container py-5"
   }, [_c("h2", {
     staticClass: "text-center pb-3"
-  }, [_vm._v("I migliori ristoranti nella tua zona!")]), _vm._v(" "), _c("div", _vm._l(_vm.listRestaurants, function (user, index) {
-    return _c("a", {
+  }, [_vm._v("Cerca tra i migliori ristoranti nella tua zona!")]), _vm._v(" "), _c("div", [_c("span", [_vm._v("Filtra i ristoranti per categoria")]), _vm._v(" "), _c("select", {
+    attrs: {
+      name: "categories",
+      id: "categories"
+    }
+  }, _vm._l(_vm.categories, function (category, index) {
+    return _c("option", {
       key: index,
-      staticClass: "d-flex",
-      attrs: {
-        href: ""
+      domProps: {
+        value: category.id
       }
-    }, [_c("img", {
-      attrs: {
-        src: user.image,
-        alt: user.restaurant_name
-      }
-    }), _vm._v(" "), _c("div", {
-      staticClass: "p-4"
-    }, [_c("h3", {
-      staticClass: "font-weight-bold"
-    }, [_vm._v(_vm._s(user.restaurant_name))])])]);
-  }), 0)])])])]);
+    }, [_vm._v("\r\n              " + _vm._s(category.name) + "\r\n            ")]);
+  }), 0)])])])])]);
 };
 
 var staticRenderFns = [];
@@ -11281,7 +11268,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "img[data-v-b3c5cf30] {\n  width: 30%;\n  height: 15vh;\n  -o-object-fit: cover;\n     object-fit: cover;\n}", ""]);
+exports.push([module.i, "img[data-v-b3c5cf30] {\n  width: 30%;\n  height: 15vh;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\nselect[data-v-b3c5cf30] {\n  min-width: 100px;\n}", ""]);
 
 // exports
 
