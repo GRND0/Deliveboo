@@ -1,15 +1,15 @@
 <template>
   <div>
-    <PostsList />
+    <RestaurantsList />
   </div>
 </template>
 
 <script>
-import PostsList from "../components/PostsList.vue";
+import RestaurantsList from "../components/RestaurantsList.vue";
 export default {
     name: "Blog",
     components: {
-      PostsList
+      RestaurantsList
     }
 }
 </script>

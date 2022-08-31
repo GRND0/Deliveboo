@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="mt-4">Lista dei post | Totale: {{ totalPosts }}</h1>
+        <h1 class="mt-4">Lista dei ristoranti | Totale: {{ totalPosts }}</h1>
         <div class="form-group">
             <label for="elements_in_page"> Elementi in pagina</label>
             <select @change="getPosts(1)"
@@ -21,7 +21,7 @@
                 v-for="post in posts"
                 :key="post.id"            
             >
-                <PostCard :post="post" />
+                <SingleRestaurantCard :post="post" />
             </div>
         </div>
 
@@ -67,11 +67,11 @@
 </template>
 
 <script>
-import PostCard from "../components/PostCard.vue";
+import SingleRestaurantCard from "./SingleRestaurantCard.vue";
 export default {
-    name: 'PostsList',
+    name: 'RestaurantsList',
     components: {
-        PostCard
+        SingleRestaurantCard
     },
     data() {
         return {
@@ -87,7 +87,7 @@ export default {
     },
     methods: {
         getPosts(pageNumber) {
-            axios.get("/api/posts", {
+            axios.get("/api/users", {
                 params: {
                     page: pageNumber,
                     elements_in_page: this.elementsInPage

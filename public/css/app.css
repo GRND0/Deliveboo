@@ -23107,6 +23107,15 @@ readers do not read off random characters that represent icons */
   content: "\F63F";
 }
 
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+main {
+  min-height: calc(100vh - 480px);
+}
+
 ul {
   list-style: none;
 }
@@ -23129,7 +23138,7 @@ a {
 header {
   background: #fff;
   width: 100%;
-  min-height: 80px;
+  height: 80px;
 }
 
 header .navbar {
@@ -23170,10 +23179,6 @@ header .btn-info {
 header .btn-info:hover {
   background-color: white;
   color: #00ccbc;
-}
-
-main {
-  min-height: calc(100vh - 498px);
 }
 
 footer {
@@ -23249,9 +23254,5 @@ footer .social-channels ul li {
   display: inline;
   margin-right: 10px;
   cursor: pointer;
-}
-
-footer .social-channels p {
-  color: white;
 }
 

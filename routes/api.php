@@ -20,3 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // route per chiamata api per filtrare le categorie
 Route::get('/categories', 'Api\CategoryController@index');
+
+// route per visualizzare lista ristoranti e singolo ristorante
+Route::get('/users', 'Api\UserController@index'); 
+Route::get('/users/{id}', 'Api\UserController@show');

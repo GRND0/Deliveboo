@@ -46,7 +46,7 @@ export default {
         },
         {
           name: "blog",
-          title: "Blog delle ricette"
+          title: "Lista dei ristoranti"
         },
         {
           name: "about",
