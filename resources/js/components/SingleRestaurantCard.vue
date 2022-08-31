@@ -1,4 +1,5 @@
 <template>
+
   <div class="card mt-2 mb-2">
     <img v-if="item.image" class="card-img-top" :src="item.image" alt=""/>
     <div class="card-body">
@@ -14,7 +15,7 @@
 export default {
   name: "SingleRestaurantCard",
   props: {
-    item: Object
+    item: Object,
   },
   // computed: {
   //   category() {

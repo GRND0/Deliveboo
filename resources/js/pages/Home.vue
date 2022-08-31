@@ -37,22 +37,22 @@ export default {
       category: null,
     };
   },
-  methods: {
-    categoriaSelezionata(categoria) {
-      this.categoriaRistorante = categoria;
-      console.log("categoria id", categoria);
-    },
-  },
-  created() {
-    axios
-      .get("/api/categories")
-      .then((response)=> {
-        this.categories = response.data;
-      })
-      .catch((error)=> {
-        console.log(error);
-      });
-  },
+  // methods: {
+  //   categoriaSelezionata(categoria) {
+  //     this.categoriaRistorante = categoria;
+  //     console.log("categoria id", categoria);
+  //   },
+  // },
+  // created() {
+  //   axios
+  //     .get("/api/categories")
+  //     .then((response)=> {
+  //       this.categories = response.data;
+  //     })
+  //     .catch((error)=> {
+  //       console.log(error);
+  //     });
+  // },
 };
 </script>
 

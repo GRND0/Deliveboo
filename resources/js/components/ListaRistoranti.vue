@@ -50,8 +50,8 @@
         computed: {
             ristorantiFiltrati() {
                 return this.item.filter((item) => {
-                    item.category.includes(this.categoriaRistorante);
-                    console.log("categoria filtrata", this.categoriaRistorante);
+                    console.log("ristorantiFiltrati", this.categoriaRistorante);
+                   return item.categories.includes(this.categoriaRistorante);
                 });
             }
         }

@@ -5261,8 +5261,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       return this.item.filter(function (item) {
-        item.category.includes(_this2.categoriaRistorante);
-        console.log("categoria filtrata", _this2.categoriaRistorante);
+        console.log("ristorantiFiltrati", _this2.categoriaRistorante);
+        return item.categories.includes(_this2.categoriaRistorante);
       });
     }
   }
@@ -5401,22 +5401,23 @@ __webpack_require__.r(__webpack_exports__);
       categories: [],
       category: null
     };
-  },
-  methods: {
-    categoriaSelezionata: function categoriaSelezionata(categoria) {
-      this.categoriaRistorante = categoria;
-      console.log("categoria id", categoria);
-    }
-  },
-  created: function created() {
-    var _this = this;
+  } // methods: {
+  //   categoriaSelezionata(categoria) {
+  //     this.categoriaRistorante = categoria;
+  //     console.log("categoria id", categoria);
+  //   },
+  // },
+  // created() {
+  //   axios
+  //     .get("/api/categories")
+  //     .then((response)=> {
+  //       this.categories = response.data;
+  //     })
+  //     .catch((error)=> {
+  //       console.log(error);
+  //     });
+  // },
 
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/categories").then(function (response) {
-      _this.categories = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  }
 });
 
 /***/ }),
