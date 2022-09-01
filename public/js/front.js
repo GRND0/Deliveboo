@@ -5239,6 +5239,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       item: [],
+      element: [],
       categoriaRistorante: ""
     };
   },
@@ -5247,8 +5248,7 @@ __webpack_require__.r(__webpack_exports__);
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/users").then(function (resp) {
       _this.item = resp.data;
-      console.log("risposta axios lista ristoranti", _this.item);
-      console.log("risposta axios categorie", _this.item[12].categories[1].id);
+      console.log("risposta axios lista ristoranti", _this.item); //   console.log("risposta axios categorie", this.item[12].categories[1].id);
     });
   },
   methods: {
@@ -5261,11 +5261,25 @@ __webpack_require__.r(__webpack_exports__);
     ristorantiFiltrati: function ristorantiFiltrati() {
       var _this2 = this;
 
-      return this.item.filter(function (item) {
-        // console.log("ristorantiFiltrati con categoria id", this.categoriaRistorante);
-        return item.categories.includes(_this2.categoriaRistorante);
+      var results = [];
+      this.item.forEach(function (element) {
+        element.categories.forEach(function (category) {
+          console.log("id categorie prima di ciclo if=", category.id, "user id=", element.id);
+
+          if (category.id == _this2.categoriaRistorante) {
+            results.push(element.id);
+          }
+        });
       });
-    }
+      console.log("result", results);
+      return results;
+    } // ristorantiFiltrati() {
+    //     return this.item.filter((item) => {
+    //          console.log("ristorantiFiltrati con categoria id", this.categoriaRistorante);
+    //        return item.categories.includes(this.categoriaRistorante);
+    //     });
+    // }
+
   }
 });
 

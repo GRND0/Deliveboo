@@ -2,9 +2,6 @@
 
 @section('content')
 
-{{-- <script src="jquery.js"></script>
-<script src="parsley.min.js"></script> --}}
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -12,14 +9,14 @@
                 <div class="card-header">{{ __('Registrati') }}</div>
 
                 <div class="card-body">
-                    <form id="formRegistrazione" method="POST" action="{{ route('register', $user) }}" enctype="multipart/form-data" data-parsley-validate>
+                    <form id="formRegistrazione" method="POST" action="{{ route('register', $user) }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row mb-1">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail*') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required data-parsley-type="email" data-parsley-trigger="keyup" autocomplete="email" placeholder="nome@mail.com"  >
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="nome@mail.com">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -33,7 +30,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password*') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required data-parsley-length="[4]" data-parsley-trigger="keyup" autocomplete="new-password" placeholder="Inserire almeno 4 caratteri alfanumerici">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="la password deve essere di almeno 4 caratteri">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -152,7 +149,7 @@
                             <div class="col-md-6">
                                 <input id="image" type="file" accept="image/png"
                                     class="form-control @error('image') is-invalid @enderror" name="image"
-                                    value="{{ old('image') }}" autocomplete="image" autofocus>
+                                    value="{{ ('image') }}" autocomplete="image" autofocus>
 
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">
@@ -187,8 +184,12 @@
                             <div class="col-md-6">
                                 @foreach ($categories as $category)
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
-                                            name="category[]">
+                                        <input 
+                                            name="categories[]"
+                                            class="form-check-input" 
+                                            type="checkbox" 
+                                            value="{{ $category->id }}"
+                                            {{ in_array( $category->id, old('categories', [])) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="categories">
                                             {{ ucfirst($category->name) }}
                                         </label>
@@ -218,12 +219,6 @@
         </div>
     </div>
 </div>
-
-{{-- <script type="text/javascript">
-    $(function(){
-        $('#formRegistrazione').parsley();
-    })
-</script> --}}
 
 @endsection
 

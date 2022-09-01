@@ -4,7 +4,7 @@
             <label for="categories">Filtra per categoria</label>
 
             <select 
-            name="categories" id="categories"
+            name="categories" id="categories"  
             v-model="category" @change="$emit('opzione', category)" >
                 <option :value="category.id"
                     v-for="(category, index) in categories"

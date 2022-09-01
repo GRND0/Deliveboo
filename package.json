@@ -25,7 +25,6 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "parsleyjs": "^2.9.2",
         "vue-router": "^3.6.4"
     }
 }
