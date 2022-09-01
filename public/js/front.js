@@ -5535,42 +5535,27 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("div", [_c("label", {
-    attrs: {
-      "for": "categories"
-    }
-  }, [_vm._v("Filtra per categoria")]), _vm._v(" "), _c("select", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.category,
-      expression: "category"
-    }],
-    attrs: {
-      name: "categories",
-      id: "categories"
-    },
-    on: {
-      change: [function ($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-          return o.selected;
-        }).map(function (o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val;
-        });
-        _vm.category = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
-      }, function ($event) {
-        return _vm.$emit("opzione", _vm.category);
-      }]
-    }
+  return _c("div", {
+    staticClass: "container"
+  }, [_c("div", {
+    staticClass: "row"
   }, _vm._l(_vm.categories, function (category, index) {
-    return _c("option", {
+    return _c("div", {
       key: index,
-      domProps: {
-        value: category.id
+      staticClass: "col-6 mb-3"
+    }, [_c("div", {
+      staticClass: "card"
+    }, [_c("div", {
+      staticClass: "card-body my-pointer",
+      on: {
+        click: function click($event) {
+          return _vm.$emit("opzione", category);
+        }
       }
-    }, [_vm._v("\n          " + _vm._s(category.name) + "\n        ")]);
-  }), 0)])]);
+    }, [_c("div", {
+      staticClass: "text-center"
+    }, [_vm._v("\n                        " + _vm._s(category.name) + "\n                    ")])])])]);
+  }), 0)]);
 };
 
 var staticRenderFns = [];
@@ -6097,7 +6082,7 @@ var render = function render() {
     staticClass: "container py-5"
   }, [_c("h2", {
     staticClass: "text-center pb-3"
-  }, [_vm._v("Cerca tra i migliori ristoranti nella tua zona!")]), _vm._v(" "), _c("div", [_c("ListaRistoranti")], 1)])])])]);
+  }, [_vm._v("Seleziona una o più categorie tra i ristoranti presenti nella tua zona!")]), _vm._v(" "), _c("div", [_c("ListaRistoranti")], 1)])])])]);
 };
 
 var staticRenderFns = [];
