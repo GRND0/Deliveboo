@@ -19,7 +19,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail*') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required data-parsley-type="email" data-parsley-trigger="keyup" autocomplete="email" placeholder="nome@mail?.com"  >
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required data-parsley-type="email" data-parsley-trigger="keyup" autocomplete="email" placeholder="nome@mail.com"  >
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -219,11 +219,11 @@
     </div>
 </div>
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     $(function(){
         $('#formRegistrazione').parsley();
     })
-</script>
+</script> --}}
 
 @endsection
 
