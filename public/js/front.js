@@ -5248,6 +5248,7 @@ __webpack_require__.r(__webpack_exports__);
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/users").then(function (resp) {
       _this.item = resp.data;
       console.log("risposta axios lista ristoranti", _this.item);
+      console.log("risposta axios categorie", _this.item[12].categories[1].id);
     });
   },
   methods: {
@@ -5261,7 +5262,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       return this.item.filter(function (item) {
-        console.log("ristorantiFiltrati", _this2.categoriaRistorante);
+        // console.log("ristorantiFiltrati con categoria id", this.categoriaRistorante);
         return item.categories.includes(_this2.categoriaRistorante);
       });
     }
@@ -5775,10 +5776,10 @@ render._withStripped = true;
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListaRistoranti.vue?vue&type=template&id=ff425636&":
-/*!************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ListaRistoranti.vue?vue&type=template&id=ff425636& ***!
-  \************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListaRistoranti.vue?vue&type=template&id=ff425636&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ListaRistoranti.vue?vue&type=template&id=ff425636&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -58705,7 +58706,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ListaRistoranti_vue_vue_type_template_id_ff425636___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListaRistoranti.vue?vue&type=template&id=ff425636& */ "./resources/js/components/ListaRistoranti.vue?vue&type=template&id=ff425636&");
+/* harmony import */ var _ListaRistoranti_vue_vue_type_template_id_ff425636_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListaRistoranti.vue?vue&type=template&id=ff425636&scoped=true& */ "./resources/js/components/ListaRistoranti.vue?vue&type=template&id=ff425636&scoped=true&");
 /* harmony import */ var _ListaRistoranti_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListaRistoranti.vue?vue&type=script&lang=js& */ "./resources/js/components/ListaRistoranti.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -58717,11 +58718,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _ListaRistoranti_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ListaRistoranti_vue_vue_type_template_id_ff425636___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ListaRistoranti_vue_vue_type_template_id_ff425636___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ListaRistoranti_vue_vue_type_template_id_ff425636_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ListaRistoranti_vue_vue_type_template_id_ff425636_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "ff425636",
   null
   
 )
@@ -58747,19 +58748,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/ListaRistoranti.vue?vue&type=template&id=ff425636&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/ListaRistoranti.vue?vue&type=template&id=ff425636& ***!
-  \************************************************************************************/
+/***/ "./resources/js/components/ListaRistoranti.vue?vue&type=template&id=ff425636&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/ListaRistoranti.vue?vue&type=template&id=ff425636&scoped=true& ***!
+  \************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ListaRistoranti_vue_vue_type_template_id_ff425636___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../node_modules/vue-loader/lib??vue-loader-options!./ListaRistoranti.vue?vue&type=template&id=ff425636& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListaRistoranti.vue?vue&type=template&id=ff425636&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ListaRistoranti_vue_vue_type_template_id_ff425636___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ListaRistoranti_vue_vue_type_template_id_ff425636_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../node_modules/vue-loader/lib??vue-loader-options!./ListaRistoranti.vue?vue&type=template&id=ff425636&scoped=true& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListaRistoranti.vue?vue&type=template&id=ff425636&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ListaRistoranti_vue_vue_type_template_id_ff425636_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ListaRistoranti_vue_vue_type_template_id_ff425636___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ListaRistoranti_vue_vue_type_template_id_ff425636_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -69,7 +69,7 @@
                         @endif
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-3">Modifica</button>
+                    <button type="submit" class="btn btn-primary mt-3">Salva modifiche</button>
 
 
                 </form>

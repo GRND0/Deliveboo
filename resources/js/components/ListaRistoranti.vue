@@ -34,6 +34,9 @@
             .then((resp) => {
                 this.item = resp.data;
                 console.log("risposta axios lista ristoranti", this.item);
+                console.log("risposta axios categorie", this.item[12].categories[1].id);
+                
+                
             }
              );
 
@@ -50,10 +53,15 @@
         computed: {
             ristorantiFiltrati() {
                 return this.item.filter((item) => {
-                    console.log("ristorantiFiltrati", this.categoriaRistorante);
+                    // console.log("ristorantiFiltrati con categoria id", this.categoriaRistorante);
+
                    return item.categories.includes(this.categoriaRistorante);
                 });
             }
         }
     };
   </script>
+
+  <style scoped>
+  
+  </style>

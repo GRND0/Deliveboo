@@ -2,8 +2,8 @@
 
 @section('content')
 
-<script src="jquery.js"></script>
-<script src="parsley.min.js"></script>
+{{-- <script src="jquery.js"></script>
+<script src="parsley.min.js"></script> --}}
 
 <div class="container">
     <div class="row justify-content-center">
@@ -72,7 +72,7 @@
 
                         <div class="form-group row mb-1">
                             <label for="restaurant_name"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Nome Ristorante') }}</label>
+                                class="col-md-4 col-form-label text-md-right">{{ __('Nome Ristorante*') }}</label>
 
                             <div class="col-md-6">
 
@@ -91,7 +91,7 @@
 
                         <div class="form-group row mb-1">
                             <label for="restaurant_phone"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Telefono Ristorante') }}</label>
+                                class="col-md-4 col-form-label text-md-right">{{ __('Telefono Ristorante*') }}</label>
 
                             <div class="col-md-6">
 
@@ -110,7 +110,7 @@
 
                         <div class="form-group row mb-1">
                             <label for="address"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo') }}</label>
+                                class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo*') }}</label>
 
                             <div class="col-md-6">
                                 <input id="address" type="text"
@@ -128,7 +128,7 @@
 
                         <div class="form-group row mb-1">
                             <label for="p_iva"
-                                class="col-md-4 col-form-label text-md-right">{{ __('P. IVA') }}</label>
+                                class="col-md-4 col-form-label text-md-right">{{ __('P. IVA*') }}</label>
 
                             <div class="col-md-6">
 
@@ -147,7 +147,7 @@
 
                         <div class="form-group row mb-1">
                             <label for="image"
-                                class="col-md-4 col-form-label text-md-right">{{ __('image (.png)') }}</label>
+                                class="col-md-4 col-form-label text-md-right">{{ __('image (.png)*') }}</label>
 
                             <div class="col-md-6">
                                 <input id="image" type="file" accept="image/png"
@@ -164,7 +164,7 @@
 
                         <div class="form-group row mb-1">
                             <label for="link_social_media"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Link social media') }}</label>
+                                class="col-md-4 col-form-label text-md-right">{{ __('Link social media*') }}</label>
 
                             <div class="col-md-6">
                                 <input id="link_social_media" type="text"

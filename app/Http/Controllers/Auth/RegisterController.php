@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'restaurant_name' => ['required', 'string', 'max:255'],
             'restaurant_phone' => ['unique:users', 'required', 'string', 'max:255'],
-            'link_social_media' => ['required', 'string'],
+            'link_social_media' => ['required', 'string', 'link'],
             'address' => ['required', 'string', 'max:255'],
             'p_iva' => ['unique:users', 'required', 'string', 'min:13', 'max:13'],
             'image' => ['required', 'image'],
@@ -73,6 +73,8 @@ class RegisterController extends Controller
             'p_iva.min' => 'La Partita IVA deve essere di 13 caratteri',
             'p_iva.max' => 'La Partita IVA deve essere di 13 caratteri',
             'restaurant_phone.unique' => 'Numero già in uso',
+            'image.image' => 'immagine non valida',
+            'link_social_media.link' => 'link non valido',
             'category.required' => 'Devi selezionare almeno una categoria',
         ]);
     }

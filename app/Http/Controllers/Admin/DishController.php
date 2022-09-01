@@ -54,7 +54,7 @@ class DishController extends Controller
         $dish->slug = $this->generateSlugFromName($dish->name);
         $dish->save();
 
-        return redirect()->route('admin.dishes.index');
+        return redirect()->route('admin.dishes.index')->with('message', 'Piatto creato con successo');
     }
 
     /**
@@ -110,7 +110,7 @@ class DishController extends Controller
 
         $dish->fill($data);
         $dish->save();
-        return redirect()->route('admin.dishes.index');
+        return redirect()->route('admin.dishes.index')->with('message', 'Piatto modificato con successo');
     }
 
     /**
@@ -124,7 +124,7 @@ class DishController extends Controller
         $dish = Dish::findOrFail($id);
         $this->authorize('destroy', $dish);
         $dish->delete();
-        return redirect()->route('admin.dishes.index');
+        return redirect()->route('admin.dishes.index')->with('message', 'Piatto eliminato');
     }
 
     private function generateSlugFromName($name) {
