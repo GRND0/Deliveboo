@@ -2,7 +2,7 @@
   <div class="container">
     <section v-if="user">    
       <h1 class="mt-4">{{ user.restaurant_name }}</h1>
-      <h6><strong>Categoria: {{ category }}</strong></h6>
+      <!-- <h6><strong>Categoria: {{ user.category }}</strong></h6> -->
       <div v-if="user.image">
         <img :src="user.image" alt=""/>
       </div>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "SinglePost",
+  name: "SingleRestaurantPage",
   data() {
     return {
       user: null,
@@ -24,9 +24,9 @@ export default {
     this.getDetails();
   },
   computed: {
-    category() {
-      return this.user.category ? this.user.category.name : "nessuna";
-    }
+    // category() {
+    //   return this.user.category ? this.user.category.name : "nessuna";
+    // }
   },
   methods: {
     getDetails() {

@@ -14,7 +14,7 @@ export default {
 <style lang="scss" scoped>
 .back {
   position: absolute;
-  top: 65%;
+  top: 40%;
   left: 50%; 
   transform: translate(-50%, -50%);
   font-size: 2rem;
@@ -22,7 +22,7 @@ export default {
 
 h1 {
   position: absolute;
-  top: 50%;
+  top: 20%;
   left: 50%; 
   transform: translate(-50%, -50%);
   font-size: 4rem;

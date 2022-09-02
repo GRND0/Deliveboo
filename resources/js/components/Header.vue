@@ -45,10 +45,6 @@ export default {
           title: "Home"
         },
         {
-          name: "blog",
-          title: "Lista dei ristoranti"
-        },
-        {
           name: "about",
           title: "Chi Siamo"
         },

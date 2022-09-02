@@ -23,4 +23,4 @@ Route::get('/categories', 'Api\CategoryController@index');
 
 // route per visualizzare lista ristoranti e singolo ristorante
 Route::get('/users', 'Api\UserController@index'); 
-Route::get('/users/{id}', 'Api\UserController@show');
+Route::get('/users/{slug}', 'Api\UserController@show');

@@ -2,7 +2,7 @@
   <div class="row">
     <label
       v-for="category in categories"
-      class="col-6 mb-3 py-2 d-flex flex-row justify-content-between align-items-center card"
+      class="col-12 col-md-6 mb-3 py-2 d-flex flex-row justify-content-between align-items-center card"
       :key="category.id"
     >
       {{ category.name }}
@@ -69,21 +69,21 @@ export default {
       });
     },
 
-    methods: { 
-        async findByCheckbox() {
-            if (this.checkbox.length == 0) {
-                this.checkbox = [0].checked;
-            }
+    // methods: { 
+    //     async findByCheckbox() {
+    //         if (this.checkbox.length == 0) {
+    //             this.checkbox = [0].checked;
+    //         }
 
-            await axios
-                    .get(`/api/categories` + this.checkbox)
-                    .then((response)=> {
-                        this.restaurants = response.data;
-                        console.log("ristoranti",this.restaurants);
-                    });
+    //         await axios
+    //                 .get(`/api/categories` + this.checkbox)
+    //                 .then((response)=> {
+    //                     this.restaurants = response.data;
+    //                     console.log("ristoranti",this.restaurants);
+    //                 });
 
-        }
-    },
+    //     }
+    // },
 };
 </script>
 

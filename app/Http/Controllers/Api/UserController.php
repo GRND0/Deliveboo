@@ -16,7 +16,10 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('categories')->get();
-        return response()->json($users);
+        return response()->json([
+            'success' => true,
+            'results' => $users                      
+        ]);
     }
 
     /**
@@ -27,7 +30,20 @@ class UserController extends Controller
      */
     public function show($slug)
     {
-        $users = User::with('categories', 'dishes')->findOrFail($slug);
-        return response()->json($users);
+        dd($slug);
+        $user = User::with('categories', 'dishes')->findOrFail($slug);
+        return response()->json($user);
+
+        $user = User::where('slug', '=', $slug)->with(['category'])->first();
+        if ($user) {
+            return response()->json([
+                'success' => true,
+                'results' => $user 
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'error' => 'nessun user corrispondente'                      
+        ]);
     }
 }
