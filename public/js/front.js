@@ -5240,7 +5240,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       item: [],
       element: [],
-      categoriaRistorante: ""
+      categoriaRistorante: null
     };
   },
   created: function created() {
@@ -5254,7 +5254,8 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     categoriaSelezionata: function categoriaSelezionata(categoria) {
       this.categoriaRistorante = categoria;
-      console.log("categoria id", categoria);
+      console.log("categoriaSelezionata", this.categoriaRistorante);
+      return this.categoriaRistorante;
     }
   },
   computed: {
@@ -5264,10 +5265,10 @@ __webpack_require__.r(__webpack_exports__);
       var results = [];
       this.item.forEach(function (element) {
         element.categories.forEach(function (category) {
-          console.log("id categorie prima di ciclo if=", category.id, "user id=", element.id);
+          console.log("id categorie prima di ciclo if=", category.id, "user id=", element.id, "categoriaRistorante dentro filtro", _this2.categoriaRistorante);
 
           if (category.id == _this2.categoriaRistorante) {
-            results.push(element.id);
+            results.push(element);
           }
         });
       });
@@ -5549,7 +5550,7 @@ var render = function render() {
       staticClass: "card-body my-pointer",
       on: {
         click: function click($event) {
-          return _vm.$emit("opzione", category);
+          return _vm.$emit("opzione", category.id);
         }
       }
     }, [_c("div", {
@@ -5968,6 +5969,12 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
+    staticClass: "container"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-6"
+  }, [_c("div", {
     staticClass: "card mt-2 mb-2"
   }, [_vm.item.image ? _c("img", {
     staticClass: "card-img-top",
@@ -5991,7 +5998,7 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("Leggi tutto")])], 1)]);
+  }, [_vm._v("Leggi tutto")])], 1)])])])]);
 };
 
 var staticRenderFns = [];

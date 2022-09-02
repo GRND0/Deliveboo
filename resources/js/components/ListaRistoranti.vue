@@ -1,6 +1,8 @@
 <template>
   <main>
     <CustomSelettore @opzione="categoriaSelezionata($event)" />
+
+
     <div>
       <SingleRestaurantCard
         v-for="(item, index) in ristorantiFiltrati"
@@ -27,7 +29,7 @@ export default {
     return {
       item: [],
       element: [],
-      categoriaRistorante: "",
+      categoriaRistorante: null,
     };
   },
 
@@ -42,23 +44,25 @@ export default {
   methods: {
     categoriaSelezionata(categoria) {
       this.categoriaRistorante = categoria;
-      console.log("categoria id", categoria);
-    },
+      console.log("categoriaSelezionata", this.categoriaRistorante);
+      return this.categoriaRistorante;     
+    }, 
   },
 
   computed: {
     ristorantiFiltrati() {
       const results = [];
-
+      
       this.item.forEach((element) => {
         element.categories.forEach((category) => {
-            console.log( "id categorie prima di ciclo if=", category.id, "user id=", element.id);
+            console.log( "id categorie prima di ciclo if=", category.id, "user id=", element.id, "categoriaRistorante dentro filtro", this.categoriaRistorante);
           if ((category.id == this.categoriaRistorante)) {
-             results.push(element.id);
+             results.push(element);
           }
         });
       });
       console.log("result", results);
+    
       return results;
     },
 

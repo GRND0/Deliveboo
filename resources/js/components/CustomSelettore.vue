@@ -21,7 +21,7 @@
                     <!-- <div class="card-head">
                         <img src="" :alt= category.name>
                     </div> -->
-                    <div @click="$emit('opzione', category)" class="card-body my-pointer">
+                    <div @click="$emit('opzione', category.id)" class="card-body my-pointer">
                         <div class="text-center">
                             {{ category.name }}
                         </div>
