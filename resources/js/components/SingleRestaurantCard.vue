@@ -5,7 +5,7 @@
       <h4 class="card-title">{{ item.restaurant_name }}</h4>
       <!-- <h6><strong>Categoria: {{ item.categories }}</strong></h6> -->
       <div class="card-text">{{ item.restaurant_phone }}</div>
-      <router-link :to="{ name: 'single-post', params: {slug: item.slug} }" class="card-link">Leggi tutto</router-link>
+      <router-link :to="{ name: 'single-post', params: {slug: item.slug} }" class="card-link">Vai al menu e ordina i tuoi piatti preferiti!</router-link>
     </div>
   </div>
 </template>

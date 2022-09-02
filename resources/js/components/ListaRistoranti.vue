@@ -10,7 +10,7 @@
             class="col-6"
           />
         </div>
-        <h3 v-else class="text-center">Nessun ristorante corrisponde alle categorie selezionate</h3>
+        <h4 v-else class="text-center">Nessun ristorante corrisponde alle categorie selezionate</h4>
     </div>
   </main>
 </template>
@@ -44,17 +44,22 @@ export default {
   },
 
   methods: {
-    categoriaSelezionata(categoria) {
-      console.log("check categoria da selettore" , categoria);
-      if (this.categoriaRistorante.includes(categoria)) {
-            this.categoriaRistorante.splice(categoria,1)
-      } else {
-        this.categoriaRistorante.push(categoria)
-      }
-       ;
-      console.log("categoriaSelezionata", this.categoriaRistorante);
-      return this.categoriaRistorante;     
-    }, 
+    //  categoriaSelezionata(categoria) {
+    //   console.log("check categoria da selettore" , categoria);
+    //    if (this.categoriaRistorante.includes(categoria) && categoria) {
+    //          this.categoriaRistorante.splice(categoria)
+    //    } else {
+    //      this.categoriaRistorante.push(categoria)
+    //    }
+    //     ;
+    //    console.log("categoriaSelezionata", this.categoriaRistorante);
+    //    return this.categoriaRistorante;     
+    //  }, 
+     categoriaSelezionata(categoria) {
+      this.categoriaRistorante = categoria
+      return this.categoriaRistorante;
+     }
+
   },
 
   computed: {
