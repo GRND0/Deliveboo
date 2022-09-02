@@ -1,14 +1,16 @@
 <template>
   <main>
-    <CustomSelettore @opzione="categoriaSelezionata($event)" />
-
-
-    <div>
-      <SingleRestaurantCard
-        v-for="(item, index) in ristorantiFiltrati"
-        :key="index"
-        :item="item"
-      />
+    <div class="container">
+        <CustomSelettore @opzione="categoriaSelezionata($event)" />
+        <div v-if="ristorantiFiltrati.length > 0" class="row">          
+          <SingleRestaurantCard
+            v-for="(item, index) in ristorantiFiltrati"
+            :key="index"
+            :item="item"
+            class="col-6"
+          />
+        </div>
+        <h3 v-else class="text-center">Nessun ristorante corrisponde alle categorie selezionate</h3>
     </div>
   </main>
 </template>
@@ -29,7 +31,7 @@ export default {
     return {
       item: [],
       element: [],
-      categoriaRistorante: null,
+      categoriaRistorante: [],
     };
   },
 
@@ -43,7 +45,13 @@ export default {
 
   methods: {
     categoriaSelezionata(categoria) {
-      this.categoriaRistorante = categoria;
+      console.log("check categoria da selettore" , categoria);
+      if (this.categoriaRistorante.includes(categoria)) {
+            this.categoriaRistorante.splice(categoria,1)
+      } else {
+        this.categoriaRistorante.push(categoria)
+      }
+       ;
       console.log("categoriaSelezionata", this.categoriaRistorante);
       return this.categoriaRistorante;     
     }, 
@@ -77,5 +85,6 @@ export default {
 };
 </script>
 
-  <style scoped>
+<style lang="scss" scoped>
+
 </style>

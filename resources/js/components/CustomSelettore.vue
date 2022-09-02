@@ -1,6 +1,16 @@
 <template>
-    <div class="container">
         <div class="row">
+            <label v-for="category in categories"
+                    :key="category.id">
+                    {{ category.name }}
+            
+            <input type="checkbox"
+                    :value="category.id"
+                    v-model="checkbox"
+                    @click="$emit('opzione', category.id)">
+            </label>
+        </div>
+
             <!-- <div>
                 <label for="categories">Filtra per categoria</label>
                 <select 
@@ -14,22 +24,19 @@
                 </select>
             </div> -->
 
-            <div v-for="(category, index) in categories"
+            <!-- <div v-for="(category, index) in categories"
                 :key="index"
                 class="col-6 mb-3">
                 <div class="card">
-                    <!-- <div class="card-head">
-                        <img src="" :alt= category.name>
-                    </div> -->
-                    <div @click="$emit('opzione', category.id)" class="card-body my-pointer">
+                     <div @click="$emit('opzione', category.id)" class="card-body my-pointer">
                         <div class="text-center">
-                            {{ category.name }}
+                            {{ category.name }} 
                         </div>
                     </div>
+                    
                 </div>                
             </div>
-        </div>
-    </div>
+        </div> -->
 </template>
 
 <script>
@@ -39,11 +46,34 @@ export default {
     name: "CustomSelettore",
     data: function () {
         return {
+            restaurants: [],
             categories: [],
-            category: null,
+            category: [],
+            checkbox: [],
         };
     },
-    methods: {},
+
+    // watch: {
+    //     checkbox(newVal, oldVal) {
+    //         this.findByCheckbox(newVal);
+    //     },
+    // },
+
+    // methods: {
+    //     async findByCheckbox() {
+    //         if (this.checkbox.length == 0) {
+    //             this.checkbox = [0];
+    //         }
+
+    //         await axios
+    //                 .get(`/api/categories` + this.checkbox)
+    //                 .then((response)=> {
+    //                     this.restaurants = response.data;
+    //                 });
+
+    //     }
+
+    // },
 
     created() {
     axios
@@ -55,5 +85,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>
