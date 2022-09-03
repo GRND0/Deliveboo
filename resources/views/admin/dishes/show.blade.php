@@ -9,7 +9,7 @@
             <h5 class="text-muted">Slug : {{ $dish->slug }}</h5>
             <p>Ingredienti: {{ $dish->ingredients }}</p>
             <p>Descrizione: {{ $dish->description }}</p>
-            <p class="text-secondary">Prezzo: € {{ $dish->price }}</p>
+            <p class="text-secondary">Prezzo: € {{ number_format((float)$dish->price, 2, '.', '') }}</p>
             
             @if ($dish->image)
             <div class="text-center">

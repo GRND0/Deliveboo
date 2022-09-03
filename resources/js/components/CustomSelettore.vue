@@ -2,13 +2,15 @@
   <div class="row">
     <label
       v-for="category in categories"
-      class="col-12 col-md-6 mb-3 py-2 d-flex flex-row justify-content-between align-items-center card"
+      class="col-12 col-md-6 col-lg-4 mb-3 py-4 text-center d-block card"
       :key="category.id"
+      :for="category.id"
     >
       {{ category.name }}
 
       <input
         type="checkbox"
+        :id="category.id"
         :value="category.id"
         v-model="checkbox"
         @change="$emit('opzione', checkbox)"
@@ -17,31 +19,31 @@
   </div>
 
   <!-- <div>
-                <label for="categories">Filtra per categoria</label>
-                <select 
-                name="categories" id="categories"  
-                v-model="category" @change="$emit('opzione', category)" >
-                    <option :value="category.id"
-                        v-for="(category, index) in categories"
-                        :key="index">
-                    {{ category.name }}
-                </option>
-                </select>
-            </div> -->
+        <label for="categories">Filtra per categoria</label>
+        <select 
+        name="categories" id="categories"  
+        v-model="category" @change="$emit('opzione', category)" >
+            <option :value="category.id"
+                v-for="(category, index) in categories"
+                :key="index">
+            {{ category.name }}
+        </option>
+        </select>
+    </div> -->
 
   <!-- <div v-for="(category, index) in categories"
-                :key="index"
-                class="col-6 mb-3">
-                <div class="card">
-                     <div @click="$emit('opzione', category.id)" class="card-body my-pointer">
-                        <div class="text-center">
-                            {{ category.name }} 
-                        </div>
-                    </div>
-                    
-                </div>                
-            </div>
-        </div> -->
+          :key="index"
+          class="col-6 mb-3">
+          <div class="card">
+                <div @click="$emit('opzione', category.id)" class="card-body my-pointer">
+                  <div class="text-center">
+                      {{ category.name }} 
+                  </div>
+              </div>
+              
+          </div>                
+      </div>
+  </div> -->
 </template>
 
 <script>
@@ -55,8 +57,7 @@ export default {
             restaurants: [],
             categories: [],
             category: [],
-            checkbox: [],
-            
+            checkbox: [],            
         };
     },
    
@@ -87,5 +88,21 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+label {
+  border: solid 2px #450063;
+  color: #450063;
+  font-weight: bold;
+}
+
+// input[type=checkbox] {
+//   display: none;
+// }
+
+input:checked + label {
+  border: solid 2px #00ccbc;
+  color: #00ccbc;
+}
+
 </style>

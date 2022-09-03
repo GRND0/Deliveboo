@@ -17,7 +17,7 @@ const router = new VueRouter({
       component: Home
     },
     {
-      path: "/users/:slug",
+      path: "/api/users/:slug",
       name: "restaurant",
       component: SingleRestaurantPage
     },

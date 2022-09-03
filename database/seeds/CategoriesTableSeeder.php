@@ -23,7 +23,9 @@ class CategoriesTableSeeder extends Seeder
             'Vegetariano',
             'Indiano',
             'Greco',
-            'Pesce'
+            'Pesce',
+            'Mediterraneo',
+            'Internazionale'
         ];
 
         foreach ($categories as $category) {

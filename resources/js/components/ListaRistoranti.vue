@@ -10,7 +10,7 @@
             class="col-12 col-md-6"
           />
         </div>
-        <h4 v-else class="text-center">Nessun ristorante corrisponde alle categorie selezionate</h4>
+        <h4 v-else class="text-center mt-5">Nessun ristorante corrisponde alle categorie selezionate</h4>
     </div>
   </main>
 </template>

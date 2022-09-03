@@ -26,7 +26,7 @@
                 @endif
                 <div class="card-body">
                     <h5 class="card-title mb-2">{{ $dish->name }}</h5>
-                    <p class="text-success mb-2">€ {{ $dish->price }}</p>
+                    <p class="text-success mb-2">€ {{ number_format((float)$dish->price, 2, '.', '') }}</p>
                     <p class="text-info">{{ $dish->ingredients }}</p>
                     <p class="text-muted">{{ $dish->description }}</p>
                     <a href="{{ route('admin.dishes.show', ['slug' =>$dish->slug]) }}" class="btn btn-primary">Dettagli piatto</a>
