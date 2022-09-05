@@ -5,7 +5,7 @@
         <div class="row col-12 col-md-9 float-start">
           <h1 class="mt-4">{{ user.restaurant_name }}</h1>
           <h5>Categorie: <span v-for="category in user.categories" :key="category.slug">
-              <div class="text-capitalize badge rounded-pill bg-success me-2 d-inline-block">{{ category.name }} </div>
+            <div class="text-capitalize badge rounded-pill bg-success me-2 d-inline-block">{{ category.name }} </div>
             </span>
           </h5>
           <div v-if="user.image">
@@ -39,7 +39,7 @@
         </div>
 
         <!-- Carrello -->
-        <div class="col-12 col-md-3 float-end">
+        <div class="col-12 col-md-3 cart">
           <h2 class="mt-4">Carrello <i class="fa-solid fa-cart-arrow-down"></i></h2>
             <div class="mb-4" v-if="cart.length > 0">
               <div class="mb-1 d-flex justify-content-between" v-for="(dish, index) in cart" :key="index">
@@ -58,7 +58,7 @@
         </div>
 
         <!-- Checkout -->
-        <div class="col-12 col-md-3 float-end" v-if="cart.length > 0">
+        <div class="col-12 col-md-3 checkout" v-if="cart.length > 0">
           <h3 class="mt-4">Checkout</h3>
           <input
               class="form-control mb-2"
@@ -105,13 +105,13 @@
                  v-if="validateEmailMessage == 'Email non valida'">
             {{ validateEmailMessage }}
           </small>
-          <v-braintree
+          <div class="braintree"
             authorization="registrarsi su braintree"
             locale="it_IT"
             btnText="Ordina"
             @success="onSuccess"
             @error="onError">
-          </v-braintree>
+          </div>
         </div>
 
         <div v-if="responseMessage && cart.length == 0">
@@ -276,6 +276,30 @@ export default {
   &:hover {
     transform: none;
     cursor: initial;
+  }
+}
+
+.cart, .checkout {
+  position: fixed;
+  right: 0;
+  padding: 5px;
+}
+
+.cart {
+  top: 45vh;
+  background-color: #dbdbdbaa;
+}
+
+.checkout {
+  top: 10vh;
+  background-color: #00ccbcaa;
+}
+
+@media screen and (max-width: 768px) {
+  .cart, .checkout {
+    margin-top: 2rem;
+    position: static;
+    background-color: transparent;
   }
 }
 </style>

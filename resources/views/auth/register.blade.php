@@ -179,7 +179,7 @@
 
                         <div class="form-group row mb-1">
                             <label for="types"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Categorie*') }}</label>
+                                class="col-md-4 col-form-label text-md-right">{{ __('Categorie') }}</label>
 
                             <div class="col-md-6">
                                 @foreach ($categories as $category)

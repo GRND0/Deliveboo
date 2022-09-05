@@ -5258,8 +5258,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/users").then(function (resp) {
-      _this.item = resp.data.results;
-      console.log("risposta axios lista ristoranti", _this.item); //   console.log("risposta axios categorie", this.item[12].categories[1].id);
+      _this.item = resp.data.results; // console.log("risposta axios lista ristoranti", this.item);
+      // console.log("risposta axios categorie", this.item[12].categories[1].id);
     });
   },
   methods: {
@@ -5271,15 +5271,7 @@ __webpack_require__.r(__webpack_exports__);
     comparatoreArray: function comparatoreArray(array1, array2) {
       return array2.every(function (element) {
         return array1.includes(element);
-      }); //        if (array1.length === array2.length) {
-      //     return array1.every(element => {
-      //        if (array2.includes(element)) {
-      //          return true;
-      //       }
-      //       return false;
-      //    });
-      //   }
-      //  return false;
+      });
     }
   },
   computed: {
@@ -5290,18 +5282,15 @@ __webpack_require__.r(__webpack_exports__);
       this.item.forEach(function (restaurants) {
         var arrayInterno = [];
         restaurants.categories.forEach(function (category) {
-          console.log("id categorie prima di ciclo if=", category.id, "user id=", restaurants.id);
+          // console.log( "id categorie prima di ciclo if=", category.id, "user id=", restaurants.id, );
           arrayInterno.push(category.id);
-        });
-        console.log("arraynonvuoto", arrayInterno, "categoriaRistorante dentro filtro", _this2.categoriaRistorante);
+        }); // console.log("arraynonvuoto",  arrayInterno,"categoriaRistorante dentro filtro",  this.categoriaRistorante);
 
         if (_this2.comparatoreArray(arrayInterno, _this2.categoriaRistorante)) {
           results.push(restaurants);
-        }
+        } // console.log("result interno", results);
 
-        console.log("result interno", results);
-      });
-      console.log("result esterno", results); // arrayInterno=[]
+      }); // console.log("result esterno", results);
 
       return results;
     }
@@ -6129,7 +6118,7 @@ var render = function render() {
       staticClass: "text-danger"
     }, [_vm._v("Ingredienti: ")]), _vm._v(_vm._s(dish.ingredients))])])])]);
   })], 2), _vm._v(" "), _c("div", {
-    staticClass: "col-12 col-md-3 float-end"
+    staticClass: "col-12 col-md-3 cart"
   }, [_vm._m(0), _vm._v(" "), _vm.cart.length > 0 ? _c("div", {
     staticClass: "mb-4"
   }, [_vm._l(_vm.cart, function (dish, index) {
@@ -6153,7 +6142,7 @@ var render = function render() {
   }), _vm._v(" "), _c("div", {
     staticClass: "bg-success text-light"
   }, [_vm._v("Totale: "), _c("span", [_vm._v("€ " + _vm._s(_vm.totalTwoDecimals))])])], 2) : _vm._e()]), _vm._v(" "), _vm.cart.length > 0 ? _c("div", {
-    staticClass: "col-12 col-md-3 float-end"
+    staticClass: "col-12 col-md-3 checkout"
   }, [_c("h3", {
     staticClass: "mt-4"
   }, [_vm._v("Checkout")]), _vm._v(" "), _c("input", {
@@ -6276,7 +6265,8 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.validateEmailMessage == "Email non valida" ? _c("small", {
     staticClass: "text-danger"
-  }, [_vm._v("\n          " + _vm._s(_vm.validateEmailMessage) + "\n        ")]) : _vm._e(), _vm._v(" "), _c("v-braintree", {
+  }, [_vm._v("\n          " + _vm._s(_vm.validateEmailMessage) + "\n        ")]) : _vm._e(), _vm._v(" "), _c("div", {
+    staticClass: "braintree",
     attrs: {
       authorization: "registrarsi su braintree",
       locale: "it_IT",
@@ -6286,7 +6276,7 @@ var render = function render() {
       success: _vm.onSuccess,
       error: _vm.onError
     }
-  })], 1) : _vm._e(), _vm._v(" "), _vm.responseMessage && _vm.cart.length == 0 ? _c("div", [_c("p", {
+  })]) : _vm._e(), _vm._v(" "), _vm.responseMessage && _vm.cart.length == 0 ? _c("div", [_c("p", {
     staticClass: "text-success font-weight-bold"
   }, [_vm._v(_vm._s(_vm.responseMessage))])]) : _vm._e()]) : _c("section", [_c("h2", [_vm._v("Caricamento...")])])])]);
 };
@@ -11572,7 +11562,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "label[data-v-2b21d4eb] {\n  border: solid 2px #450063;\n  color: #450063;\n  font-weight: bold;\n}\ninput[type=checkbox][data-v-2b21d4eb] {\n  display: none;\n}\ninput:checked + label[data-v-2b21d4eb] {\n  border: solid 2px #00ccbc;\n  color: #00ccbc;\n  background-color: #450063;\n}\nlabel[data-v-2b21d4eb]:hover {\n  border: solid 2px #00ccbc;\n}", ""]);
+exports.push([module.i, "label[data-v-2b21d4eb] {\n  border: solid 2px #450063;\n  color: #450063;\n  font-weight: bold;\n}\ninput[type=checkbox][data-v-2b21d4eb] {\n  display: none;\n}\ninput:checked + label[data-v-2b21d4eb] {\n  border: solid 2px #00ccbc;\n  color: #ffffff;\n  background-color: #00ccbc;\n}\nlabel[data-v-2b21d4eb]:hover {\n  border: solid 2px #00ccbc;\n  color: #00ccbc;\n}", ""]);
 
 // exports
 
@@ -11629,7 +11619,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".rest-img[data-v-c497e646] {\n  width: 50%;\n}\n.not-visible[data-v-c497e646] {\n  opacity: 0.3;\n}\n.not-visible[data-v-c497e646]:hover {\n  transform: none;\n  cursor: initial;\n}", ""]);
+exports.push([module.i, ".rest-img[data-v-c497e646] {\n  width: 50%;\n}\n.not-visible[data-v-c497e646] {\n  opacity: 0.3;\n}\n.not-visible[data-v-c497e646]:hover {\n  transform: none;\n  cursor: initial;\n}\n.cart[data-v-c497e646], .checkout[data-v-c497e646] {\n  position: fixed;\n  right: 0;\n  padding: 5px;\n}\n.cart[data-v-c497e646] {\n  top: 45vh;\n  background-color: rgba(219, 219, 219, 0.6666666667);\n}\n.checkout[data-v-c497e646] {\n  top: 10vh;\n  background-color: rgba(0, 204, 188, 0.6666666667);\n}\n@media screen and (max-width: 768px) {\n.cart[data-v-c497e646], .checkout[data-v-c497e646] {\n    margin-top: 2rem;\n    position: static;\n    background-color: transparent;\n}\n}", ""]);
 
 // exports
 

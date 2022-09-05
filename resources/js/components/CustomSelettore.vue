@@ -101,12 +101,13 @@ input[type=checkbox] {
 
 input:checked + label {
   border: solid 2px #00ccbc;
-  color: #00ccbc;
-  background-color: #450063;
+  color: #ffffff;
+  background-color: #00ccbc;
 }
 
 label:hover {
   border: solid 2px #00ccbc;
+  color: #00ccbc;
 }
 
 </style>

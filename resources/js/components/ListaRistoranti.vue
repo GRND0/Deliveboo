@@ -40,8 +40,8 @@ export default {
   created() {
     axios.get("/api/users").then((resp) => {
       this.item = resp.data.results;
-      console.log("risposta axios lista ristoranti", this.item);
-      //   console.log("risposta axios categorie", this.item[12].categories[1].id);
+      // console.log("risposta axios lista ristoranti", this.item);
+      // console.log("risposta axios categorie", this.item[12].categories[1].id);
     });
   },
 
@@ -53,26 +53,9 @@ export default {
     },
 
     comparatoreArray(array1, array2) {
-
-       return array2.every((element) => array1.includes(element));
-      
-
-//        if (array1.length === array2.length) {
-//     return array1.every(element => {
-//        if (array2.includes(element)) {
-//          return true;
-//       }
-
-//       return false;
-//    });
-//   }
-
-//  return false;
- 
-  
-}
-}, 
-  
+      return array2.every((element) => array1.includes(element));  
+    }
+  },  
 
   computed: {
     ristorantiFiltrati() {
@@ -81,21 +64,16 @@ export default {
       this.item.forEach((restaurants) => {
         let arrayInterno = [];
         restaurants.categories.forEach((category) => {
-          console.log( "id categorie prima di ciclo if=", category.id, "user id=", restaurants.id, );
+          // console.log( "id categorie prima di ciclo if=", category.id, "user id=", restaurants.id, );
           arrayInterno.push(category.id);
         });
-        console.log("arraynonvuoto",  arrayInterno,"categoriaRistorante dentro filtro",  this.categoriaRistorante);
+        // console.log("arraynonvuoto",  arrayInterno,"categoriaRistorante dentro filtro",  this.categoriaRistorante);
         if (this.comparatoreArray(arrayInterno,this.categoriaRistorante)) { 
-          results.push(restaurants);
-         
-        }
-       
-        console.log("result interno", results);
+          results.push(restaurants);         
+        }       
+        // console.log("result interno", results);
       });
-
-      console.log("result esterno", results);
-      // arrayInterno=[]
-
+      // console.log("result esterno", results);
       return results;
     },
   },

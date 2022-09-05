@@ -64,7 +64,7 @@ class RegisterController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'p_iva' => ['unique:users', 'required', 'string', 'min:13', 'max:13'],
             'image' => ['required', 'image'],
-            'category' => ['required'],
+            'category' => ['nullable'],
         ], [
             'email.unique' => 'L\'email inserita è già in uso',
             'password.confirmed' => 'Le password non corrispondono',
@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'p_iva.max' => 'La Partita IVA deve essere di 13 caratteri',
             'restaurant_phone.unique' => 'Numero già in uso',
             'image.image' => 'immagine non valida',
-            'category.required' => 'Devi selezionare almeno una categoria',
+            // 'category.required' => 'Devi selezionare almeno una categoria',
         ]);
     }
 
@@ -99,8 +99,10 @@ class RegisterController extends Controller
             'slug' => Str::slug($data['restaurant_name'], '-'),
         ]);
 
-        $category = $data['category'];
-        $user->categories()->attach($category);
+        // $category = $data['category'];
+        // $user->categories()->attach($category);
+        $categories = Category::findOrFail(request() -> get('categories'));
+        $user -> categories() -> sync($categories);
 
         return $user;
     }
