@@ -2,18 +2,16 @@
   <div class="container mb-2">
     <div class="row">
       <section v-if="user">
-        <div class="row col-12 col-md-9 float-start">
+        <div class="row col-12 col-md-10 float-start">
           <h1 class="mt-4">{{ user.restaurant_name }}</h1>
           <h5>Categorie: <span v-for="category in user.categories" :key="category.slug">
             <div class="text-capitalize badge rounded-pill bg-success me-2 d-inline-block">{{ category.name }} </div>
             </span>
           </h5>
-          <div v-if="user.image">
-            <img class="rest-img" :src="user.image" :alt="user.restaurant_name"/>
-          </div>
-          <h5 class="text-secondary">Tel: {{ user.restaurant_phone }}</h5>
-          <h6 class="text-success">{{ user.address }}</h6>
-          <div><a href="">{{ user.link_social_media }}</a></div>
+          <img class="restaurant-img" :src="user.image" :alt="user.restaurant_name"/>
+          <h5 class="text-secondary mt-2"><i class="fa-solid fa-phone"></i> {{ user.restaurant_phone }}</h5>
+          <h6 class="text-success"><i class="fa-solid fa-location-dot"></i> {{ user.address }}</h6>
+          <div><a href=""><i class="fa-solid fa-at"></i> {{ user.link_social_media }}</a></div>
           
           <!-- piatti del ristorante -->
           <div class="col-12 col-lg-6" 
@@ -23,10 +21,10 @@
                @click="[dish.available == 1 ? addToCart(dish) : '']"
               >
             <div class="card mt-3 my-pointer">
-              <img class="card-img-top" :src="dish.image" :alt="dish.name">
+              <img class="card-img-top" :src="'/storage/app/public/' + dish.image" :alt="dish.name">
               <div class="card-body d-flex justify-content-between">
                 <h4 class="card-title text-capitalize">{{ dish.name }}</h4>
-                <h4 class="text-success me-3">€ {{ dish.price }}</h4>
+                <h4 class="text-success me-3">€ {{ dish.price.toFixed(2) }}</h4>
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item"> <span class="text-danger">Descrizione: </span>{{ capitalizeFirstLetter(dish.description) }}</li>
@@ -39,85 +37,91 @@
         </div>
 
         <!-- Carrello -->
-        <div class="col-12 col-md-3 cart">
-          <h2 class="mt-4">Carrello <i class="fa-solid fa-cart-arrow-down"></i></h2>
-            <div class="mb-4" v-if="cart.length > 0">
-              <div class="mb-1 d-flex justify-content-between" v-for="(dish, index) in cart" :key="index">
-                <div class="mb-1 d-flex justify-content-between">
-                  <div class="float-start">{{ dish.name }}</div>
-                  <div class="float-end">€ {{ dish.price }}</div>
+        <div class="col-12 col-md-3 col-lg-2 cart rounded-start">
+          <h2 class="mt-2 text-center">Carrello <i class="fa-solid fa-cart-arrow-down"></i></h2>
+          <div class="mb-4" v-if="cart.length > 0">
+            <div class="mb-1 d-flex justify-content-between" v-for="(dish, index) in cart" :key="index">
+              <div class="mb-1 d-flex justify-content-between cart-item">
+                <div class="">{{ dish.name }}</div>
+                <div class="pe-4">
+                  <!-- <span class="">
+                    <button type="button" class="btn btn-primary btn-sm" @click="removeItem(item)">-</button> 
+                    {{ dish.quantity }} 
+                    <button type="button" class="btn btn-primary btn-sm me-2" @click="addItem(item)">+</button> 
+                  </span> -->
+                  € {{ dish.price.toFixed(2) }}
                 </div>
-                <button
-                    class="btn btn-sm btn-danger"
-                    @click="removeFromCart(dish)">
-                    Rimuovi
-                </button>
               </div>
-              <div class="bg-success text-light">Totale: <span>€ {{ totalTwoDecimals }}</span></div>
+              <button
+                  class="btn btn-sm btn-danger text-light"
+                  @click="removeFromCart(dish)">
+                  Rimuovi
+              </button>
             </div>
-        </div>
+            <h4 class="bg-dark text-light text-center rounded p-1">Totale: <span>€ {{ total.toFixed(2) }}</span></h4>
+          </div>
 
-        <!-- Checkout -->
-        <div class="col-12 col-md-3 checkout" v-if="cart.length > 0">
-          <h3 class="mt-4">Checkout</h3>
-          <input
-              class="form-control mb-2"
-              type="text"
-              v-model="customerName"
-              placeholder="Nome*"
-              required
-          />
-          <input
-              class="form-control mb-2"
-              type="text"
-              v-model="customerSurname"
-              placeholder="Cognome*"
-              required
-          />
-          <input
-              class="form-control mb-2"
-              type="text"
-              v-model="customerAddress"
-              placeholder="Indirizzo*"
-              required
-          />
-          <input
-              class="form-control mb-2"
-              type="text"
-              v-model="customerPhone"
-              placeholder="Numero di telefono*"
-              @keyup="validatePhone(customerPhone)"
-              required
-          />
-          <small class="text-danger"
-                 v-if="validatePhoneMessage == 'Numero non valido'">
-            {{ validatePhoneMessage }}
-          </small>
-          <input
-              class="form-control mb-2"
-              type="text"
-              v-model="customerEmail"
-              placeholder="Email*"
-              required
-              @keyup="validateEmail(customerEmail)"
-          />
-          <small class="text-danger"
-                 v-if="validateEmailMessage == 'Email non valida'">
-            {{ validateEmailMessage }}
-          </small>
-          <div class="braintree"
-            authorization="registrarsi su braintree"
-            locale="it_IT"
-            btnText="Ordina"
-            @success="onSuccess"
-            @error="onError">
+          <!-- Checkout -->
+          <div v-if="cart.length > 0"> <!-- il checkout compare solo se c'è qualcosa nel carrello -->
+            <h2 class="mt-2 text-center">Checkout <i class="fa-regular fa-credit-card"></i></h2>
+            <input
+                class="form-control mb-2"
+                type="text"
+                v-model="customerName"
+                placeholder="Nome*"
+                required
+            />
+            <input
+                class="form-control mb-2"
+                type="text"
+                v-model="customerSurname"
+                placeholder="Cognome*"
+                required
+            />
+            <input
+                class="form-control mb-2"
+                type="text"
+                v-model="customerAddress"
+                placeholder="Indirizzo*"
+                required
+            />
+            <input
+                class="form-control mb-2"
+                type="text"
+                v-model="customerPhone"
+                placeholder="Numero di telefono*"
+                @keyup="validatePhone(customerPhone)"
+                required
+            />
+            <small class="text-danger"
+                  v-if="validatePhoneMessage == 'Numero non valido'">
+              {{ validatePhoneMessage }}
+            </small>
+            <input
+                class="form-control mb-2"
+                type="text"
+                v-model="customerEmail"
+                placeholder="Email*"
+                required
+                @keyup="validateEmail(customerEmail)"
+            />
+            <small class="text-danger"
+                  v-if="validateEmailMessage == 'Email non valida'">
+              {{ validateEmailMessage }}
+            </small>
+            <div class="v-braintree"
+              authorization="key da mettere"
+              locale="it_IT"
+              btnText="Ordina"
+              @success="onSuccess"
+              @error="onError">
+            </div>
+          </div>
+
+          <div v-if="responseMessage && cart.length == 0">
+            <p class="text-success font-weight-bold">{{ responseMessage }}</p>
           </div>
         </div>
-
-        <div v-if="responseMessage && cart.length == 0">
-          <p class="text-success font-weight-bold">{{ responseMessage }}</p>
-        </div>
-
       </section> 
 
       <section v-else><h2>Caricamento...</h2></section> 
@@ -133,9 +137,10 @@ export default {
       user: null,
       cart: [],
       total: 0,
+      quantity: 1,
       dishIdsArray: [],
-      // per checkout con braintree
       id: null,
+      // per checkout con braintree
       customerName: null,
       customerSurname: null,
       customerAddress: null,
@@ -154,17 +159,17 @@ export default {
   mounted() {
     const url = window.location.href;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    this.id = id;
+    this.id = id; // nel nostro caso l'id è uno slug e rappresenza il ristorante
 
     // evita di mettere nel carrello piatti di ristoranti differenti
     if (localStorage.getItem("id") && localStorage.getItem("id") != this.id) {
-      console.log(this.id);
-      console.log(localStorage.getItem("id"));
+      console.log("ristorante dove si stavano aggiungendo oggetti nel carrello", localStorage.getItem("id"));
+      console.log("nuovo ristorante dove non si può visualizzare il carrello precedente", this.id);
       localStorage.removeItem("cart");
       localStorage.removeItem("total");
       localStorage.removeItem("id");
     }
-
+    // i dati del carrello rimangono salvati anche se si torna indietro nella vista delle categorie ristoranti
     if (localStorage.getItem("cart")) {
       try {
         this.cart = JSON.parse(localStorage.getItem("cart"));
@@ -178,23 +183,28 @@ export default {
     }
   },
 
-  computed: {
-    totalTwoDecimals() {
-      return this.total.toFixed(2);
-    },
-  },
-
   methods: {
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     },
+
     addToCart(dish) {
+      // dish['quantity'] = 1;
+      // for (const items in this.cart) {
+
+      //   let cartId = this.cart[items].id;
+
+      //   // Confronto l'id del prodotto con  gli id già presenti nel carrello
+      //   if (dish.id == cartId) {
+      //     this.addItem(this.cart[items]); // Se il piatto è già stato inserito, aggiunge solo la quantità
+      //     break;  // break per uscire dal ciclo, perchè che gli id combaciano
+      //   }
+      // }
       this.cart.push(dish);
       this.dishIdsArray.push(dish.id);
       this.total += parseFloat(dish.price);
       this.save();
     },
-
     removeFromCart(dish) {
       this.cart.splice(this.cart.indexOf(dish), 1);
       this.total -= parseFloat(dish.price);
@@ -261,13 +271,28 @@ export default {
             this.$router.push({ name: "not-found" });
           }          
       })
-    }
+    },
+
+    // metodo per aggiungere un item
+    // addItem(item) {
+    //   for (const dish in this.dishes) {
+    //     if (this.dishes.hasOwnProperty.call(this.dishes, dish)) {
+    //       const dishOriginal = this.dishes[dish];
+    //       console.log(this.dishOriginal);
+    //       if (item.id == dishOriginal.id) {
+    //         item.quantity += 1;
+    //         item.price = dishOriginal.price * item.quantity;
+    //         this.save();
+    //       }
+    //     }
+    //   }
+    // },
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.rest-img {
+.restaurant-img {
   width: 50%;
 }
 
@@ -279,27 +304,32 @@ export default {
   }
 }
 
-.cart, .checkout {
+.cart {
   position: fixed;
   right: 0;
   padding: 5px;
-}
-
-.cart {
-  top: 45vh;
-  background-color: #dbdbdbaa;
-}
-
-.checkout {
   top: 10vh;
   background-color: #00ccbcaa;
+  box-shadow: -2px 2px 10px -2px #00887d;
+  // background-color: #dbdbdbaa;
+  // box-shadow: -2px 2px 10px -2px #454545;
+  .cart-item {
+    width: 100%;
+  }
 }
 
+// .checkout {
+//   top: 10vh;
+//   background-color: #00ccbcaa;
+//   box-shadow: -2px 2px 10px -2px #00887d;
+// }
+
 @media screen and (max-width: 768px) {
-  .cart, .checkout {
+  .cart {
     margin-top: 2rem;
     position: static;
     background-color: transparent;
+    box-shadow: 0px 0px 0px 0px;
   }
 }
 </style>
