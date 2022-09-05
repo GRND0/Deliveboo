@@ -30,11 +30,10 @@ class UserController extends Controller
      */
     public function show($slug)
     {
-        dd($slug);
-        $user = User::with('categories', 'dishes')->findOrFail($slug);
-        return response()->json($user);
+        // $user = User::with('categories', 'dishes')->findOrFail($slug);
+        // return response()->json($user);
 
-        $user = User::where('slug', '=', $slug)->with(['category'])->first();
+        $user = User::where('slug', '=', $slug)->with(['categories', 'dishes'])->first();
         if ($user) {
             return response()->json([
                 'success' => true,
@@ -43,7 +42,7 @@ class UserController extends Controller
         }
         return response()->json([
             'success' => false,
-            'error' => 'nessun user corrispondente'                      
+            'error' => 'nessuna ricerca corrispondente'                      
         ]);
     }
 }

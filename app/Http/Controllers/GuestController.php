@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -18,27 +19,6 @@ class GuestController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -50,41 +30,47 @@ class GuestController extends Controller
         return view('guest.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function restaurants(){
         return view('guest.restaurants');
     }
+
+    // public function checkout(Request $request)
+    // {
+
+    //     $amount = $request->total;
+    //     $nonce = $request->nonce;
+    //     $userName = $request->userName;
+
+    //     $gateway = new \Braintree\Gateway([
+    //         'environment' => env('BRAINTREE_ENV'),
+    //         'merchantId' => env('BRAINTREE_MERCHANT_ID'),
+    //         'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
+    //         'privateKey' => env('BRAINTREE_PRIVATE_KEY')
+    //     ]);
+
+    //     $result = $gateway->transaction()->sale([
+    //         'amount' => $amount,
+    //         'paymentMethodNonce' => $nonce,
+    //         'customer' => [
+    //             'firstName' => $userName,
+    //         ],
+    //     ]);
+
+    //     if($result->success) {
+    //         $transaction = $result->transaction;
+
+    //         $order = new Order();
+    //         // ...
+    //         $order->save();
+
+    //         // Select current order model
+    //         $currentOrder = Order::find($order->id);
+    //         $currentOrder->dishes()->attach($request->dishIdsArray);
+
+    //         return response()->json(['message' => 'Transazione andata a buon fine. Controlla la tua mail per il riepilogo. ID: ' . $transaction->id,]);
+    //     } else {
+    //         return response()->json(['message' => 'Transazione non andata a buon fine.']);
+    //     };
+        
+    // }
 }

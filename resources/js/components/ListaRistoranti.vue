@@ -1,16 +1,18 @@
 <template>
   <main>
     <div class="container">
-        <CustomSelettore @opzione="categoriaSelezionata($event)" />
-        <div v-if="ristorantiFiltrati.length > 0" class="row">          
-          <SingleRestaurantCard
-            v-for="(item, index) in ristorantiFiltrati"
-            :key="index"
-            :item="item"
-            class="col-12 col-md-6"
-          />
-        </div>
-        <h4 v-else class="text-center mt-5">Nessun ristorante corrisponde alle categorie selezionate</h4>
+      <CustomSelettore @opzione="categoriaSelezionata($event)" />
+      <div v-if="ristorantiFiltrati.length > 0" class="row">
+        <SingleRestaurantCard
+          v-for="(item, index) in ristorantiFiltrati"
+          :key="index"
+          :item="item"
+          class="col-12 col-md-6"
+        />
+      </div>
+      <h4 v-else class="text-center mt-5">
+        Nessun ristorante corrisponde alle categorie selezionate
+      </h4>
     </div>
   </main>
 </template>
@@ -39,51 +41,61 @@ export default {
     axios.get("/api/users").then((resp) => {
       this.item = resp.data.results;
       console.log("risposta axios lista ristoranti", this.item);
-    //   console.log("risposta axios categorie", this.item[12].categories[1].id);
+      //   console.log("risposta axios categorie", this.item[12].categories[1].id);
     });
   },
 
   methods: {
-    //  categoriaSelezionata(categoria) {
-    //   console.log("check categoria da selettore" , categoria);
-    //    if (this.categoriaRistorante.includes(categoria) && categoria) {
-    //          this.categoriaRistorante.splice(categoria)
-    //    } else {
-    //      this.categoriaRistorante.push(categoria)
-    //    };
-    //    console.log("categoriaSelezionata", this.categoriaRistorante);
-    //    return this.categoriaRistorante;     
-    //  }, 
-
     // questa funzione serve come toggle per le checkbox
     categoriaSelezionata(categoria) {
-      this.categoriaRistorante = categoria
+      this.categoriaRistorante = categoria;
       return this.categoriaRistorante;
-    }
-  },
+    },
+
+    comparatoreArray(array1, array2) {
+
+       return array2.every((element) => array1.includes(element));
+      
+
+//        if (array1.length === array2.length) {
+//     return array1.every(element => {
+//        if (array2.includes(element)) {
+//          return true;
+//       }
+
+//       return false;
+//    });
+//   }
+
+//  return false;
+ 
+  
+}
+}, 
+  
 
   computed: {
     ristorantiFiltrati() {
-      const results = [];
-      let arrayInterno= [];
-      
-      this.item.forEach((restaurants) => {
-        restaurants.categories.forEach((category) => {
-          //console.log( "id categorie prima di ciclo if=", category.id, "user id=", restaurants.id, "categoriaRistorante dentro filtro", this.categoriaRistorante);
-          arrayInterno.push(category.id)
-          console.log("arraynonvuoto", arrayInterno);
+      let results =[];
 
-           if ((category.id == this.categoriaRistorante)) {
-            
-             results.push(restaurants);
-            
-          }
+      this.item.forEach((restaurants) => {
+        let arrayInterno = [];
+        restaurants.categories.forEach((category) => {
+          console.log( "id categorie prima di ciclo if=", category.id, "user id=", restaurants.id, );
+          arrayInterno.push(category.id);
         });
+        console.log("arraynonvuoto",  arrayInterno,"categoriaRistorante dentro filtro",  this.categoriaRistorante);
+        if (this.comparatoreArray(arrayInterno,this.categoriaRistorante)) { 
+          results.push(restaurants);
+         
+        }
+       
+        console.log("result interno", results);
       });
-      
-      console.log("result", results);
-      arrayInterno=[]
-      console.log("arraysvuotato", arrayInterno);
+
+      console.log("result esterno", results);
+      // arrayInterno=[]
+
       return results;
     },
   },
@@ -91,5 +103,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

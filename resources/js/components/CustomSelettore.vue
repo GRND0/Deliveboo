@@ -1,22 +1,21 @@
 <template>
   <div class="row">
+  <div v-for="category in categories" :key="category.id" class="col-12 col-md-6 col-lg-4 mb-3">
+    <input
+           type="checkbox"
+           :id="category.slug"
+           :value="category.id"
+           v-model="checkbox"
+           @change="$emit('opzione', checkbox)"
+           />
     <label
-      v-for="category in categories"
-      class="col-12 col-md-6 col-lg-4 mb-3 py-4 text-center d-block card"
-      :key="category.id"
-      :for="category.id"
-    >
+           class="py-4 text-center d-block card"
+           :for="category.slug"
+           >
       {{ category.name }}
-
-      <input
-        type="checkbox"
-        :id="category.id"
-        :value="category.id"
-        v-model="checkbox"
-        @change="$emit('opzione', checkbox)"
-      />
     </label>
   </div>
+</div>
 
   <!-- <div>
         <label for="categories">Filtra per categoria</label>
@@ -96,13 +95,18 @@ label {
   font-weight: bold;
 }
 
-// input[type=checkbox] {
-//   display: none;
-// }
+input[type=checkbox] {
+  display: none;
+}
 
 input:checked + label {
   border: solid 2px #00ccbc;
   color: #00ccbc;
+  background-color: #450063;
+}
+
+label:hover {
+  border: solid 2px #00ccbc;
 }
 
 </style>
