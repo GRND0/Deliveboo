@@ -2,9 +2,9 @@
   <main>
     <div class="container">
       <CustomSelettore @opzione="categoriaSelezionata($event)" />
-      <div v-if="ristorantiFiltrati.length > 0" class="row">
+      <div v-if="item.length > 0" class="row">
         <SingleRestaurantCard
-          v-for="(item, index) in ristorantiFiltrati"
+          v-for="(item, index) in item"
           :key="index"
           :item="item"
           class="col-12 col-md-6"
@@ -38,12 +38,12 @@ export default {
   },
 
   created() {
-    axios.get("/api/users").then((resp) => {
-      this.item = resp.data.results;
-      // console.log("risposta axios lista ristoranti", this.item);
-      // console.log("risposta axios categorie", this.item[12].categories[1].id);
-    });
-  },
+      axios.get("/api/users").then((resp) => {
+        this.item = resp.data.results;
+        console.log("risposta axios lista ristoranti", this.item);
+    
+      }); 
+  },      
 
   methods: {
     // questa funzione serve come toggle per le checkbox
@@ -53,29 +53,17 @@ export default {
     },
 
     comparatoreArray(array1, array2) {
-      return array2.every((element) => array1.includes(element));  
-    }
-  },  
+      return array2.every((element) => array1.includes(element));
+    },
+  },
 
   computed: {
-    ristorantiFiltrati() {
-      let results =[];
-
-      this.item.forEach((restaurants) => {
-        let arrayInterno = [];
-        restaurants.categories.forEach((category) => {
-          // console.log( "id categorie prima di ciclo if=", category.id, "user id=", restaurants.id, );
-          arrayInterno.push(category.id);
-        });
-        // console.log("arraynonvuoto",  arrayInterno,"categoriaRistorante dentro filtro",  this.categoriaRistorante);
-        if (this.comparatoreArray(arrayInterno,this.categoriaRistorante)) { 
-          results.push(restaurants);         
-        }       
-        // console.log("result interno", results);
-      });
-      // console.log("result esterno", results);
-      return results;
-    },
+     ristorantiFiltrati() {
+       axios.get(`/api/users/ricerca`, 
+       {params: {id:this.categoriaRistorante}})
+       .then(response => {
+       this.item = response.data});
+     },
   },
 };
 </script>

@@ -5258,8 +5258,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/users").then(function (resp) {
-      _this.item = resp.data.results; // console.log("risposta axios lista ristoranti", this.item);
-      // console.log("risposta axios categorie", this.item[12].categories[1].id);
+      _this.item = resp.data.results;
+      console.log("risposta axios lista ristoranti", _this.item);
     });
   },
   methods: {
@@ -5278,21 +5278,13 @@ __webpack_require__.r(__webpack_exports__);
     ristorantiFiltrati: function ristorantiFiltrati() {
       var _this2 = this;
 
-      var results = [];
-      this.item.forEach(function (restaurants) {
-        var arrayInterno = [];
-        restaurants.categories.forEach(function (category) {
-          // console.log( "id categorie prima di ciclo if=", category.id, "user id=", restaurants.id, );
-          arrayInterno.push(category.id);
-        }); // console.log("arraynonvuoto",  arrayInterno,"categoriaRistorante dentro filtro",  this.categoriaRistorante);
-
-        if (_this2.comparatoreArray(arrayInterno, _this2.categoriaRistorante)) {
-          results.push(restaurants);
-        } // console.log("result interno", results);
-
-      }); // console.log("result esterno", results);
-
-      return results;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/users/ricerca", {
+        params: {
+          id: this.categoriaRistorante
+        }
+      }).then(function (response) {
+        _this2.item = response.data;
+      });
     }
   }
 });
@@ -5434,6 +5426,13 @@ __webpack_require__.r(__webpack_exports__);
     if (localStorage.getItem("id") && localStorage.getItem("id") != this.id) {
       console.log("ristorante dove si stavano aggiungendo oggetti nel carrello", localStorage.getItem("id"));
       console.log("nuovo ristorante dove non si può visualizzare il carrello precedente", this.id);
+
+      if (confirm("Vuoi visualizzare un altro ristorante? Così perderai il tuo carrello")) {// localStorage.removeItem("cart");
+        // localStorage.removeItem("total");
+        // localStorage.removeItem("id");          
+      } else {// rimani in questa pagina                 
+      }
+
       localStorage.removeItem("cart");
       localStorage.removeItem("total");
       localStorage.removeItem("id");
@@ -5463,7 +5462,7 @@ __webpack_require__.r(__webpack_exports__);
       //   // Confronto l'id del prodotto con  gli id già presenti nel carrello
       //   if (dish.id == cartId) {
       //     this.addItem(this.cart[items]); // Se il piatto è già stato inserito, aggiunge solo la quantità
-      //     break;  // break per uscire dal ciclo, perchè che gli id combaciano
+      //     break;  // break per uscire dal ciclo, perchè gli id combaciano
       //   }
       // }
       this.cart.push(dish);
@@ -5540,7 +5539,6 @@ __webpack_require__.r(__webpack_exports__);
     //   for (const dish in this.dishes) {
     //     if (this.dishes.hasOwnProperty.call(this.dishes, dish)) {
     //       const dishOriginal = this.dishes[dish];
-    //       console.log(this.dishOriginal);
     //       if (item.id == dishOriginal.id) {
     //         item.quantity += 1;
     //         item.price = dishOriginal.price * item.quantity;
@@ -5885,9 +5883,9 @@ var render = function render() {
         return _vm.categoriaSelezionata($event);
       }
     }
-  }), _vm._v(" "), _vm.ristorantiFiltrati.length > 0 ? _c("div", {
+  }), _vm._v(" "), _vm.item.length > 0 ? _c("div", {
     staticClass: "row"
-  }, _vm._l(_vm.ristorantiFiltrati, function (item, index) {
+  }, _vm._l(_vm.item, function (item, index) {
     return _c("SingleRestaurantCard", {
       key: index,
       staticClass: "col-12 col-md-6",
@@ -6109,7 +6107,7 @@ var render = function render() {
   }), _vm._v(" " + _vm._s(_vm.user.link_social_media))])]), _vm._v(" "), _vm._l(_vm.user.dishes, function (dish) {
     return _c("div", {
       key: dish.slug,
-      staticClass: "col-12 col-lg-6",
+      staticClass: "col-12 col-lg-6 position-relative",
       "class": dish.available == 0 ? "not-visible" : "",
       on: {
         click: function click($event) {
@@ -6122,7 +6120,7 @@ var render = function render() {
     }, [_c("img", {
       staticClass: "card-img-top",
       attrs: {
-        src: "/storage/app/public/" + dish.image,
+        src: dish.image,
         alt: dish.name
       }
     }), _vm._v(" "), _c("div", {
@@ -11649,7 +11647,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".restaurant-img[data-v-c497e646] {\n  width: 50%;\n}\n.not-visible[data-v-c497e646] {\n  opacity: 0.3;\n}\n.not-visible[data-v-c497e646]:hover {\n  transform: none;\n  cursor: initial;\n}\n.cart[data-v-c497e646] {\n  position: fixed;\n  right: 0;\n  padding: 5px;\n  top: 10vh;\n  background-color: rgba(0, 204, 188, 0.6666666667);\n  box-shadow: -2px 2px 10px -2px #00887d;\n}\n.cart .cart-item[data-v-c497e646] {\n  width: 100%;\n}\n@media screen and (max-width: 768px) {\n.cart[data-v-c497e646] {\n    margin-top: 2rem;\n    position: static;\n    background-color: transparent;\n    box-shadow: 0px 0px 0px 0px;\n}\n}", ""]);
+exports.push([module.i, ".restaurant-img[data-v-c497e646] {\n  width: 50%;\n}\n.not-visible[data-v-c497e646] {\n  opacity: 0.5;\n}\n.not-visible[data-v-c497e646]:hover {\n  transform: none;\n  cursor: default;\n}\n.not-visible[data-v-c497e646]::before {\n  content: \"ATTUALMENTE NON DISPONIBILE\";\n  position: absolute;\n  top: 30%;\n  left: 30%;\n  z-index: 5;\n}\n.cart[data-v-c497e646] {\n  position: fixed;\n  right: 0;\n  padding: 5px;\n  top: 10vh;\n  background-color: rgba(0, 204, 188, 0.6666666667);\n  box-shadow: -2px 2px 10px -2px #00887d;\n}\n.cart .cart-item[data-v-c497e646] {\n  width: 100%;\n}\n@media screen and (max-width: 768px) {\n.cart[data-v-c497e646] {\n    margin-top: 2rem;\n    position: static;\n    background-color: transparent;\n    box-shadow: 0px 0px 0px 0px;\n}\n}", ""]);
 
 // exports
 

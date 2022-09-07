@@ -9,7 +9,7 @@
                 <div class="card-header">{{ __('Registrati') }}</div>
 
                 <div class="card-body">
-                    <form id="formRegistrazione" method="POST" action="{{ route('register', $user) }}" enctype="multipart/form-data">
+                    <form id="formRegistrazione" name="theform" method="POST" action="{{ route('register', $user) }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row mb-1">
@@ -30,7 +30,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password*') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="la password deve essere di almeno 4 caratteri">
+                                <input id="password" type="password" minlength="4" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="la password deve essere di almeno 4 caratteri" onkeyup='check();'>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -44,7 +44,8 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password*') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Reinserisci la password">
+                                <input id="password-confirm" type="password" minlength="4" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Reinserisci la password" onkeyup='check();'>
+                                <span id='message'></span>
                             </div>
                         </div>
 
@@ -149,7 +150,7 @@
                             <div class="col-md-6">
                                 <input id="image" type="file" accept="image/png"
                                     class="form-control @error('image') is-invalid @enderror" name="image"
-                                    value="{{ ('image') }}" autocomplete="image" autofocus>
+                                    value="{{ ('image') }}" required autocomplete="image" autofocus>
 
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">
@@ -179,7 +180,7 @@
 
                         <div class="form-group row mb-1">
                             <label for="types"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Categorie') }}</label>
+                                class="col-md-4 col-form-label text-md-right">{{ __('Categorie*') }}</label>
 
                             <div class="col-md-6">
                                 @foreach ($categories as $category)
@@ -206,7 +207,10 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button id="submit" type="submit" class="btn btn-primary">
+                                <button id="submit" 
+                                        type="submit" 
+                                        class="btn btn-primary"
+                                >
                                     {{ __('Registrati') }}
                                 </button>
                             </div>
@@ -221,4 +225,39 @@
 </div>
 
 @endsection
+
+<script>
+    let check = function() {
+        
+        if ((document.getElementById('password').value == document.getElementById('password-confirm').value) && (document.getElementById('password').value != '') ) {
+            document.getElementById('message').style.color = 'green';
+            document.getElementById('message').innerHTML = 'La password corrisponde';
+        } else {
+            document.getElementById('message').style.color = 'red';
+            document.getElementById('message').innerHTML = 'La password non corrisponde';
+        }
+    };
+
+    // $('#formRegistrazione').qualcosa(function() {
+    // $('input[type=submit]').addClass("disabled");
+    // });
+
+    // (function() {
+    //     $('form > input').keyup(function() {
+
+    //         let empty = false;
+    //         $('form > input').each(function() {
+    //             if ($(this).val() == '') {
+    //                 empty = true;
+    //             }
+    //         });
+
+    //         if (empty) {
+    //             $('#submit').attr('disabled', 'disabled');
+    //         } else {
+    //             $('#submit').removeAttr('disabled');
+    //         }
+    //     });
+    // })()
+</script>
 

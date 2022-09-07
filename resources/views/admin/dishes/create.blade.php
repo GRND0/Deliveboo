@@ -23,7 +23,7 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="name">Nome del piatto</label>
+                        <label for="name">Nome del piatto*</label>
                         <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
                     </div>
 
@@ -38,13 +38,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="price">Prezzo del piatto € (max 50,00)</label>
+                        <label for="price">Prezzo del piatto € (max 50,00)*</label>
                         <input type="number" min="1" max="50" step=".01" class="form-control"
                             id="price" name="price" value="{{ old('price') }}">
                     </div>
 
                     <div class="mt-2">
-                        <label for="image">Immagine</label>
+                        <label for="image">Immagine*</label>
                         <input type="file" name="image" id="image">
                     </div>
 

@@ -14,14 +14,14 @@
           <div><a href=""><i class="fa-solid fa-at"></i> {{ user.link_social_media }}</a></div>
           
           <!-- piatti del ristorante -->
-          <div class="col-12 col-lg-6" 
+          <div class="col-12 col-lg-6 position-relative" 
                v-for="dish in user.dishes" 
                :key="dish.slug"
                :class="dish.available == 0 ? 'not-visible' : ''"
                @click="[dish.available == 1 ? addToCart(dish) : '']"
               >
             <div class="card mt-3 my-pointer">
-              <img class="card-img-top" :src="'/storage/app/public/' + dish.image" :alt="dish.name">
+              <img class="card-img-top" :src="dish.image" :alt="dish.name">
               <div class="card-body d-flex justify-content-between">
                 <h4 class="card-title text-capitalize">{{ dish.name }}</h4>
                 <h4 class="text-success me-3">€ {{ dish.price.toFixed(2) }}</h4>
@@ -165,9 +165,16 @@ export default {
     if (localStorage.getItem("id") && localStorage.getItem("id") != this.id) {
       console.log("ristorante dove si stavano aggiungendo oggetti nel carrello", localStorage.getItem("id"));
       console.log("nuovo ristorante dove non si può visualizzare il carrello precedente", this.id);
-      localStorage.removeItem("cart");
-      localStorage.removeItem("total");
-      localStorage.removeItem("id");
+      if (confirm("Vuoi visualizzare un altro ristorante? Così perderai il tuo carrello")) {
+        // localStorage.removeItem("cart");
+        // localStorage.removeItem("total");
+        // localStorage.removeItem("id");          
+      } else {
+        // rimani in questa pagina                 
+      }
+        localStorage.removeItem("cart");
+        localStorage.removeItem("total");
+        localStorage.removeItem("id");   
     }
     // i dati del carrello rimangono salvati anche se si torna indietro nella vista delle categorie ristoranti
     if (localStorage.getItem("cart")) {
@@ -197,7 +204,7 @@ export default {
       //   // Confronto l'id del prodotto con  gli id già presenti nel carrello
       //   if (dish.id == cartId) {
       //     this.addItem(this.cart[items]); // Se il piatto è già stato inserito, aggiunge solo la quantità
-      //     break;  // break per uscire dal ciclo, perchè che gli id combaciano
+      //     break;  // break per uscire dal ciclo, perchè gli id combaciano
       //   }
       // }
       this.cart.push(dish);
@@ -278,7 +285,6 @@ export default {
     //   for (const dish in this.dishes) {
     //     if (this.dishes.hasOwnProperty.call(this.dishes, dish)) {
     //       const dishOriginal = this.dishes[dish];
-    //       console.log(this.dishOriginal);
     //       if (item.id == dishOriginal.id) {
     //         item.quantity += 1;
     //         item.price = dishOriginal.price * item.quantity;
@@ -297,10 +303,17 @@ export default {
 }
 
 .not-visible {
-  opacity: 0.3;
+  opacity: 0.5;
   &:hover {
     transform: none;
-    cursor: initial;
+    cursor: default;
+  }
+  &::before {
+    content: "ATTUALMENTE NON DISPONIBILE";
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    z-index: 5;
   }
 }
 

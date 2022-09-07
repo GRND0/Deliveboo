@@ -77,10 +77,10 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
 
     {        
-        $dish = Dish::findOrFail($id);
+        $dish = Dish::where('slug', '=', $slug)->first();
         $this->authorize('edit', $dish);
         return view('admin.dishes.edit', compact('dish'));
     }

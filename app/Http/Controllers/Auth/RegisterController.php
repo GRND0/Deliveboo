@@ -64,7 +64,7 @@ class RegisterController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'p_iva' => ['unique:users', 'required', 'string', 'min:13', 'max:13'],
             'image' => ['required', 'image'],
-            'category' => ['nullable'],
+            'category' => ['required'],
         ], [
             'email.unique' => 'L\'email inserita è già in uso',
             'password.confirmed' => 'Le password non corrispondono',
@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'p_iva.max' => 'La Partita IVA deve essere di 13 caratteri',
             'restaurant_phone.unique' => 'Numero già in uso',
             'image.image' => 'immagine non valida',
-            // 'category.required' => 'Devi selezionare almeno una categoria',
+            'category.required' => 'Devi selezionare almeno una categoria',
         ]);
     }
 
@@ -100,13 +100,21 @@ class RegisterController extends Controller
         ]);
 
         // $category = $data['category'];
-        // $user->categories()->attach($category);
+        // $user->categories()->attach($category); 
+        // errore del required per le categorie è qua, perchè con queste 2 righe funzionava
         $categories = Category::findOrFail(request() -> get('categories'));
         $user -> categories() -> sync($categories);
 
         return $user;
     }
 
+    public function chooseCategory(User $user){
+
+        $categories = Category::all();
+
+        return view('auth.register', compact('categories', 'user'));
+    }
+    
     // private function generateSlugFromName($restaurant_name) {
     //     $base_slug = Str::slug($restaurant_name, '-');
     //     $slug = $base_slug;
@@ -120,11 +128,5 @@ class RegisterController extends Controller
     //     return $slug;
     // }
 
-    public function chooseCategory(User $user){
-
-        $categories = Category::all();
-
-        return view('auth.register', compact('categories', 'user'));
-    }
 
 }

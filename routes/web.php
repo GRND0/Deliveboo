@@ -28,6 +28,7 @@ Route::middleware('auth')
         // dishes
         Route::resource('dishes', 'DishController');
         Route::get('dishes/{slug}', 'DishController@show')->name('dishes.show');
+        Route::get('dishes/{slug}/edit', 'DishController@edit')->name('dishes.edit');
 
         // categories
         Route::get('categories', 'CategoryController@index')->name('categories.index');

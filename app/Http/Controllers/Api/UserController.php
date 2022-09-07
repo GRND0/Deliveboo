@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
@@ -16,11 +17,29 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('categories')->get();
+        foreach ($users as $user) {
+            if ($user->image) {
+                $user->image = url('storage/' . $user->image);
+            }
+        }
         return response()->json([
             'success' => true,
             'results' => $users                      
         ]);
     }
+
+       public function ricerca(Request $request) {
+            $data = User::with('categories')->wherePivot('category_id','='.$request->id)->get() ;
+           return response()->json($data);
+        }
+
+
+
+
+
+ 
+
+
 
     /**
      * Display the specified resource.
@@ -35,6 +54,9 @@ class UserController extends Controller
 
         $user = User::where('slug', '=', $slug)->with(['categories', 'dishes'])->first();
         if ($user) {
+            if ($user->image) {
+                $user->image = url('storage/' . $user->image);
+            }
             return response()->json([
                 'success' => true,
                 'results' => $user 
