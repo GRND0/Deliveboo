@@ -64,17 +64,17 @@ class RegisterController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'p_iva' => ['unique:users', 'required', 'string', 'min:13', 'max:13'],
             'image' => ['required', 'image'],
-            'category' => ['required'],
+            'categories' => ['required'],
         ], [
             'email.unique' => 'L\'email inserita è già in uso',
             'password.confirmed' => 'Le password non corrispondono',
-            'password.min' => 'Le password deve essere di almeno 4 caratteri',
+            'password.min' => 'La password deve essere di almeno 4 caratteri',
             'p_iva.unique' => 'La Partita IVA inserità è già in uso',
             'p_iva.min' => 'La Partita IVA deve essere di 13 caratteri',
             'p_iva.max' => 'La Partita IVA deve essere di 13 caratteri',
             'restaurant_phone.unique' => 'Numero già in uso',
-            'image.image' => 'immagine non valida',
-            'category.required' => 'Devi selezionare almeno una categoria',
+            'image.image' => 'Immagine non valida',
+            'categories.required' => 'Devi selezionare almeno una categoria',
         ]);
     }
 

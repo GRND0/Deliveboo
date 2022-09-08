@@ -4,9 +4,10 @@
 <div class="container">
   <h2 class="mt-2">Ciao {{$user->name}}. Questa è la home di amministrazione </h2>
   <div class="row row-cols-10">
-    <h5 class="font-weight-bold">{{$user->restaurant_name}}</h5>
-    <p>Qui puoi gestire la tua attività</p>
-    <img src="storage/{{ $user->image }}" alt="">  
+    <h3 class="font-weight-bold">{{$user->restaurant_name}}</h3>
+    <p>Qui potrai gestire la tua attività</p>
+    <h3><a href="/admin/dishes/">Visualizza e modifica qui i piatti che venderai da asporto!</a></h3>
+    <img src="/storage/app/public/uploads/{{ $user->image }}" alt="">  
   </div> 
 </div>
 

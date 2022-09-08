@@ -4,7 +4,8 @@
 
         {{-- logo --}}
         <a class="navbar-brand align-items-center" href="">
-          <img class="img-logo" src="" alt="Deliveboo logo">
+          Deliveboo
+          {{-- <img class="img-logo" src="/storage/app/public/uploads/logo-deliveboo.png" alt="Deliveboo logo"> --}}
         </a>
 
         {{-- bottone hamburger menu su schermi piccoli --}}

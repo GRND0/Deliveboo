@@ -12,7 +12,7 @@ class User extends Authenticatable
 
     // relazione molti a molti con Category
     public function categories() {
-        return $this->belongsToMany('App\Category');
+        return $this->belongsToMany('App\Category')->withPivot('category_id');
     }
 
     // relazione 1 a molti con Dish

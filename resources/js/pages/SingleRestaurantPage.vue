@@ -15,21 +15,21 @@
           
           <!-- piatti del ristorante -->
           <div class="col-12 col-lg-6 position-relative" 
-               v-for="dish in user.dishes" 
+               v-for="dish in dishes" 
                :key="dish.slug"
                :class="dish.available == 0 ? 'not-visible' : ''"
                @click="[dish.available == 1 ? addToCart(dish) : '']"
               >
-            <div class="card mt-3 my-pointer">
-              <img class="card-img-top" :src="dish.image" :alt="dish.name">
+            <div class="card mt-3 my-pointer ms-translate">
+              <img class="d-none d-sm-block card-img-top" :src="dish.image" :alt="dish.name">
               <div class="card-body d-flex justify-content-between">
                 <h4 class="card-title text-capitalize">{{ dish.name }}</h4>
                 <h4 class="text-success me-3">€ {{ dish.price.toFixed(2) }}</h4>
               </div>
-              <ul class="list-group list-group-flush">
+              <ul class="list-group list-group-flush d-none d-sm-block">
                 <li class="list-group-item"> <span class="text-danger">Descrizione: </span>{{ capitalizeFirstLetter(dish.description) }}</li>
               </ul>
-              <div class="card-body">
+              <div class="card-body d-none d-sm-block">
                 <p class="card-text font-weight-bold text-capitalize"><span class="text-danger">Ingredienti: </span>{{ dish.ingredients }}</p>
               </div>
             </div>
@@ -165,16 +165,16 @@ export default {
     if (localStorage.getItem("id") && localStorage.getItem("id") != this.id) {
       console.log("ristorante dove si stavano aggiungendo oggetti nel carrello", localStorage.getItem("id"));
       console.log("nuovo ristorante dove non si può visualizzare il carrello precedente", this.id);
-      if (confirm("Vuoi visualizzare un altro ristorante? Così perderai il tuo carrello")) {
+      // if (confirm("Vuoi visualizzare un altro ristorante? Così perderai il tuo carrello")) {
         // localStorage.removeItem("cart");
         // localStorage.removeItem("total");
         // localStorage.removeItem("id");          
-      } else {
-        // rimani in questa pagina                 
-      }
-        localStorage.removeItem("cart");
-        localStorage.removeItem("total");
-        localStorage.removeItem("id");   
+      // } else {
+         // rimani in questa pagina                 
+      // }
+      localStorage.removeItem("cart");
+      localStorage.removeItem("total");
+      localStorage.removeItem("id");   
     }
     // i dati del carrello rimangono salvati anche se si torna indietro nella vista delle categorie ristoranti
     if (localStorage.getItem("cart")) {
@@ -272,8 +272,10 @@ export default {
       axios
         .get(`/api/users/${slug}`) //ricordare di mettere backtick
         .then((resp) => {
+          console.log(resp.data.results.dishes);
           if (resp.data.success) {
-            this.user = resp.data.results;
+            this.user = resp.data.results.user;
+            this.dishes = resp.data.results.dishes;
           } else {
             this.$router.push({ name: "not-found" });
           }          
@@ -339,9 +341,13 @@ export default {
 
 @media screen and (max-width: 768px) {
   .cart {
-    margin-top: 2rem;
-    position: static;
-    background-color: transparent;
+    width: 100%;
+    margin-top: 50vh;
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: #00ccbc;
     box-shadow: 0px 0px 0px 0px;
   }
 }

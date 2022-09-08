@@ -2,7 +2,7 @@
   <div class="container py-3">
     {{-- footer nav  --}}
     <div class="nav-footer row g-5 justify-content-around">
-      <div class="col-md-6 p-2 col-lg-3">
+      <div class="col-12 col-md-6 p-2 col-lg-3">
         <div class="footer-card">
           <h5>Scopri Deliveboo</h5>
           <ul>
@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="col-md-6 p-2  col-lg-3">
+      <div class="col-12 col-md-6 p-2  col-lg-3">
         <div class="footer-card">
           <h5>Note legali</h5>
           <ul>
@@ -30,7 +30,7 @@
         </div>          
       </div>
 
-      <div class="col-md-6 p-2  col-lg-3">
+      <div class="col-12 col-md-6 p-2 col-lg-3">
         <div class="footer-card">
           <h5>Aiuto</h5>
           <ul>
@@ -41,7 +41,7 @@
         </div>          
       </div>
 
-      <div class="col-md-6 p-2 col-lg-3">
+      <div class="col-12 col-md-6 p-2 col-lg-3">
         <div class="footer-card">
           @auth
             <h5>Porta Deliveboo con te</h5>
@@ -58,14 +58,14 @@
       </div>
     </div>
     
-    {{-- social channels  --}}
+    {{-- social channels --}}
     <nav class="social-channels">
       <ul>
         <li><a class="h6"><i class="fab fa-facebook h2 mr-2"></i> Facebook</a></li>
         <li><a class="h6 mr-2"><i class="fab fa-twitter h2 mr-2"></i> Twitter</a></li>
         <li><a class="h6 mr-2"><i class="fab fa-linkedin-in h2 mr-2"></i> Linkedin</a></li>
       </ul>
-      <p>2022 DeliveBoo - Classe 62 Team 3 with &hearts;</p>
+      <p>DeliveBoo 2022 - Classe #62 - Team 3 with &hearts;</p>
     </nav>
   </div>
 </footer>

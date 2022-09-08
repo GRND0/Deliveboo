@@ -3,6 +3,7 @@
 use App\Dish;
 use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
 class DishesTableSeeder extends Seeder
@@ -59,6 +60,7 @@ class DishesTableSeeder extends Seeder
             $dish->price = $faker->randomFloat(1, 3, 25);
             $dish->user_id = $faker->randomElement($user_ids);
             $dish->available = $faker->boolean();
+            $dish->slug = Str::slug($dish->name, '-');
             $dish->save();
         }
     }

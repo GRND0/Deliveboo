@@ -7,7 +7,7 @@
           v-for="(item, index) in item"
           :key="index"
           :item="item"
-          class="col-12 col-md-6"
+          class="col-12 col-md-6 ms-translate"
         />
       </div>
       <h4 v-else class="text-center mt-5">
@@ -34,6 +34,7 @@ export default {
       item: [],
       restaurants: [],
       categoriaRistorante: [],
+      categories_id: [],
     };
   },
 
@@ -43,7 +44,7 @@ export default {
         console.log("risposta axios lista ristoranti", this.item);
     
       }); 
-  },      
+  },       
 
   methods: {
     // questa funzione serve come toggle per le checkbox
@@ -54,16 +55,23 @@ export default {
 
     comparatoreArray(array1, array2) {
       return array2.every((element) => array1.includes(element));
-    },
+    }, 
+
   },
 
-  computed: {
-     ristorantiFiltrati() {
-       axios.get(`/api/users/ricerca`, 
-       {params: {id:this.categoriaRistorante}})
-       .then(response => {
-       this.item = response.data});
-     },
+  computed: {  ristorantiFiltrati()    { 
+    console.log(this.categoriaRistorante)
+; } 
+      //   {
+      //   axios.get('/api/users/ricerca', {
+      //   params: {
+      //     id: this.categoriaRistorante,
+      //   }
+      // })
+      //   .then(response => {
+      //   this.item = response.data.results});
+        
+      // },
   },
 };
 </script>

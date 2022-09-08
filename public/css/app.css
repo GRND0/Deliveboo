@@ -21292,6 +21292,13 @@ a {
   cursor: pointer;
 }
 
+.ms-translate {
+  transition: 0.7s;
+}
+.ms-translate:hover {
+  transform: translateY(-1%);
+}
+
 .card-img-top {
   width: 100%;
   height: 250px;
