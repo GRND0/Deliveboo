@@ -21,7 +21,12 @@
                @click="[dish.available == 1 ? addToCart(dish) : '']"
               >
             <div class="card mt-3 my-pointer ms-translate">
-              <img class="d-none d-sm-block card-img-top" :src="dish.image" :alt="dish.name">
+              <div v-if="dish.image">
+                <img class="d-none d-sm-block card-img-top" :src="dish.image" :alt="dish.name">
+              </div>
+              <div v-else>
+                <img class="d-none d-sm-block card-img-top" src="https://images.ctfassets.net/84wm3hhxw4gx/0sxerdVddcgpnd69VcMsx/414cb6a014fc90e5d96e07fef8022ccf/foodplaceholder.png" alt="placeholder">
+              </div>
               <div class="card-body d-flex justify-content-between">
                 <h4 class="card-title text-capitalize">{{ dish.name }}</h4>
                 <h4 class="text-success me-3">€ {{ dish.price.toFixed(2) }}</h4>

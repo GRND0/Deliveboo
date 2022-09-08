@@ -51,8 +51,9 @@ class UserController extends Controller
             }
 
             foreach ($dishes as $dish) {
+                if ($dish->image) {
                 $dish->image = url('storage/' . $dish->image);
-            }
+            }}
 
             return response()->json([
                 'success' => true,
@@ -62,13 +63,39 @@ class UserController extends Controller
                 ]
             ]);
         }
-        return response()->json([
-            'success' => false,
-            'error' => 'nessuna ricerca corrispondente'                      
-        ]);
+
     }
 
     // funzione di filtraggio lato server 
+
+        public function ricerca(Request $request) {
+            $str = $request->str;
+            dd($str);
+
+            $users = User::with('categories');
+            if (!$str) $users->get();
+            return response()->json([
+                'success' => true,
+                'results' => $users                      
+            ]);  
+                $users->whereHas('categories', function($q) use($str)
+                {
+                    $q->where('category_id', $str);
+                });
+            $users->get();
+            return response()->json([
+                'success' => true,
+                'results' => $users                      
+            ]);                     
+        }
+
+
+
+
+
+
+
+
     //   public function ricerca(Request $request) {
         
     //       $data = User::with('categories')->wherePivot('category_id','='.$request->input('id'))->get();

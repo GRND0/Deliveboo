@@ -5277,17 +5277,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     ristorantiFiltrati: function ristorantiFiltrati() {
-      console.log(this.categoriaRistorante);
-    } //   {
-    //   axios.get('/api/users/ricerca', {
-    //   params: {
-    //     id: this.categoriaRistorante,
-    //   }
-    // })
-    //   .then(response => {
-    //   this.item = response.data.results});
-    // },
+      var _this2 = this;
 
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/users/ricerca', {
+        params: {
+          str: this.categoriaRistorante
+        }
+      }).then(function (response) {
+        _this2.item = response.data.results;
+      });
+    }
   }
 });
 
@@ -6011,6 +6010,8 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
+    staticClass: "jumbotron-deliveboo"
+  }, [_c("div", {
     staticClass: "container"
   }, [_c("div", {
     staticClass: "row"
@@ -6020,7 +6021,7 @@ var render = function render() {
     staticClass: "container py-5"
   }, [_c("h2", {
     staticClass: "text-center pb-3"
-  }, [_vm._v("Seleziona una o più categorie tra i ristoranti presenti nella tua zona!")]), _vm._v(" "), _c("div", [_c("ListaRistoranti")], 1)])])])]);
+  }, [_vm._v("Seleziona una o più categorie tra i ristoranti presenti nella tua zona!")]), _vm._v(" "), _c("div", [_c("ListaRistoranti")], 1)])])])])]);
 };
 
 var staticRenderFns = [];
@@ -6122,13 +6123,19 @@ var render = function render() {
       }
     }, [_c("div", {
       staticClass: "card mt-3 my-pointer ms-translate"
-    }, [_c("img", {
+    }, [dish.image ? _c("div", [_c("img", {
       staticClass: "d-none d-sm-block card-img-top",
       attrs: {
         src: dish.image,
         alt: dish.name
       }
-    }), _vm._v(" "), _c("div", {
+    })]) : _c("div", [_c("img", {
+      staticClass: "d-none d-sm-block card-img-top",
+      attrs: {
+        src: "https://images.ctfassets.net/84wm3hhxw4gx/0sxerdVddcgpnd69VcMsx/414cb6a014fc90e5d96e07fef8022ccf/foodplaceholder.png",
+        alt: "placeholder"
+      }
+    })]), _vm._v(" "), _c("div", {
       staticClass: "card-body d-flex justify-content-between"
     }, [_c("h4", {
       staticClass: "card-title text-capitalize"

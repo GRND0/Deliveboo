@@ -59,19 +59,17 @@ export default {
 
   },
 
-  computed: {  ristorantiFiltrati()    { 
-    console.log(this.categoriaRistorante)
-; } 
-      //   {
-      //   axios.get('/api/users/ricerca', {
-      //   params: {
-      //     id: this.categoriaRistorante,
-      //   }
-      // })
-      //   .then(response => {
-      //   this.item = response.data.results});
+  computed: {       
+       ristorantiFiltrati()  {
+         axios.get('/api/users/ricerca', {
+         params: {
+           str: this.categoriaRistorante,
+         }
+       })
+         .then(response => {
+         this.item = response.data.results});
         
-      // },
+       },
   },
 };
 </script>

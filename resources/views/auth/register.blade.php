@@ -1,4 +1,4 @@
-@extends('layouts.app')isCheck
+@extends('layouts.app')
 
 @section('content')
 
@@ -16,7 +16,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail*') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="nome@mail.com" onkeydown="verify()" onblur="verify()" onfocus="verify()">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="nome@mail.com" oninput="verify()" onblur="verify()" onfocus="verify()">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -30,7 +30,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password*') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" minlength="4" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="la password deve essere di almeno 4 caratteri" onkeyup='check()' onkeydown="verify()" onblur="verify()" onfocus="verify()">
+                                <input id="password" type="password" minlength="4" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="la password deve essere di almeno 4 caratteri" onkeyup='check()' oninput="verify()" onblur="verify()" onfocus="verify()">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password*') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" minlength="4" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Reinserisci la password" onkeyup='check()' onkeydown="verify()" onblur="verify()" onfocus="verify()">
+                                <input id="password-confirm" type="password" minlength="4" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Reinserisci la password" onkeyup='check()' oninput="verify()" onblur="verify()" onfocus="verify()">
                                 <span id='message'></span>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 <input id="name" type="text"
                                     class="form-control @error('name') is-invalid @enderror" name="name"
                                     value="{{ old('name') }}" required autocomplete="name" autofocus
-                                    placeholder="Inserire il tuo nome" onkeydown="verify()" onblur="verify()" onfocus="verify()">
+                                    placeholder="Inserire il tuo nome" oninput="verify()" onblur="verify()" onfocus="verify()">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -77,7 +77,7 @@
                                 <input id="restaurant_name" type="text"
                                     class="form-control @error('restaurant_name') is-invalid @enderror" name="restaurant_name"
                                     value="{{ old('restaurant_name') }}" required autocomplete="restaurant_name" autofocus
-                                    placeholder="Inserire il tuo nome ristorante" onkeydown="verify()" onblur="verify()" onfocus="verify()">
+                                    placeholder="Inserire il tuo nome ristorante" oninput="verify()" onblur="verify()" onfocus="verify()">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -96,7 +96,7 @@
                                 <input id="restaurant_phone" type="text"
                                     class="form-control @error('restaurant_phone') is-invalid @enderror" name="restaurant_phone"
                                     value="{{ old('restaurant_phone') }}" required autocomplete="restaurant_phone" autofocus
-                                    placeholder="Inserire il numero di telefono del ristorante" onkeydown="verify()" onblur="verify()" onfocus="verify()">
+                                    placeholder="Inserire il numero di telefono del ristorante" oninput="verify()" onblur="verify()" onfocus="verify()">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -114,7 +114,7 @@
                                 <input id="address" type="text"
                                     class="form-control @error('address') is-invalid @enderror" name="address"
                                     value="{{ old('address') }}" required autocomplete="address" autofocus
-                                    placeholder="Inserire l'indirizzo dell'attività" onkeydown="verify()" onblur="verify()" onfocus="verify()">
+                                    placeholder="Inserire l'indirizzo dell'attività" oninput="verify()" onblur="verify()" onfocus="verify()">
 
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
@@ -132,8 +132,8 @@
 
                                 <input id="p_iva" type="text"
                                     class="form-control @error('p_iva') is-invalid @enderror" name="p_iva"
-                                    value="{{ old('p_iva') }}" required autocomplete="p_iva" autofocus
-                                    placeholder="Inserire la P. IVA" onkeydown="verify()" onblur="verify()" onfocus="verify()">
+                                    value="{{ old('p_iva') }}" required minlength="13"autocomplete="p_iva" autofocus
+                                    placeholder="Inserire la P. IVA" oninput="verify()" onblur="verify()" onfocus="verify()">
 
                                 @error('p_iva')
                                     <span class="invalid-feedback" role="alert">
@@ -168,7 +168,7 @@
                                 <input id="link_social_media" type="text"
                                     class="form-control @error('link_social_media') is-invalid @enderror" name="link_social_media"
                                     value="{{ old('link_social_media') }}" required autocomplete="link_social_media" autofocus
-                                    placeholder="Inserire un link" onkeydown="verify()" onblur="verify()" onfocus="verify()">
+                                    placeholder="Inserire un link" oninput="verify()" onblur="verify()" onfocus="verify()">
 
                                 @error('link_social_media')
                                     <span class="invalid-feedback" role="alert">
@@ -254,9 +254,10 @@
             && (document.getElementById('p_iva').value != '') 
             && (document.getElementById('image').value != '') 
             && (document.getElementById('link_social_media').value != '')
-            && (document.querySelector('.form-check-input').checked)
+            // && (document.querySelector('.form-check-input').value != 'null')
         ) {
             document.getElementById('submit').disabled = false;
+            // console.log((document.querySelector('.form-check-input')));
         } else {
             document.getElementById('submit').disabled = true;
         }
