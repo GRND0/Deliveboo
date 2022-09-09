@@ -35,6 +35,7 @@ export default {
       restaurants: [],
       categoriaRistorante: [],
       categories_id: [],
+      aaa: false
     };
   },
   
@@ -42,9 +43,10 @@ export default {
 
 
   },
-mounted() {
-  
-},
+  created() {
+      this.aaa = true;
+      console.log('aaa', this.aaa);
+  },
 
      
 
@@ -64,8 +66,9 @@ mounted() {
 
   computed: {       
        ristorantiFiltrati()  {
+        console.log('aaa', this.aaa);
         this.categoriaRistorante;
-        
+        this.aaa = true;
          axios.get('/api/users/ricerca', {
          params: {
            str: JSON.stringify(this.categoriaRistorante),

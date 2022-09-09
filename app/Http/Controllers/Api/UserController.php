@@ -68,7 +68,7 @@ class UserController extends Controller
     public function ricerca(Request $request)
     {
 
-        $str = json_decode($request->str);
+        $str = json_decode($request->str) ?? [];
         sort($str);
 
         // dd( 'variabile interna', $str);
@@ -87,6 +87,7 @@ class UserController extends Controller
                 'controllo' => 1
             ]);
         }
+
         $ristoranti = User::whereHas('categories', function ($q) use ($str) {
             $q->whereIn('id', $str);
         })->get();

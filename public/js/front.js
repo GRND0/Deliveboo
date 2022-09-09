@@ -5239,11 +5239,15 @@ __webpack_require__.r(__webpack_exports__);
       item: [],
       restaurants: [],
       categoriaRistorante: [],
-      categories_id: []
+      categories_id: [],
+      aaa: false
     };
   },
   watch: {},
-  mounted: function mounted() {},
+  created: function created() {
+    this.aaa = true;
+    console.log('aaa', this.aaa);
+  },
   methods: {
     // questa funzione serve come toggle per le checkbox
     categoriaSelezionata: function categoriaSelezionata(categoria) {
@@ -5261,7 +5265,9 @@ __webpack_require__.r(__webpack_exports__);
     ristorantiFiltrati: function ristorantiFiltrati() {
       var _this = this;
 
+      console.log('aaa', this.aaa);
       this.categoriaRistorante;
+      this.aaa = true;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/users/ricerca', {
         params: {
           str: JSON.stringify(this.categoriaRistorante)
