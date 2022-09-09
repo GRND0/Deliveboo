@@ -5243,13 +5243,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   watch: {},
-  mounted: function mounted() {
-    ristorantiFiltrati();
-  },
+  mounted: function mounted() {},
   methods: {
     // questa funzione serve come toggle per le checkbox
     categoriaSelezionata: function categoriaSelezionata(categoria) {
       this.categoriaRistorante = categoria;
+      console.log('categoriaRistorante trasmissione', this.categoriaRistorante);
       return this.categoriaRistorante;
     },
     comparatoreArray: function comparatoreArray(array1, array2) {
@@ -5442,7 +5441,6 @@ __webpack_require__.r(__webpack_exports__);
       return string.charAt(0).toUpperCase() + string.slice(1);
     },
     addToCart: function addToCart(dish) {
-      // dish['quantity'] = 1;
       // for (const products in this.cart) {
       //   let cartId = this.cart[products].id;
       //   // Confronto l'id del prodotto con  gli id già presenti nel carrello
@@ -5524,30 +5522,18 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     } // metodo per aggiungere un item
-    // addProduct(item) {
-    //   for (const dish in this.dishes) {
-    //     if (this.dishes.hasOwnProperty.call(this.dishes, dish)) {
-    //       const dishOriginal = this.dishes[dish];
-    //       if (item.id == dishOriginal.id) {
-    //         item.quantity += 1;
-    //         item.price += dishOriginal.price * item.quantity;
-    //         this.save();
-    //       }
-    //     }
-    //   }
+    // addProduct(dish) {
+    //   ++dish.quantity;
+    //   console.log(dish.quantity);
+    //   this.dishIdsArray.push();
+    //   this.save();
     // },
-    // removeProduct(item) {
-    //   if (item.quantity > 1) {
-    //     for (const dish in this.dishes) {
-    //       if (this.dishes.hasOwnProperty.call(this.dishes, dish)) {
-    //         const dishOriginal = this.dishes[dish];
-    //         if (item.id == dishOriginal.id) {
-    //           item.quantity -= 1;
-    //           item.price = dishOriginal.price * item.quantity;
-    //           this.save();
-    //         }
-    //       }
-    //     }
+    // removeProduct(dish) {
+    //   if (dish.quantity < 0) {
+    //     --dish.quantity;
+    //     console.log(dish.quantity);
+    //     this.dishIdsArray.push();
+    //     this.save();
     //   }
     // },
 
@@ -5770,15 +5756,15 @@ var staticRenderFns = [function () {
     staticClass: "h6"
   }, [_c("i", {
     staticClass: "fab fa-facebook h2 mr-2"
-  }), _vm._v(" Facebook")])]), _vm._v(" "), _c("li", [_c("a", {
+  })])]), _vm._v(" "), _c("li", [_c("a", {
     staticClass: "h6 mr-2"
   }, [_c("i", {
     staticClass: "fab fa-twitter h2 mr-2"
-  }), _vm._v(" Twitter")])]), _vm._v(" "), _c("li", [_c("a", {
+  })])]), _vm._v(" "), _c("li", [_c("a", {
     staticClass: "h6 mr-2"
   }, [_c("i", {
     staticClass: "fab fa-linkedin-in h2 mr-2"
-  }), _vm._v(" Linkedin")])])]), _vm._v(" "), _c("p", [_vm._v("DeliveBoo 2022 - Classe #62 - Team 3 with ♥")])])])]);
+  })])])]), _vm._v(" "), _c("p", [_vm._v("DeliveBoo 2022 - Classe #62 - Team 3 with ♥")])])])]);
 }];
 render._withStripped = true;
 
@@ -5804,10 +5790,14 @@ var render = function render() {
     staticClass: "navbar navbar-expand-lg navbar-dark bg-dark"
   }, [_c("div", {
     staticClass: "container-fluid"
-  }, [_c("span", {
-    staticClass: "navbar-brand"
-  }, [_vm._v("Deliveboo")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
-    staticClass: "collapse navbar-collapse",
+  }, [_c("img", {
+    staticClass: "img-logo",
+    attrs: {
+      src: "storage/uploads/logo-deliveboo.png",
+      alt: "logo"
+    }
+  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "collapse navbar-collapse bg-dark",
     attrs: {
       id: "navbarNav"
     }
@@ -5891,7 +5881,7 @@ var render = function render() {
   }, _vm._l(_vm.item, function (item, index) {
     return _c("SingleRestaurantCard", {
       key: index,
-      staticClass: "col-12 col-md-6 ms-translate box-shadow",
+      staticClass: "col-12 col-md-6 ms-translate",
       attrs: {
         item: item
       }
@@ -6124,7 +6114,7 @@ var render = function render() {
   }), _vm._v(" " + _vm._s(_vm.user.link_social_media))])])]), _vm._v(" "), _vm._l(_vm.dishes, function (dish) {
     return _c("div", {
       key: dish.slug,
-      staticClass: "col-12 col-lg-6 position-relative",
+      staticClass: "col-12 col-lg-6 position-relative card-group",
       "class": dish.available == 0 ? "not-visible" : "",
       on: {
         click: function click($event) {
@@ -6179,32 +6169,12 @@ var render = function render() {
       staticClass: "mb-1 d-flex justify-content-between cart-item"
     }, [_c("div", {}, [_vm._v(_vm._s(dish.name))]), _vm._v(" "), _c("div", {
       staticClass: "pe-4"
-    }, [_c("span", {}, [_c("button", {
-      staticClass: "btn btn-primary btn-sm",
-      attrs: {
-        type: "button"
-      },
-      on: {
-        click: function click($event) {
-          return _vm.removeProduct(dish);
-        }
-      }
-    }, [_vm._v("-")]), _vm._v(" \n                  " + _vm._s(dish.quantity) + " \n                  "), _c("button", {
-      staticClass: "btn btn-primary btn-sm me-2",
-      attrs: {
-        type: "button"
-      },
-      on: {
-        click: function click($event) {
-          return _vm.addProduct(dish);
-        }
-      }
-    }, [_vm._v("+")])]), _vm._v("\n                € " + _vm._s(dish.price.toFixed(2)) + "\n              ")])]), _vm._v(" "), _c("button", {
+    }, [_vm._v("\n                € " + _vm._s(dish.price.toFixed(2)) + "\n              ")])]), _vm._v(" "), _c("button", {
       staticClass: "btn btn-sm btn-danger text-light",
       on: {
         click: function click($event) {
           $event.preventDefault();
-          return _vm.removeFromCart(index);
+          return _vm.removeFromCart(dish);
         }
       }
     }, [_vm._v("\n                Rimuovi\n            ")])]);

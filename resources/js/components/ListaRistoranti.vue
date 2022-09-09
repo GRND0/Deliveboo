@@ -7,7 +7,7 @@
           v-for="(item, index) in item"
           :key="index"
           :item="item"
-          class="col-12 col-md-6 ms-translate box-shadow"
+          class="col-12 col-md-6 ms-translate"
         />
       </div>
       <h4 v-else class="text-center mt-5">
@@ -43,7 +43,7 @@ export default {
 
   },
 mounted() {
-  ristorantiFiltrati() 
+  
 },
 
      
@@ -51,8 +51,9 @@ mounted() {
   methods: {
     // questa funzione serve come toggle per le checkbox
     categoriaSelezionata(categoria) {
-      this.categoriaRistorante = categoria;
+      this.categoriaRistorante = categoria;  console.log( 'categoriaRistorante trasmissione',this.categoriaRistorante);
       return this.categoriaRistorante;
+    
     },
 
     comparatoreArray(array1, array2) {

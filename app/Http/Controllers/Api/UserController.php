@@ -69,6 +69,8 @@ class UserController extends Controller
     {
 
         $str = json_decode($request->str);
+        sort($str);
+
         // dd( 'variabile interna', $str);
 
         // $ristoranti = User::with('categories');
@@ -86,7 +88,7 @@ class UserController extends Controller
             ]);
         }
         $ristoranti = User::whereHas('categories', function ($q) use ($str) {
-            $q->where('id', $str);
+            $q->whereIn('id', $str);
         })->get();
         foreach ($ristoranti as $user) {
             if ($user->image) {

@@ -19,7 +19,7 @@
           </div>
           
           <!-- piatti del ristorante -->
-          <div class="col-12 col-lg-6 position-relative" 
+          <div class="col-12 col-lg-6 position-relative card-group" 
                v-for="dish in dishes" 
                :key="dish.slug"
                :class="dish.available == 0 ? 'not-visible' : ''"
@@ -57,17 +57,17 @@
               <div class="mb-1 d-flex justify-content-between cart-item">
                 <div class="">{{ dish.name }}</div>
                 <div class="pe-4">
-                  <span class="">
+                  <!-- <span class="">
                     <button type="button" class="btn btn-primary btn-sm" @click="removeProduct(dish)">-</button> 
                     {{ dish.quantity }} 
                     <button type="button" class="btn btn-primary btn-sm me-2" @click="addProduct(dish)">+</button> 
-                  </span>
-                  € {{ dish.price.toFixed(2) }}
+                  </span> -->
+                  € {{(dish.price).toFixed(2) }}
                 </div>
               </div>
               <button
                   class="btn btn-sm btn-danger text-light"
-                  @click.prevent="removeFromCart(index)">
+                  @click.prevent="removeFromCart(dish)">
                   Rimuovi
               </button>
             </div>
@@ -209,7 +209,6 @@ export default {
     },
 
     addToCart(dish) {
-      // dish['quantity'] = 1;
       // for (const products in this.cart) {
 
       //   let cartId = this.cart[products].id;
@@ -296,31 +295,19 @@ export default {
     },
 
     // metodo per aggiungere un item
-    // addProduct(item) {
-    //   for (const dish in this.dishes) {
-    //     if (this.dishes.hasOwnProperty.call(this.dishes, dish)) {
-    //       const dishOriginal = this.dishes[dish];
-    //       if (item.id == dishOriginal.id) {
-    //         item.quantity += 1;
-    //         item.price += dishOriginal.price * item.quantity;
-    //         this.save();
-    //       }
-    //     }
-    //   }
+    // addProduct(dish) {
+    //   ++dish.quantity;
+    //   console.log(dish.quantity);
+    //   this.dishIdsArray.push();
+    //   this.save();
     // },
-    // removeProduct(item) {
-    //   if (item.quantity > 1) {
-    //     for (const dish in this.dishes) {
-    //       if (this.dishes.hasOwnProperty.call(this.dishes, dish)) {
-    //         const dishOriginal = this.dishes[dish];
-
-    //         if (item.id == dishOriginal.id) {
-    //           item.quantity -= 1;
-    //           item.price = dishOriginal.price * item.quantity;
-    //           this.save();
-    //         }
-    //       }
-    //     }
+    // removeProduct(dish) {
+    //   if (dish.quantity < 0) {
+    //     --dish.quantity;
+    //     console.log(dish.quantity);
+    //     this.dishIdsArray.push();
+    //     this.save();
+        
     //   }
     // },
   }

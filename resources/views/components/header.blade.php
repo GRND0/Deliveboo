@@ -21,9 +21,6 @@
             @auth
               {{-- voci menu visibili se loggati --}}
               <a class="nav-link" href="/admin/dishes/">I tuoi piatti</a>
-              <a class="nav-link" href="/admin/">
-                {{ Auth::user()->name }}
-              </a>
               <a class="btn btn-info mx-2" href="/admin/">Ritorna al tuo ristorante</a>
               <a class="btn btn-danger exit-btn" href="{{ route('logout') }}"onclick="event.preventDefault(); 
                 document.getElementById('logout-form').submit();"

@@ -2,7 +2,7 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <span class="navbar-brand">Deliveboo</span>
+        <img class="img-logo" src="storage/uploads/logo-deliveboo.png" alt="logo">
         <button
           class="navbar-toggler"
           type="button"
@@ -14,7 +14,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse bg-dark" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item"
               v-for="(link, index) in menuLinks"
