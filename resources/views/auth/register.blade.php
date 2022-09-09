@@ -212,7 +212,6 @@
                                 <button id="submit" 
                                         type="submit" 
                                         class="btn btn-primary"
-                                        disabled
                                         
                                 >
                                     {{ __('Registrati') }}
@@ -254,7 +253,7 @@
             && (document.getElementById('p_iva').value != '') 
             && (document.getElementById('image').value != '') 
             && (document.getElementById('link_social_media').value != '')
-            // && (document.querySelector('.form-check-input').value != 'null')
+            && Array.prototype.slice.call((document.querySelectorAll('input[type="checkbox"]'))).some(x => x.checked)
         ) {
             document.getElementById('submit').disabled = false;
             // console.log((document.querySelector('.form-check-input')));

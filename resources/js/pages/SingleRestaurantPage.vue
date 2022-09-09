@@ -1,5 +1,8 @@
 <template>
   <div class="container mb-2">
+  <div class="bg"></div>
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
     <div class="row">
       <section v-if="user">
         <div class="row col-12 col-md-10 float-start">

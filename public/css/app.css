@@ -21274,33 +21274,47 @@ readers do not read off random characters that represent icons */
 
 body {
   width: 100%;
-  background: linear-gradient(-45deg, #007e8a, #d0eb99, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  -webkit-animation: gradient 15s ease infinite;
-          animation: gradient 15s ease infinite;
 }
 
-@-webkit-keyframes gradient {
+.bg {
+  -webkit-animation: slide 3s ease-in-out infinite alternate;
+          animation: slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0;
+  z-index: -1;
+}
+
+.bg2 {
+  animation-direction: alternate-reverse;
+  -webkit-animation-duration: 4s;
+          animation-duration: 4s;
+}
+
+.bg3 {
+  -webkit-animation-duration: 5s;
+          animation-duration: 5s;
+}
+
+@-webkit-keyframes slide {
   0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
+    transform: translateX(-25%);
   }
   100% {
-    background-position: 0% 50%;
+    transform: translateX(25%);
   }
 }
 
-@keyframes gradient {
+@keyframes slide {
   0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
+    transform: translateX(-25%);
   }
   100% {
-    background-position: 0% 50%;
+    transform: translateX(25%);
   }
 }
 main {

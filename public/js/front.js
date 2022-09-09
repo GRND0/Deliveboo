@@ -6010,10 +6010,14 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "jumbotron-deliveboo"
-  }, [_c("div", {
     staticClass: "container"
   }, [_c("div", {
+    staticClass: "bg"
+  }), _vm._v(" "), _c("div", {
+    staticClass: "bg bg2"
+  }), _vm._v(" "), _c("div", {
+    staticClass: "bg bg3"
+  }), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-12"
@@ -6021,7 +6025,7 @@ var render = function render() {
     staticClass: "container py-5"
   }, [_c("h2", {
     staticClass: "text-center pb-3"
-  }, [_vm._v("Seleziona una o più categorie tra i ristoranti presenti nella tua zona!")]), _vm._v(" "), _c("div", [_c("ListaRistoranti")], 1)])])])])]);
+  }, [_vm._v("Seleziona una o più categorie tra i ristoranti presenti nella tua zona!")]), _vm._v(" "), _c("div", [_c("ListaRistoranti")], 1)])])])]);
 };
 
 var staticRenderFns = [];
@@ -6079,6 +6083,12 @@ var render = function render() {
   return _c("div", {
     staticClass: "container mb-2"
   }, [_c("div", {
+    staticClass: "bg"
+  }), _vm._v(" "), _c("div", {
+    staticClass: "bg bg2"
+  }), _vm._v(" "), _c("div", {
+    staticClass: "bg bg3"
+  }), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_vm.user ? _c("section", [_c("div", {
     staticClass: "row col-12 col-md-10 float-start"
