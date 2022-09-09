@@ -5166,20 +5166,7 @@ __webpack_require__.r(__webpack_exports__);
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/categories").then(function (response) {
       _this.categories = response.data;
     });
-  } // methods: { 
-  //     async findByCheckbox() {
-  //         if (this.checkbox.length == 0) {
-  //             this.checkbox = [0].checked;
-  //         }
-  //         await axios
-  //                 .get(`/api/categories` + this.checkbox)
-  //                 .then((response)=> {
-  //                     this.restaurants = response.data;
-  //                     console.log("ristoranti",this.restaurants);
-  //                 });
-  //     }
-  // },
-
+  }
 });
 
 /***/ }),
@@ -5255,13 +5242,9 @@ __webpack_require__.r(__webpack_exports__);
       categories_id: []
     };
   },
-  created: function created() {
-    var _this = this;
-
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/users").then(function (resp) {
-      _this.item = resp.data.results;
-      console.log("risposta axios lista ristoranti", _this.item);
-    });
+  watch: {},
+  mounted: function mounted() {
+    ristorantiFiltrati();
   },
   methods: {
     // questa funzione serve come toggle per le checkbox
@@ -5277,14 +5260,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     ristorantiFiltrati: function ristorantiFiltrati() {
-      var _this2 = this;
+      var _this = this;
 
+      this.categoriaRistorante;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/users/ricerca', {
         params: {
-          str: this.categoriaRistorante
+          str: JSON.stringify(this.categoriaRistorante)
         }
       }).then(function (response) {
-        _this2.item = response.data.results;
+        _this.item = response.data.results;
       });
     }
   }
@@ -5426,18 +5410,19 @@ __webpack_require__.r(__webpack_exports__);
 
     if (localStorage.getItem("id") && localStorage.getItem("id") != this.id) {
       console.log("ristorante dove si stavano aggiungendo oggetti nel carrello", localStorage.getItem("id"));
-      console.log("nuovo ristorante dove non si può visualizzare il carrello precedente", this.id); // if (confirm("Vuoi visualizzare un altro ristorante? Così perderai il tuo carrello")) {
-      // localStorage.removeItem("cart");
-      // localStorage.removeItem("total");
-      // localStorage.removeItem("id");          
-      // } else {
-      // rimani in questa pagina                 
-      // }
+      console.log("nuovo ristorante dove non si può visualizzare il carrello precedente", this.id);
 
-      localStorage.removeItem("cart");
-      localStorage.removeItem("total");
-      localStorage.removeItem("id");
-    } // i dati del carrello rimangono salvati anche se si torna indietro nella vista delle categorie ristoranti
+      if (confirm("Vuoi visualizzare un altro ristorante? Così perderai il tuo carrello")) {
+        localStorage.removeItem("cart");
+        localStorage.removeItem("total");
+        localStorage.removeItem("id");
+      } else {
+        history.back();
+        this.cart = JSON.parse(localStorage.getItem("cart"));
+        this.total = parseFloat(localStorage.getItem("total"));
+        this.id = JSON.parse(localStorage.getItem("id"));
+      }
+    } // i dati del carrello rimangono salvati anche se si ricarica la pagina
 
 
     if (localStorage.getItem("cart")) {
@@ -5458,11 +5443,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     addToCart: function addToCart(dish) {
       // dish['quantity'] = 1;
-      // for (const items in this.cart) {
-      //   let cartId = this.cart[items].id;
+      // for (const products in this.cart) {
+      //   let cartId = this.cart[products].id;
       //   // Confronto l'id del prodotto con  gli id già presenti nel carrello
       //   if (dish.id == cartId) {
-      //     this.addItem(this.cart[items]); // Se il piatto è già stato inserito, aggiunge solo la quantità
+      //     this.addProduct(this.cart[products]); // Se il piatto è già stato inserito, aggiunge solo la quantità
       //     break;  // break per uscire dal ciclo, perchè gli id combaciano
       //   }
       // }
@@ -5539,14 +5524,28 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     } // metodo per aggiungere un item
-    // addItem(item) {
+    // addProduct(item) {
     //   for (const dish in this.dishes) {
     //     if (this.dishes.hasOwnProperty.call(this.dishes, dish)) {
     //       const dishOriginal = this.dishes[dish];
     //       if (item.id == dishOriginal.id) {
     //         item.quantity += 1;
-    //         item.price = dishOriginal.price * item.quantity;
+    //         item.price += dishOriginal.price * item.quantity;
     //         this.save();
+    //       }
+    //     }
+    //   }
+    // },
+    // removeProduct(item) {
+    //   if (item.quantity > 1) {
+    //     for (const dish in this.dishes) {
+    //       if (this.dishes.hasOwnProperty.call(this.dishes, dish)) {
+    //         const dishOriginal = this.dishes[dish];
+    //         if (item.id == dishOriginal.id) {
+    //           item.quantity -= 1;
+    //           item.price = dishOriginal.price * item.quantity;
+    //           this.save();
+    //         }
     //       }
     //     }
     //   }
@@ -5892,7 +5891,7 @@ var render = function render() {
   }, _vm._l(_vm.item, function (item, index) {
     return _c("SingleRestaurantCard", {
       key: index,
-      staticClass: "col-12 col-md-6 ms-translate",
+      staticClass: "col-12 col-md-6 ms-translate box-shadow",
       attrs: {
         item: item
       }
@@ -6092,6 +6091,8 @@ var render = function render() {
     staticClass: "row"
   }, [_vm.user ? _c("section", [_c("div", {
     staticClass: "row col-12 col-md-10 float-start"
+  }, [_c("div", {
+    staticClass: "bg-light text-center rounded box-shadow"
   }, [_c("h1", {
     staticClass: "mt-4"
   }, [_vm._v(_vm._s(_vm.user.restaurant_name))]), _vm._v(" "), _c("h5", [_vm._v("Categorie: "), _vm._l(_vm.user.categories, function (category) {
@@ -6120,7 +6121,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "fa-solid fa-at"
-  }), _vm._v(" " + _vm._s(_vm.user.link_social_media))])]), _vm._v(" "), _vm._l(_vm.dishes, function (dish) {
+  }), _vm._v(" " + _vm._s(_vm.user.link_social_media))])])]), _vm._v(" "), _vm._l(_vm.dishes, function (dish) {
     return _c("div", {
       key: dish.slug,
       staticClass: "col-12 col-lg-6 position-relative",
@@ -6132,15 +6133,17 @@ var render = function render() {
         }
       }
     }, [_c("div", {
-      staticClass: "card mt-3 my-pointer ms-translate"
-    }, [dish.image ? _c("div", [_c("img", {
-      staticClass: "d-none d-sm-block card-img-top",
+      staticClass: "card mt-3 my-pointer ms-translate box-shadow"
+    }, [!dish.available ? _c("div", [_c("div", {
+      staticClass: "not-disp text-center text-uppercase"
+    }, [_vm._v("Piatto attualmente non disponibile")])]) : _vm._e(), _vm._v(" "), dish.image ? _c("div", [_c("img", {
+      staticClass: "d-none d-md-block card-img-top",
       attrs: {
         src: dish.image,
         alt: dish.name
       }
     })]) : _c("div", [_c("img", {
-      staticClass: "d-none d-sm-block card-img-top",
+      staticClass: "d-none d-md-block card-img-top",
       attrs: {
         src: "https://images.ctfassets.net/84wm3hhxw4gx/0sxerdVddcgpnd69VcMsx/414cb6a014fc90e5d96e07fef8022ccf/foodplaceholder.png",
         alt: "placeholder"
@@ -6152,13 +6155,13 @@ var render = function render() {
     }, [_vm._v(_vm._s(dish.name))]), _vm._v(" "), _c("h4", {
       staticClass: "text-success me-3"
     }, [_vm._v("€ " + _vm._s(dish.price.toFixed(2)))])]), _vm._v(" "), _c("ul", {
-      staticClass: "list-group list-group-flush d-none d-sm-block"
+      staticClass: "list-group list-group-flush d-none d-md-block"
     }, [_c("li", {
       staticClass: "list-group-item"
     }, [_c("span", {
       staticClass: "text-danger"
     }, [_vm._v("Descrizione: ")]), _vm._v(_vm._s(_vm.capitalizeFirstLetter(dish.description)))])]), _vm._v(" "), _c("div", {
-      staticClass: "card-body d-none d-sm-block"
+      staticClass: "card-body d-none d-md-block"
     }, [_c("p", {
       staticClass: "card-text font-weight-bold text-capitalize"
     }, [_c("span", {
@@ -6176,11 +6179,32 @@ var render = function render() {
       staticClass: "mb-1 d-flex justify-content-between cart-item"
     }, [_c("div", {}, [_vm._v(_vm._s(dish.name))]), _vm._v(" "), _c("div", {
       staticClass: "pe-4"
-    }, [_vm._v("\n                € " + _vm._s(dish.price.toFixed(2)) + "\n              ")])]), _vm._v(" "), _c("button", {
+    }, [_c("span", {}, [_c("button", {
+      staticClass: "btn btn-primary btn-sm",
+      attrs: {
+        type: "button"
+      },
+      on: {
+        click: function click($event) {
+          return _vm.removeProduct(dish);
+        }
+      }
+    }, [_vm._v("-")]), _vm._v(" \n                  " + _vm._s(dish.quantity) + " \n                  "), _c("button", {
+      staticClass: "btn btn-primary btn-sm me-2",
+      attrs: {
+        type: "button"
+      },
+      on: {
+        click: function click($event) {
+          return _vm.addProduct(dish);
+        }
+      }
+    }, [_vm._v("+")])]), _vm._v("\n                € " + _vm._s(dish.price.toFixed(2)) + "\n              ")])]), _vm._v(" "), _c("button", {
       staticClass: "btn btn-sm btn-danger text-light",
       on: {
         click: function click($event) {
-          return _vm.removeFromCart(dish);
+          $event.preventDefault();
+          return _vm.removeFromCart(index);
         }
       }
     }, [_vm._v("\n                Rimuovi\n            ")])]);
@@ -11669,7 +11693,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".restaurant-img[data-v-c497e646] {\n  width: 50%;\n}\n.not-visible[data-v-c497e646] {\n  opacity: 0.5;\n}\n.not-visible[data-v-c497e646]:hover {\n  transform: none;\n  cursor: default;\n}\n.not-visible[data-v-c497e646]::before {\n  content: \"ATTUALMENTE NON DISPONIBILE\";\n  position: absolute;\n  top: 30%;\n  left: 30%;\n  z-index: 5;\n}\n.cart[data-v-c497e646] {\n  position: fixed;\n  right: 0;\n  padding: 5px;\n  top: 10vh;\n  background-color: rgba(0, 204, 188, 0.6666666667);\n  box-shadow: -2px 2px 10px -2px #00887d;\n}\n.cart .cart-item[data-v-c497e646] {\n  width: 100%;\n}\n@media screen and (max-width: 768px) {\n.cart[data-v-c497e646] {\n    width: 100%;\n    margin-top: 50vh;\n    display: block;\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    background-color: #00ccbc;\n    box-shadow: 0px 0px 0px 0px;\n}\n}", ""]);
+exports.push([module.i, ".restaurant-img[data-v-c497e646] {\n  width: 50%;\n}\n.not-visible[data-v-c497e646] {\n  opacity: 0.5;\n}\n.not-visible[data-v-c497e646]:hover {\n  transform: none;\n  cursor: default;\n}\n.not-disp[data-v-c497e646] {\n  width: 100%;\n  color: white;\n  font-weight: bolder;\n  opacity: 1;\n  background-color: black;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  z-index: 5;\n}\n.cart[data-v-c497e646] {\n  position: fixed;\n  right: 0;\n  padding: 5px;\n  top: 10vh;\n  background-color: rgba(0, 204, 188, 0.6666666667);\n  box-shadow: -2px 2px 10px -2px #00887d;\n}\n.cart .cart-item[data-v-c497e646] {\n  width: 100%;\n}\n@media screen and (max-width: 768px) {\n.cart[data-v-c497e646] {\n    width: 100%;\n    margin-top: 50vh;\n    display: block;\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    background-color: #00ccbc;\n    box-shadow: 0px 0px 0px 0px;\n}\n}", ""]);
 
 // exports
 

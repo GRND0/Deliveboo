@@ -6,6 +6,7 @@
     <div class="row">
       <section v-if="user">
         <div class="row col-12 col-md-10 float-start">
+          <div class="bg-light text-center rounded box-shadow">
           <h1 class="mt-4">{{ user.restaurant_name }}</h1>
           <h5>Categorie: <span v-for="category in user.categories" :key="category.slug">
             <div class="text-capitalize badge rounded-pill bg-success me-2 d-inline-block">{{ category.name }} </div>
@@ -15,6 +16,7 @@
           <h5 class="text-secondary mt-2"><i class="fa-solid fa-phone"></i> {{ user.restaurant_phone }}</h5>
           <h6 class="text-success"><i class="fa-solid fa-location-dot"></i> {{ user.address }}</h6>
           <div><a href=""><i class="fa-solid fa-at"></i> {{ user.link_social_media }}</a></div>
+          </div>
           
           <!-- piatti del ristorante -->
           <div class="col-12 col-lg-6 position-relative" 
@@ -23,23 +25,26 @@
                :class="dish.available == 0 ? 'not-visible' : ''"
                @click="[dish.available == 1 ? addToCart(dish) : '']"
               >
-            <div class="card mt-3 my-pointer ms-translate">
-              <div v-if="dish.image">
-                <img class="d-none d-sm-block card-img-top" :src="dish.image" :alt="dish.name">
-              </div>
-              <div v-else>
-                <img class="d-none d-sm-block card-img-top" src="https://images.ctfassets.net/84wm3hhxw4gx/0sxerdVddcgpnd69VcMsx/414cb6a014fc90e5d96e07fef8022ccf/foodplaceholder.png" alt="placeholder">
-              </div>
-              <div class="card-body d-flex justify-content-between">
-                <h4 class="card-title text-capitalize">{{ dish.name }}</h4>
-                <h4 class="text-success me-3">€ {{ dish.price.toFixed(2) }}</h4>
-              </div>
-              <ul class="list-group list-group-flush d-none d-sm-block">
-                <li class="list-group-item"> <span class="text-danger">Descrizione: </span>{{ capitalizeFirstLetter(dish.description) }}</li>
-              </ul>
-              <div class="card-body d-none d-sm-block">
-                <p class="card-text font-weight-bold text-capitalize"><span class="text-danger">Ingredienti: </span>{{ dish.ingredients }}</p>
-              </div>
+            <div class="card mt-3 my-pointer ms-translate box-shadow">
+              <div v-if="!dish.available">
+                <div class="not-disp text-center text-uppercase">Piatto attualmente non disponibile</div>
+                </div>
+                <div v-if="dish.image">
+                  <img class="d-none d-md-block card-img-top" :src="dish.image" :alt="dish.name">
+                </div>
+                <div v-else>
+                  <img class="d-none d-md-block card-img-top" src="https://images.ctfassets.net/84wm3hhxw4gx/0sxerdVddcgpnd69VcMsx/414cb6a014fc90e5d96e07fef8022ccf/foodplaceholder.png" alt="placeholder">
+                </div>
+                <div class="card-body d-flex justify-content-between">
+                  <h4 class="card-title text-capitalize">{{ dish.name }}</h4>
+                  <h4 class="text-success me-3">€ {{ dish.price.toFixed(2) }}</h4>
+                </div>
+                <ul class="list-group list-group-flush d-none d-md-block">
+                  <li class="list-group-item"> <span class="text-danger">Descrizione: </span>{{ capitalizeFirstLetter(dish.description) }}</li>
+                </ul>
+                <div class="card-body d-none d-md-block">
+                  <p class="card-text font-weight-bold text-capitalize"><span class="text-danger">Ingredienti: </span>{{ dish.ingredients }}</p>
+                </div>            
             </div>
           </div>   
         </div>
@@ -52,17 +57,17 @@
               <div class="mb-1 d-flex justify-content-between cart-item">
                 <div class="">{{ dish.name }}</div>
                 <div class="pe-4">
-                  <!-- <span class="">
-                    <button type="button" class="btn btn-primary btn-sm" @click="removeItem(item)">-</button> 
+                  <span class="">
+                    <button type="button" class="btn btn-primary btn-sm" @click="removeProduct(dish)">-</button> 
                     {{ dish.quantity }} 
-                    <button type="button" class="btn btn-primary btn-sm me-2" @click="addItem(item)">+</button> 
-                  </span> -->
+                    <button type="button" class="btn btn-primary btn-sm me-2" @click="addProduct(dish)">+</button> 
+                  </span>
                   € {{ dish.price.toFixed(2) }}
                 </div>
               </div>
               <button
                   class="btn btn-sm btn-danger text-light"
-                  @click="removeFromCart(dish)">
+                  @click.prevent="removeFromCart(index)">
                   Rimuovi
               </button>
             </div>
@@ -173,18 +178,18 @@ export default {
     if (localStorage.getItem("id") && localStorage.getItem("id") != this.id) {
       console.log("ristorante dove si stavano aggiungendo oggetti nel carrello", localStorage.getItem("id"));
       console.log("nuovo ristorante dove non si può visualizzare il carrello precedente", this.id);
-      // if (confirm("Vuoi visualizzare un altro ristorante? Così perderai il tuo carrello")) {
-        // localStorage.removeItem("cart");
-        // localStorage.removeItem("total");
-        // localStorage.removeItem("id");          
-      // } else {
-         // rimani in questa pagina                 
-      // }
-      localStorage.removeItem("cart");
-      localStorage.removeItem("total");
-      localStorage.removeItem("id");   
+      if (confirm("Vuoi visualizzare un altro ristorante? Così perderai il tuo carrello")) {
+        localStorage.removeItem("cart");
+        localStorage.removeItem("total");
+        localStorage.removeItem("id");          
+      } else {
+        history.back();   
+        this.cart = JSON.parse(localStorage.getItem("cart"));
+        this.total = parseFloat(localStorage.getItem("total"));
+        this.id = JSON.parse(localStorage.getItem("id"));          
+      }
     }
-    // i dati del carrello rimangono salvati anche se si torna indietro nella vista delle categorie ristoranti
+    // i dati del carrello rimangono salvati anche se si ricarica la pagina
     if (localStorage.getItem("cart")) {
       try {
         this.cart = JSON.parse(localStorage.getItem("cart"));
@@ -205,13 +210,13 @@ export default {
 
     addToCart(dish) {
       // dish['quantity'] = 1;
-      // for (const items in this.cart) {
+      // for (const products in this.cart) {
 
-      //   let cartId = this.cart[items].id;
+      //   let cartId = this.cart[products].id;
 
       //   // Confronto l'id del prodotto con  gli id già presenti nel carrello
       //   if (dish.id == cartId) {
-      //     this.addItem(this.cart[items]); // Se il piatto è già stato inserito, aggiunge solo la quantità
+      //     this.addProduct(this.cart[products]); // Se il piatto è già stato inserito, aggiunge solo la quantità
       //     break;  // break per uscire dal ciclo, perchè gli id combaciano
       //   }
       // }
@@ -291,14 +296,29 @@ export default {
     },
 
     // metodo per aggiungere un item
-    // addItem(item) {
+    // addProduct(item) {
     //   for (const dish in this.dishes) {
     //     if (this.dishes.hasOwnProperty.call(this.dishes, dish)) {
     //       const dishOriginal = this.dishes[dish];
     //       if (item.id == dishOriginal.id) {
     //         item.quantity += 1;
-    //         item.price = dishOriginal.price * item.quantity;
+    //         item.price += dishOriginal.price * item.quantity;
     //         this.save();
+    //       }
+    //     }
+    //   }
+    // },
+    // removeProduct(item) {
+    //   if (item.quantity > 1) {
+    //     for (const dish in this.dishes) {
+    //       if (this.dishes.hasOwnProperty.call(this.dishes, dish)) {
+    //         const dishOriginal = this.dishes[dish];
+
+    //         if (item.id == dishOriginal.id) {
+    //           item.quantity -= 1;
+    //           item.price = dishOriginal.price * item.quantity;
+    //           this.save();
+    //         }
     //       }
     //     }
     //   }
@@ -318,14 +338,19 @@ export default {
     transform: none;
     cursor: default;
   }
-  &::before {
-    content: "ATTUALMENTE NON DISPONIBILE";
+}
+  .not-disp {
+    width: 100%;
+    color: white;
+    font-weight: bolder;
+    opacity: 1;
+    background-color: black;
     position: absolute;
-    top: 30%;
-    left: 30%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 5;
   }
-}
 
 .cart {
   position: fixed;
@@ -334,8 +359,7 @@ export default {
   top: 10vh;
   background-color: #00ccbcaa;
   box-shadow: -2px 2px 10px -2px #00887d;
-  // background-color: #dbdbdbaa;
-  // box-shadow: -2px 2px 10px -2px #454545;
+
   .cart-item {
     width: 100%;
   }

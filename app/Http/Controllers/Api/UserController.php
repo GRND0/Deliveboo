@@ -27,12 +27,9 @@ class UserController extends Controller
         }
         return response()->json([
             'success' => true,
-            'results' => $users                      
+            'results' => $users
         ]);
     }
-    
-    
-
 
 
     /**
@@ -52,91 +49,55 @@ class UserController extends Controller
 
             foreach ($dishes as $dish) {
                 if ($dish->image) {
-                $dish->image = url('storage/' . $dish->image);
-            }}
+                    $dish->image = url('storage/' . $dish->image);
+                }
+            }
 
             return response()->json([
                 'success' => true,
-                "results" => [ 
+                "results" => [
                     "user" => $user,
-                    "dishes" => $dishes 
+                    "dishes" => $dishes
                 ]
             ]);
         }
-
     }
 
     // funzione di filtraggio lato server 
 
-        public function ricerca(Request $request) {
-            $str = $request->str;
-            dd($str);
+    public function ricerca(Request $request)
+    {
 
-            $users = User::with('categories');
-            if (!$str) $users->get();
+        $str = json_decode($request->str);
+        // dd( 'variabile interna', $str);
+
+        // $ristoranti = User::with('categories');
+        if (count($str) == 0) {
+            $ristoranti = User::with('categories')->get();
+            foreach ($ristoranti as $user) {
+                if ($user->image) {
+                    $user->image = url('storage/' . $user->image);
+                }
+            }
             return response()->json([
                 'success' => true,
-                'results' => $users                      
-            ]);  
-                $users->whereHas('categories', function($q) use($str)
-                {
-                    $q->where('category_id', $str);
-                });
-            $users->get();
-            return response()->json([
-                'success' => true,
-                'results' => $users                      
-            ]);                     
+                'results' => $ristoranti,
+                'controllo' => 1
+            ]);
+        }
+        $ristoranti = User::whereHas('categories', function ($q) use ($str) {
+            $q->where('id', $str);
+        })->get();
+        foreach ($ristoranti as $user) {
+            if ($user->image) {
+                $user->image = url('storage/' . $user->image);
+            }
         }
 
-
-
-
-
-
-
-
-    //   public function ricerca(Request $request) {
-        
-    //       $data = User::with('categories')->wherePivot('category_id','='.$request->input('id'))->get();
-        
-    //       return response()->json([
-    //           'success' => true,
-    //          'results' => $data
-    //       ]);
-    //   }
-
-    // public function ricerca(Request $request) { 
-    //     $users = [];
-    //     $categories_id = $request->id;
-    //     dd('dati', $request);
-    //     if ($categories_id == 'null') {
-    //         $users = User::all();
-    //     } else {
-    //         $categories_as_array = explode(',', $categories_id);
-    //         $counter = count($categories_as_array);
-    //         $users = DB::table('users')
-    //         ->select('id', 'restaurant_name')
-    //         ->join('category_user', 'users.id', '=', 'category_user.user_id')
-    //         ->whereIn('category_id', $categories_as_array)
-    //         ->groupBy('id')
-    //         ->having(DB::raw('count(id)'), '=', $counter)
-    //         ->get();
-    //     }
-        
-    //     $categories = Category::all();
-    //     return response()->json([
-    //         'success' => true,
-    //         'results' =>  [
-    //             'users' => $users,
-    //             'categories' => $categories,
-    //         ]
-    //     ]);
-
-
-        
-        
-    // }
-
-
+        return response()->json([
+            'success' => true,
+            'results' => $ristoranti,
+            'controllo2' => 2
+        ]);
+    }
 }

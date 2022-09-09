@@ -243,20 +243,19 @@
 
     function verify() {
         if (
-            (document.getElementById('email').value != '') 
-            && (document.getElementById('password').value != '') 
-            && (document.getElementById('password-confirm').value != '') 
-            && (document.getElementById('name').value != '') 
-            && (document.getElementById('restaurant_name').value != '') 
-            && (document.getElementById('restaurant_phone').value != '') 
-            && (document.getElementById('address').value != '') 
-            && (document.getElementById('p_iva').value != '') 
-            && (document.getElementById('image').value != '') 
-            && (document.getElementById('link_social_media').value != '')
+            (document.getElementById('email').value.trim() != '') 
+            && (document.getElementById('password').value.trim() != '') 
+            && (document.getElementById('password-confirm').value.trim() != '')
+            && (document.getElementById('name').value.trim() != '') 
+            && (document.getElementById('restaurant_name').value.trim() != '') 
+            && (document.getElementById('restaurant_phone').value.trim() != '') 
+            && (document.getElementById('address').value.trim() != '') 
+            && (document.getElementById('p_iva').value.trim() != '') 
+            && (document.getElementById('image').value.trim() != '') 
+            && (document.getElementById('link_social_media').value.trim() != '')
             && Array.prototype.slice.call((document.querySelectorAll('input[type="checkbox"]'))).some(x => x.checked)
         ) {
             document.getElementById('submit').disabled = false;
-            // console.log((document.querySelector('.form-check-input')));
         } else {
             document.getElementById('submit').disabled = true;
         }

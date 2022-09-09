@@ -7,6 +7,7 @@
             <div class="col-md-8">
 
                 <h1>Modifica il piatto</h1>
+                <span>(i campi contrasegnati con * sono obbligatori)</span><br><br>
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -24,9 +25,9 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="name">Nome del piatto</label>
+                        <label for="name">Nome del piatto*</label>
                         <input type="text" class="form-control" id="name" name="name"
-                            value="{{ old('name') ? old('name') : $dish->name }}">
+                            value="{{ old('name') ? old('name') : $dish->name }}" required>
                     </div>
 
                     <div class="form-group">
@@ -40,13 +41,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="price">Prezzo del piatto € (max 50.00)</label>
+                        <label for="price">Prezzo del piatto € (max 50.00)*</label>
                         <input type="number" min="1" max="50" step=".01" class="form-control"
-                            id="price" name="price" value="{{ old('price') ? old('price') : $dish->price }}">
+                            id="price" name="price" required value="{{ old('price') ? old('price') : $dish->price }}">
                     </div>
 
                     <div class="mt-2">
-                        <label for="image">Immagine</label>
+                        <label for="image">Immagine*</label>
                         <input type="file" id="image" name="image">
 
                         @if ($dish->image)
@@ -62,14 +63,14 @@
                             <input type="radio" id="available" name="available" value="0">
                             <label for="available">Non disponibile</label>
                         @else
-                            <input type="radio" id="available" name="available"  value="1">
+                            <input type="radio" id="available" name="available" value="1">
                             <label for="available">Disponibile</label>
                             <input type="radio" id="available" name="available" checked value="0">
                             <label for="available">Non disponibile</label>
                         @endif
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-3">Salva modifiche</button>
+                    <button id="submit" type="submit" class="btn btn-primary mt-3">Salva modifiche</button>
 
 
                 </form>
