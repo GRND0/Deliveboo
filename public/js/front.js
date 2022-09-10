@@ -5323,8 +5323,35 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SingleRestaurantPage_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SingleRestaurantPage.vue */ "./resources/js/pages/SingleRestaurantPage.vue");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Checkout"
+  name: "Checkout",
+  components: {
+    SingleRestaurantPage: _SingleRestaurantPage_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  mounted: function mounted() {
+    this.getCart();
+  },
+  data: function data() {
+    return {
+      products: []
+    };
+  },
+  methods: {
+    getCart: function getCart() {
+      var cart = JSON.parse(localStorage.cart);
+      this.products = cart;
+    },
+    getAmount: function getAmount() {
+      var amount = 0;
+      this.products.forEach(function (element) {
+        amount += element.price * element.productQuantity;
+      });
+      amount = parseFloat(amount.toFixed(2));
+      return amount;
+    }
+  }
 });
 
 /***/ }),
@@ -6071,159 +6098,16 @@ var staticRenderFns = [function () {
   return _c("div", {
     staticClass: "container"
   }, [_c("h1", {
-    staticClass: "mt-2 mb-2"
-  }, [_vm._v("Checkout")]), _vm._v(" "), _c("div", {
+    staticClass: "mt-2 mb-2 text-center text-light bg-success rounded"
+  }, [_vm._v("Pagamento andato a buon fine! un nostro corriere sarà presto da te")]), _vm._v(" "), _c("div", {
     staticClass: "row"
-  }, [_c("div", {
-    staticClass: "form-container col-12 col-md-6 g-3 justify-content-around"
-  }, [_c("form", [_c("div", {
-    staticClass: "form-group row"
-  }, [_c("h2", [_vm._v("Dati del cliente "), _c("i", {
-    staticClass: "fa-solid fa-address-card"
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "col-12 col-md-4"
-  }, [_c("input", {
-    staticClass: "form-control mb-2",
+  }, [_c("img", {
+    staticClass: "mb-2",
     attrs: {
-      required: "",
-      type: "text",
-      name: "name",
-      placeholder: "Nome"
+      src: "https://www.orientativamente.it/wp-content/uploads/2021/04/food-delivery-5217579_1280-e1617726226397.png",
+      alt: ""
     }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "col-12 col-md-4"
-  }, [_c("input", {
-    staticClass: "form-control mb-2",
-    attrs: {
-      required: "",
-      type: "text",
-      name: "lastname",
-      placeholder: "Cognome"
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "col-12 col-md-4"
-  }, [_c("input", {
-    staticClass: "form-control mb-2",
-    attrs: {
-      required: "",
-      type: "email",
-      name: "email",
-      placeholder: "Email"
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "col-12 col-md-6"
-  }, [_c("input", {
-    staticClass: "form-control mb-2",
-    attrs: {
-      required: "",
-      type: "text",
-      name: "address",
-      placeholder: "Indirizzo"
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "col-12 col-md-6"
-  }, [_c("input", {
-    staticClass: "form-control mb-2",
-    attrs: {
-      required: "",
-      type: "text",
-      name: "phone",
-      placeholder: "Cellulare (0039...)"
-    }
-  })])]), _vm._v(" "), _c("div", {
-    staticClass: "pay-card"
-  }, [_c("h2", [_vm._v("Dati della carta 💳")]), _vm._v(" "), _c("div", {
-    staticClass: "row px-3 py-1"
-  }, [_c("div", {
-    staticClass: "col-12 col-md-6 form-group"
-  }, [_c("label", [_vm._v("Nome sulla carta")]), _vm._v(" "), _c("input", {
-    staticClass: "form-control",
-    attrs: {
-      required: "",
-      size: "4",
-      type: "text"
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "col-12 col-md-6 form-group"
-  }, [_c("label", [_vm._v("Numero di carta")]), _vm._v(" "), _c("input", {
-    staticClass: "form-control",
-    attrs: {
-      required: "",
-      autocomplete: "off",
-      size: "20",
-      type: "text",
-      name: "card_no",
-      value: "1234 5678 0987 0000"
-    }
-  })])]), _vm._v(" "), _c("div", {
-    staticClass: "row px-3 py-1"
-  }, [_c("div", {
-    staticClass: "col-12 col-md-4 form-group"
-  }, [_c("label", [_vm._v("CVV")]), _vm._v(" "), _c("input", {
-    staticClass: "form-control",
-    attrs: {
-      required: "",
-      autocomplete: "off",
-      placeholder: "123",
-      size: "3",
-      type: "text",
-      name: "cvv"
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "col-12 col-md-4 form-group"
-  }, [_c("label", [_vm._v("Mese")]), _vm._v(" "), _c("input", {
-    staticClass: "form-control",
-    attrs: {
-      required: "",
-      placeholder: "MM",
-      size: "2",
-      type: "text",
-      name: "expiry_month"
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "col-12 col-md-4 form-group"
-  }, [_c("label", [_vm._v("Anno")]), _vm._v(" "), _c("input", {
-    staticClass: "form-control",
-    attrs: {
-      required: "",
-      placeholder: "YYYY",
-      size: "4",
-      type: "text",
-      name: "expiry_year"
-    }
-  })])]), _vm._v(" "), _c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col-12 form-group"
-  }, [_c("label", [_vm._v("Prezzo totale")]), _vm._v(" "), _c("input", {
-    staticClass: "form-control",
-    attrs: {
-      required: "",
-      size: "2",
-      type: "number",
-      name: "total_price",
-      value: "totalPrice"
-    }
-  })])])]), _vm._v(" "), _c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "form-group fw-bold"
-  }, [_c("button", {
-    staticClass: "form-control btn btn-success fw-bold submit-button mt-2",
-    attrs: {
-      type: "submit"
-    }
-  }, [_vm._v("Procedi al pagamento "), _c("i", {
-    staticClass: "fa-solid fa-money-bill-transfer"
-  })])])])])]), _vm._v(" "), _c("div", {
-    staticClass: "col-12 col-md-4"
-  }, [_c("h2", [_vm._v("Carrello "), _c("i", {
-    staticClass: "fa-solid fa-cart-shopping"
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "d-flex justify-content-between"
-  }, [_c("div", [_vm._v("\r\n          dish.quantity\r\n        ")]), _vm._v(" "), _c("div", [_vm._v("\r\n          X\r\n        ")]), _vm._v(" "), _c("div", [_vm._v("\r\n          dish.name\r\n        ")]), _vm._v(" "), _c("div", [_c("span", [_vm._v("€ dish.price")])])]), _vm._v(" "), _c("h3", {
-    staticClass: "bg-dark text-success rounded p-2"
-  }, [_vm._v("\r\n        Totale: € totalPrice\r\n      ")])])])]);
+  })])]);
 }];
 render._withStripped = true;
 
@@ -6448,16 +6332,23 @@ var render = function render() {
   }), _vm._v(" "), _c("h4", {
     staticClass: "bg-dark text-light text-center rounded p-1"
   }, [_vm._v("Totale: "), _c("span", [_vm._v("€ " + _vm._s(_vm.totalPrice))])])], 2) : _vm._e(), _vm._v(" "), _vm.cart.length > 0 ? _c("div", {
-    staticClass: "text-center"
+    staticClass: "form-container justify-content-around"
+  }, [_c("form", [_vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("div", {
+    staticClass: "row mt-3"
+  }, [_c("div", {
+    staticClass: "form-group fw-bold"
   }, [_c("router-link", {
     attrs: {
       to: "/checkout"
     }
   }, [_c("button", {
-    staticClass: "btn btn-light btn-lg"
-  }, [_vm._v(" \n             Procedi al pagamento "), _c("i", {
+    staticClass: "form-control btn btn-warning btn-lg",
+    attrs: {
+      type: "submit"
+    }
+  }, [_vm._v(" \n                    Procedi al pagamento "), _c("i", {
     staticClass: "fa-regular fa-credit-card"
-  })])])], 1) : _vm._e()])]) : _c("section", [_c("h2", [_vm._v("Caricamento...")])])])]);
+  })])])], 1)])])]) : _vm._e()])]) : _c("section", [_c("h2", [_vm._v("Caricamento...")])])])]);
 };
 
 var staticRenderFns = [function () {
@@ -6469,6 +6360,125 @@ var staticRenderFns = [function () {
   }, [_vm._v("Carrello "), _c("i", {
     staticClass: "fa-solid fa-cart-arrow-down"
   })]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "form-group row"
+  }, [_c("h2", {
+    staticClass: "text-center"
+  }, [_vm._v("Dati del cliente "), _c("i", {
+    staticClass: "fa-solid fa-address-card"
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "col-6 col-md-12"
+  }, [_c("input", {
+    staticClass: "form-control mb-2",
+    attrs: {
+      required: "",
+      type: "text",
+      name: "name",
+      placeholder: "Nome"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "col-6 col-md-12"
+  }, [_c("input", {
+    staticClass: "form-control mb-2",
+    attrs: {
+      required: "",
+      type: "email",
+      name: "email",
+      placeholder: "Email"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "col-6 col-md-12"
+  }, [_c("input", {
+    staticClass: "form-control mb-2",
+    attrs: {
+      required: "",
+      type: "text",
+      name: "address",
+      placeholder: "Indirizzo"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "col-6 col-md-12"
+  }, [_c("input", {
+    staticClass: "form-control mb-2",
+    attrs: {
+      required: "",
+      type: "text",
+      name: "phone",
+      placeholder: "Cellulare (0039...)"
+    }
+  })])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "pay-card mt-2"
+  }, [_c("h2", {
+    staticClass: "text-center"
+  }, [_vm._v("Dati della carta 💳")]), _vm._v(" "), _c("div", {
+    staticClass: "row px-1"
+  }, [_c("div", {
+    staticClass: "col-6 col-md-12 form-group"
+  }, [_c("label", [_vm._v("Nome sulla carta")]), _vm._v(" "), _c("input", {
+    staticClass: "form-control",
+    attrs: {
+      required: "",
+      size: "4",
+      type: "text"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "col-6 col-md-12 form-group"
+  }, [_c("label", [_vm._v("Numero di carta")]), _vm._v(" "), _c("input", {
+    staticClass: "form-control",
+    attrs: {
+      required: "",
+      autocomplete: "off",
+      size: "20",
+      type: "text",
+      name: "card_no",
+      placeholder: "1234 5678 0987 0000"
+    }
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "row px-1"
+  }, [_c("div", {
+    staticClass: "col-4 form-group"
+  }, [_c("label", [_vm._v("CVV")]), _vm._v(" "), _c("input", {
+    staticClass: "form-control",
+    attrs: {
+      required: "",
+      autocomplete: "off",
+      placeholder: "123",
+      size: "3",
+      type: "text",
+      name: "cvv"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "col-4 form-group"
+  }, [_c("label", [_vm._v("Mese")]), _vm._v(" "), _c("input", {
+    staticClass: "form-control",
+    attrs: {
+      required: "",
+      placeholder: "MM",
+      size: "2",
+      type: "text",
+      name: "expiry_month"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "col-4 form-group"
+  }, [_c("label", [_vm._v("Anno")]), _vm._v(" "), _c("input", {
+    staticClass: "form-control",
+    attrs: {
+      required: "",
+      placeholder: "YYYY",
+      size: "4",
+      type: "text",
+      name: "expiry_year"
+    }
+  })])])]);
 }];
 render._withStripped = true;
 
@@ -11779,7 +11789,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".restaurant-img[data-v-c497e646] {\n  width: 50%;\n}\n.not-visible[data-v-c497e646] {\n  opacity: 0.5;\n}\n.not-visible[data-v-c497e646]:hover {\n  transform: none;\n  cursor: default;\n}\n.not-disp[data-v-c497e646] {\n  width: 100%;\n  color: white;\n  font-weight: bolder;\n  opacity: 1;\n  background-color: black;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  z-index: 5;\n}\n.cart[data-v-c497e646] {\n  position: fixed;\n  right: 0;\n  padding: 5px;\n  top: 10vh;\n  background-color: rgba(0, 204, 188, 0.6666666667);\n  box-shadow: -2px 2px 10px -2px #00887d;\n}\n.cart .cart-item[data-v-c497e646] {\n  width: 100%;\n}\n@media screen and (max-width: 768px) {\n.cart[data-v-c497e646] {\n    width: 100%;\n    margin-top: 50vh;\n    display: block;\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    background-color: #00ccbc;\n    box-shadow: 0px 0px 0px 0px;\n}\n}", ""]);
+exports.push([module.i, ".restaurant-img[data-v-c497e646] {\n  width: 50%;\n}\n.not-visible[data-v-c497e646] {\n  opacity: 0.5;\n}\n.not-visible[data-v-c497e646]:hover {\n  transform: none;\n  cursor: default;\n}\n.not-disp[data-v-c497e646] {\n  width: 100%;\n  color: white;\n  font-weight: bolder;\n  opacity: 1;\n  background-color: black;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  z-index: 5;\n}\n.cart[data-v-c497e646] {\n  position: fixed;\n  right: 0;\n  top: 10vh;\n  padding: 5px;\n  background-color: rgba(0, 204, 188, 0.6666666667);\n  box-shadow: -2px 2px 10px -2px #00887d;\n}\n.cart .cart-item[data-v-c497e646] {\n  width: 100%;\n}\n@media screen and (max-width: 768px) {\n.cart[data-v-c497e646] {\n    width: 100%;\n    margin-top: 55vh;\n    display: block;\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    background-color: #00ccbc;\n    box-shadow: 0px 0px 0px 0px;\n    overflow-y: auto;\n}\n}", ""]);
 
 // exports
 

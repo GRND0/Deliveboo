@@ -78,13 +78,79 @@
           </div>
 
           <!-- Checkout -->
-          <div class="text-center" v-if="cart.length > 0">  
+          <div class="form-container justify-content-around" v-if="cart.length > 0">
+            <form>
+              
+              <div class="form-group row">
+                <h2 class="text-center">Dati del cliente <i class="fa-solid fa-address-card"></i></h2>
+                <div class="col-6 col-md-12">
+                  <input required class="form-control mb-2" type="text" name="name" placeholder="Nome">
+                </div>
+                <div class="col-6 col-md-12">
+                  <input required class="form-control mb-2"  type="email" name="email" placeholder="Email">
+                </div>
+                <div class="col-6 col-md-12">
+                  <input required class="form-control mb-2"  type="text" name="address" placeholder="Indirizzo">
+                </div>
+                <div class="col-6 col-md-12">
+                  <input required class="form-control mb-2"  type="text" name="phone" placeholder="Cellulare (0039...)">
+                </div>
+              </div>
+
+              <div class="pay-card mt-2">
+                <h2 class="text-center">Dati della carta &#128179;</h2>
+
+                <div class="row px-1">
+                  <div class="col-6 col-md-12 form-group">
+                    <label>Nome sulla carta</label>
+                    <input required class="form-control" size="4" type="text">
+                  </div>
+                  <div class="col-6 col-md-12 form-group">
+                    <label>Numero di carta</label>
+                    <input required autocomplete="off" class="form-control" size="20" type="text" name="card_no" placeholder="1234 5678 0987 0000">
+                  </div>
+                </div>
+
+                <div class="row px-1">
+                  <div class="col-4 form-group">
+                    <label>CVV</label>
+                    <input required autocomplete="off" class="form-control" placeholder="123" size="3" type="text" name="cvv">
+                  </div>
+                  <div class="col-4 form-group">
+                    <label>Mese</label>
+                    <input required class="form-control" placeholder="MM" size="2" type="text" name="expiry_month">
+                  </div>
+                  <div class="col-4 form-group">
+                    <label>Anno</label>
+                    <input required class="form-control" placeholder="YYYY" size="4" type="text" name="expiry_year">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row mt-3">
+                <div class="form-group fw-bold">
+                  <router-link to="/checkout">
+                    <button type="submit" class="form-control btn btn-warning btn-lg"> 
+                      Procedi al pagamento <i class="fa-regular fa-credit-card"></i>
+                    </button>
+                  </router-link>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+
+
+
+          <!-- <div class="text-center" v-if="cart.length > 0">   -->
             <!-- il checkout compare solo se c'è qualcosa nel carrello -->
-            <router-link to="/checkout">
+            <!-- <router-link to="/checkout">
               <button class="btn btn-light btn-lg"> 
                Procedi al pagamento <i class="fa-regular fa-credit-card"></i>
               </button>
-            </router-link>
+            </router-link> -->
 
             <!-- <div class="v-braintree"
               authorization="key da mettere"
@@ -97,7 +163,7 @@
             <!-- <div v-if="responseMessage && cart.length == 0">
               <p class="text-success font-weight-bold">{{ responseMessage }}</p>
             </div> -->
-          </div>
+          <!-- </div> -->
         </div>          
 
       </section> 
@@ -364,8 +430,8 @@ export default {
 .cart {
   position: fixed;
   right: 0;
-  padding: 5px;
   top: 10vh;
+  padding: 5px;
   background-color: #00ccbcaa;
   box-shadow: -2px 2px 10px -2px #00887d;
 
@@ -383,13 +449,14 @@ export default {
 @media screen and (max-width: 768px) {
   .cart {
     width: 100%;
-    margin-top: 50vh;
+    margin-top: 55vh;
     display: block;
     position: fixed;
     bottom: 0;
     left: 0;
     background-color: #00ccbc;
     box-shadow: 0px 0px 0px 0px;
+    overflow-y: auto;
   }
 }
 </style>
