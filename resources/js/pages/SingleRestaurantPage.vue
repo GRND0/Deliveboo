@@ -49,9 +49,10 @@
           </div>   
         </div>
 
-        <!-- Carrello -->
+        
         <div class="col-12 col-md-3 col-lg-2 cart rounded-start">
           <h2 class="mt-2 text-center">Carrello <i class="fa-solid fa-cart-arrow-down"></i></h2>
+          <!-- Carrello -->
           <div class="mb-3" v-if="cart.length > 0">
             <div v-for="dish, i in cart" class="mb-1 d-flex justify-content-between" :key="i">
               <div class="mb-1 d-flex justify-content-between cart-item">
@@ -87,7 +88,7 @@
                   <input required class="form-control mb-2" type="text" name="name" placeholder="Nome">
                 </div>
                 <div class="col-6 col-md-12">
-                  <input required class="form-control mb-2"  type="email" name="email" placeholder="Email">
+                  <input required class="form-control mb-2" @input="verify()" @blur="verify()" @focus="verify()" id="email" type="email" name="email" placeholder="Email">
                 </div>
                 <div class="col-6 col-md-12">
                   <input required class="form-control mb-2"  type="text" name="address" placeholder="Indirizzo">
@@ -131,7 +132,7 @@
               <div class="row mt-3">
                 <div class="form-group fw-bold">
                   <router-link to="/checkout">
-                    <button type="submit" class="form-control btn btn-warning btn-lg"> 
+                    <button disabled="true" id="submit" type="submit" class="form-control btn btn-warning btn-lg"> 
                       Procedi al pagamento <i class="fa-regular fa-credit-card"></i>
                     </button>
                   </router-link>
@@ -139,10 +140,6 @@
               </div>
             </form>
           </div>
-
-
-
-
 
           <!-- <div class="text-center" v-if="cart.length > 0">   -->
             <!-- il checkout compare solo se c'è qualcosa nel carrello -->
@@ -200,43 +197,75 @@ export default {
   },
 
   mounted() {
-    // gestione carrello
-    if (localStorage.getItem('cart')) {
-      try {            
-        this.cart = JSON.parse(localStorage.getItem('cart'));
-        // finding ci serve per gestire un carrello per volta
-        let finding = false;
-        for (const dish in this.dishes) {
-          for (let i = 0; i < this.cart.length; i++) {
-              // se l'id dei piatti nel carrello e gli id dei piatti dell'array originale combaciano, 
-              //ritorno il carrello presente nel localStorage
-            if (this.cart[i].id == this.dishes[dish].id) {
-              this.cart = JSON.parse(localStorage.getItem('cart'));
-              finding = true; break;
-            } else {
-              finding = false;
-            }
-          }
-          // Se finding è true, esco dal ciclo con il break
-          if (finding) {
-            break;
-          } 
-        }
-        // se finding risulta false appare un confirm e se l'utente clicca ok eliminerà il carrello precedente 
-        // mentre cancel ritornerà alla pagina dei ristoranti ma senza eliminare il carrello
-        if (finding == false) {
-          if (confirm("Attenzione! Se passi ad un altro ristorante toglierai tutti i tuoi ordini dal carrello, vuoi continuare?")) {
-            localStorage.removeItem('cart');
-            this.cart = [];
-          } else {
-            history.back(); // rimane sulla pagina corrente
-          }
-        }
+    const url = window.location.href;
+    const id = url.substring(url.lastIndexOf("/") + 1);
+    this.id = id; // nel nostro caso l'id è uno slug e rappresenza il ristorante
 
-      } catch(e) {
-        localStorage.removeItem('cart');
+    // gestione carrello
+    if (localStorage.getItem("id") && localStorage.getItem("id") != this.id) {
+      console.log("ristorante dove si stavano aggiungendo oggetti nel carrello", localStorage.getItem("id"));
+      console.log("nuovo ristorante dove non si può visualizzare il carrello precedente", this.id);
+      if (confirm("Vuoi visualizzare un altro ristorante? Così perderai il tuo carrello")) {
+        localStorage.removeItem("cart");
+        localStorage.removeItem("id");          
+      } else {
+        history.back();   
+        this.cart = JSON.parse(localStorage.getItem("cart"));
+        this.id = JSON.parse(localStorage.getItem("id"));          
       }
     }
+    // i dati del carrello rimangono salvati anche se si ricarica la pagina
+    if (localStorage.getItem("cart")) {
+      try {
+        this.cart = JSON.parse(localStorage.getItem("cart"));
+        this.id = JSON.parse(localStorage.getItem("id"));
+      } catch (e) {
+        localStorage.removeItem("cart");
+        localStorage.removeItem("id");
+      }
+    }
+
+
+    // gestione carrello
+    // if (localStorage.getItem('cart')) {
+    //   try {            
+    //     this.cart = JSON.parse(localStorage.getItem('cart'));
+    //     // finding ci serve per gestire un carrello per volta
+    //     let finding = false;
+    //     for (const dish in this.dishes) {
+    //       for (let i = 0; i < this.cart.length; i++) {
+    //           // se l'id dei piatti nel carrello e gli id dei piatti dell'array originale combaciano, 
+    //           //ritorno il carrello presente nel localStorage
+    //         if (this.cart[i].id == this.dishes[dish].id) {
+    //           this.cart = JSON.parse(localStorage.getItem('cart'));
+    //           finding = true; break;
+    //         } else {
+    //           finding = false;
+    //         }
+    //       }
+    //       // Se finding è true, esco dal ciclo con il break
+    //       if (finding) {
+    //         break;
+    //       } 
+    //     }
+        // se finding risulta false appare un confirm e se l'utente clicca ok eliminerà il carrello precedente 
+        // mentre cancel ritornerà alla pagina dei ristoranti ma senza eliminare il carrello
+
+        // evita di mettere nel carrello piatti di ristoranti differenti
+        // if (finding == false) {
+        //   if (confirm("Attenzione! Se passi ad un altro ristorante toglierai tutti i tuoi ordini dal carrello, vuoi continuare?")) {
+        //     localStorage.removeItem('cart');
+        //     this.cart = [];
+        //   } else {
+        //     this.cart = JSON.parse(localStorage.getItem("cart"));
+        //     history.back(); // rimane sulla pagina corrente
+        //   }
+        // }
+
+    //   } catch(e) {
+    //     localStorage.removeItem('cart');
+    //   }
+    // }
   },
 
   computed: {
@@ -307,6 +336,7 @@ export default {
     saveCart() {
       const parsed = JSON.stringify(this.cart);
       localStorage.setItem('cart', parsed);
+      localStorage.setItem("id", this.id);
     },
 
     // aggiungere un piatto già presente nel carrello (tasto + | clic sul piatto del menù)
@@ -356,6 +386,16 @@ export default {
         }
       }
       return -1;
+    },
+
+    verify() {
+        if (
+            (document.getElementById('email').value.trim() != '')
+        ) {
+            document.getElementById('submit').disabled = false;
+        } else {
+            document.getElementById('submit').disabled = true;
+        }
     },
  
     // onSuccess(payload) {

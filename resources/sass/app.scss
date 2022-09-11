@@ -84,8 +84,12 @@ a {
 .box-shadow {
   border: 1px solid gray;
   box-shadow: -2px 2px 10px -2px #454545;
-  &:active {
+  transition: 1s;
+  &:hover {
     box-shadow: -2px 2px 20px 0px #282828;
+  }
+  &:active {
+    border: 2px solid #00ccbc;
   }
 }
 

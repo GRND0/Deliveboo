@@ -21354,9 +21354,13 @@ a {
 .box-shadow {
   border: 1px solid gray;
   box-shadow: -2px 2px 10px -2px #454545;
+  transition: 1s;
+}
+.box-shadow:hover {
+  box-shadow: -2px 2px 20px 0px #282828;
 }
 .box-shadow:active {
-  box-shadow: -2px 2px 20px 0px #282828;
+  border: 2px solid #00ccbc;
 }
 
 header {

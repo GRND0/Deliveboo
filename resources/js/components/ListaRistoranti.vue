@@ -5,7 +5,7 @@
       <CustomSelettore @opzione="categoriaSelezionata($event)" />
       <div v-if="item.length > 0" class="row">
         <SingleRestaurantCard v-for="(item, index) in item" :key="index" :item="item"
-          class="col-12 col-md-6 ms-translate" />
+          class="col-12 col-md-6 ms-card ms-translate box-shadow" />
       </div>
       <h4 v-else class="text-center mt-5">
         Nessun ristorante corrisponde alle categorie selezionate
@@ -80,5 +80,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.ms-card {
+  width: 48%;
+  margin: 0 1%;
+}
 
 </style>
