@@ -399,26 +399,26 @@ export default {
           && (document.getElementById('address').value.trim() != '')
 
           && ((document.getElementById('phone').value.trim() != '')
-            && ((document.getElementById('phone').value.length) == 10)
-            && !isNaN(document.getElementById('phone').value))
+          && ((document.getElementById('phone').value.length) == 10)
+          && !isNaN(document.getElementById('phone').value))
 
           && (document.getElementById('card_name').value.trim() != '')
 
           && ((document.getElementById('card_no').value.trim() != '') 
-            && ((document.getElementById('card_no').value.length) == 16) 
-            && !isNaN(document.getElementById('card_no').value))
+          && ((document.getElementById('card_no').value.length) == 16) 
+          && !isNaN(document.getElementById('card_no').value))
 
           && ((document.getElementById('cvv').value.trim() != '') 
-            && ((document.getElementById('cvv').value.length) == 3) 
-            && !isNaN((document.getElementById('cvv').value)))
+          && ((document.getElementById('cvv').value.length) == 3) 
+          && !isNaN((document.getElementById('cvv').value)))
 
           && ((document.getElementById('expiry_month').value.trim() != '') 
-            && ((document.getElementById('expiry_month').value) > 0) 
-            && ((document.getElementById('expiry_month').value) <= 12))
+          && ((document.getElementById('expiry_month').value) > 0) 
+          && ((document.getElementById('expiry_month').value) <= 12))
 
           && ((document.getElementById('expiry_year').value.trim() != '') 
-            && ((document.getElementById('expiry_year').value) > 2021))
-            && ((document.getElementById('expiry_year').value) <= 2030))
+          && ((document.getElementById('expiry_year').value) > 2021))
+          && ((document.getElementById('expiry_year').value) <= 2030))
       {
           document.getElementById('submit').disabled = false;
       } else {
