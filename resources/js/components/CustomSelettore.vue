@@ -9,7 +9,7 @@
            @change="$emit('opzione', checkbox)"
            />
     <label
-           class="py-4 text-center d-block card"
+           class="py-4 text-center d-block card my-pointer"
            :for="category.slug"
            >
       {{ category.name }}

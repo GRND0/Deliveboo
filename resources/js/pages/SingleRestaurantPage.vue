@@ -85,16 +85,16 @@
               <div class="form-group row">
                 <h2 class="text-center">Dati del cliente <i class="fa-solid fa-address-card"></i></h2>
                 <div class="col-6 col-md-12">
-                  <input required class="form-control mb-2" type="text" name="name" placeholder="Nome">
+                  <input required class="form-control mb-2" @input="verify()" @blur="verify()" @focus="verify()" id="name" type="text" name="name" placeholder="Nome">
                 </div>
                 <div class="col-6 col-md-12">
                   <input required class="form-control mb-2" @input="verify()" @blur="verify()" @focus="verify()" id="email" type="email" name="email" placeholder="Email">
                 </div>
                 <div class="col-6 col-md-12">
-                  <input required class="form-control mb-2"  type="text" name="address" placeholder="Indirizzo">
+                  <input required class="form-control mb-2" @input="verify()" @blur="verify()" @focus="verify()" id="address" type="text" name="address" placeholder="Indirizzo">
                 </div>
                 <div class="col-6 col-md-12">
-                  <input required class="form-control mb-2"  type="text" name="phone" placeholder="Cellulare (0039...)">
+                  <input required class="form-control mb-2" @input="verify()" @blur="verify()" @focus="verify()" id="phone" type="text" name="phone" placeholder="Cellulare (0039...)" maxlength="10" minlength="10">
                 </div>
               </div>
 
@@ -104,26 +104,26 @@
                 <div class="row px-1">
                   <div class="col-6 col-md-12 form-group">
                     <label>Nome sulla carta</label>
-                    <input required class="form-control" size="4" type="text">
+                    <input required class="form-control" size="4" type="text" @input="verify()" @blur="verify()" @focus="verify()" id="card_name">
                   </div>
                   <div class="col-6 col-md-12 form-group">
                     <label>Numero di carta</label>
-                    <input required autocomplete="off" class="form-control" size="20" type="text" name="card_no" placeholder="1234 5678 0987 0000">
+                    <input @input="verify()" @blur="verify()" @focus="verify()" required autocomplete="off" class="form-control" size="20" type="text" id="card_no" name="card_no" placeholder="1234 5678 0987 0000" maxlength="16" minlength="16">
                   </div>
                 </div>
 
                 <div class="row px-1">
                   <div class="col-4 form-group">
                     <label>CVV</label>
-                    <input required autocomplete="off" class="form-control" placeholder="123" size="3" type="text" name="cvv">
+                    <input @input="verify()" @blur="verify()" @focus="verify()" required autocomplete="off" class="form-control" placeholder="123" size="3" type="text" id="cvv" name="cvv" maxlength="3" minlength="3">
                   </div>
                   <div class="col-4 form-group">
                     <label>Mese</label>
-                    <input required class="form-control" placeholder="MM" size="2" type="text" name="expiry_month">
+                    <input @input="verify()" @blur="verify()" @focus="verify()" required class="form-control" placeholder="MM" size="2" type="text" id="expiry_month" name="expiry_month" maxlength="2" minlength="2">
                   </div>
                   <div class="col-4 form-group">
                     <label>Anno</label>
-                    <input required class="form-control" placeholder="YYYY" size="4" type="text" name="expiry_year">
+                    <input @input="verify()" @blur="verify()" @focus="verify()" required class="form-control" placeholder="YYYY" size="4" type="text" id="expiry_year" name="expiry_year" maxlength="4" minlength="4">
                   </div>
                 </div>
 
@@ -131,11 +131,11 @@
 
               <div class="row mt-3">
                 <div class="form-group fw-bold">
-                  <router-link to="/checkout">
-                    <button disabled="true" id="submit" type="submit" class="form-control btn btn-warning btn-lg"> 
+                  <button disabled="true" id="submit" type="submit" class="form-control btn btn-warning btn-lg"> 
+                    <router-link to="/checkout">
                       Procedi al pagamento <i class="fa-regular fa-credit-card"></i>
-                    </button>
-                  </router-link>
+                    </router-link>
+                  </button>
                 </div>
               </div>
             </form>
@@ -389,13 +389,41 @@ export default {
     },
 
     verify() {
-        if (
-            (document.getElementById('email').value.trim() != '')
-        ) {
-            document.getElementById('submit').disabled = false;
-        } else {
-            document.getElementById('submit').disabled = true;
-        }
+      // let itIsNumber = /^\d{4}$/.test(val);
+
+      if (
+          (document.getElementById('name').value.trim() != '')
+
+          && (document.getElementById('email').value.trim() != '')
+
+          && (document.getElementById('address').value.trim() != '')
+
+          && ((document.getElementById('phone').value.trim() != '')
+            && ((document.getElementById('phone').value.length) == 10)
+            && !isNaN(document.getElementById('phone').value))
+
+          && (document.getElementById('card_name').value.trim() != '')
+
+          && ((document.getElementById('card_no').value.trim() != '') 
+            && ((document.getElementById('card_no').value.length) == 16) 
+            && !isNaN(document.getElementById('card_no').value))
+
+          && ((document.getElementById('cvv').value.trim() != '') 
+            && ((document.getElementById('cvv').value.length) == 3) 
+            && !isNaN((document.getElementById('cvv').value)))
+
+          && ((document.getElementById('expiry_month').value.trim() != '') 
+            && ((document.getElementById('expiry_month').value) > 0) 
+            && ((document.getElementById('expiry_month').value) <= 12))
+
+          && ((document.getElementById('expiry_year').value.trim() != '') 
+            && ((document.getElementById('expiry_year').value) > 2021))
+            && ((document.getElementById('expiry_year').value) <= 2030))
+      {
+          document.getElementById('submit').disabled = false;
+      } else {
+          document.getElementById('submit').disabled = true;
+      }
     },
  
     // onSuccess(payload) {
