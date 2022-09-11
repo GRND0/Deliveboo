@@ -1,6 +1,7 @@
 <template>
   <main>
     <div class="container">
+      <JumboTron />
       <CustomSelettore @opzione="categoriaSelezionata($event)" />
       <div v-if="item.length > 0" class="row">
         <SingleRestaurantCard v-for="(item, index) in item" :key="index" :item="item"
@@ -14,15 +15,18 @@
 </template>
 
 <script>
+import JumboTron from "./JumboTron.vue";
 import SingleRestaurantCard from "./SingleRestaurantCard.vue";
 import CustomSelettore from "./CustomSelettore.vue";
 import axios from "axios";
+import { stripVTControlCharacters } from "util";
 
 export default {
   name: "ListaRistoranti",
   components: {
     SingleRestaurantCard,
     CustomSelettore,
+    JumboTron,
   },
 
   data: function () {
@@ -45,6 +49,7 @@ export default {
 
   created() {
 
+    
   },
 
 
