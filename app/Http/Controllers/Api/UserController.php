@@ -63,44 +63,53 @@ class UserController extends Controller
         }
     }
 
-    // funzione di filtraggio lato server 
+ // funzione di filtraggio lato server 
 
-    public function ricerca(Request $request)
-    {
+ public function ricerca(Request $request)
+ {
 
-        $str = json_decode($request->str) ?? [];
-        sort($str);
+     $str = json_decode($request->str) ?? [];
+     sort($str);
+     $dim = count($str);
 
-        // dd( 'variabile interna', $str);
+     // dd( 'variabile interna', $str);
 
-        // $ristoranti = User::with('categories');
-        if (count($str) == 0) {
-            $ristoranti = User::with('categories')->get();
-            foreach ($ristoranti as $user) {
-                if ($user->image) {
-                    $user->image = url('storage/' . $user->image);
-                }
-            }
-            return response()->json([
-                'success' => true,
-                'results' => $ristoranti,
-                'controllo' => 1
-            ]);
-        }
+     // $ristoranti = User::with('categories');
+     if ($dim == 0) {
+         $ristoranti = User::with('categories')->get();
+         foreach ($ristoranti as $user) {
+             if ($user->image) {
+                 $user->image = url('storage/' . $user->image);
+             }
+         }
+         return response()->json([
+             'success' => true,
+             'results' => $ristoranti,
+             'controllo' => 1
+         ]);
+     }
+     
+     // $ristoranti = User::whereHas('categories', function ($q) use ($str) {
+     //     $q->whereIn('id', $str);
+     // })->get();
 
-        $ristoranti = User::whereHas('categories', function ($q) use ($str) {
-            $q->whereIn('id', $str);
-        })->get();
-        foreach ($ristoranti as $user) {
-            if ($user->image) {
-                $user->image = url('storage/' . $user->image);
-            }
-        }
+     $ristoranti = DB::table('users')
+     ->select('id', 'name', 'restaurant_name', 'restaurant_phone', 'address', 'p_iva', 'slug', 'image', 'link_social_media', 'email')
+     ->join('category_user', 'users.id', '=', 'category_user.user_id')
+     ->whereIn('category_id', $str)
+     ->groupBy('id')
+     ->having(DB::raw('count(id)'), '=', $dim)
+     ->get();
+     foreach ($ristoranti as $user) {
+         if ($user->image) {
+             $user->image = url('storage/' . $user->image);
+         }
+     }
 
-        return response()->json([
-            'success' => true,
-            'results' => $ristoranti,
-            'controllo2' => 2
-        ]);
-    }
+     return response()->json([
+         'success' => true,
+         'results' => $ristoranti,
+         'controllo2' => 2
+     ]);
+ }
 }

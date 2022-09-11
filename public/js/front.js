@@ -5239,35 +5239,29 @@ __webpack_require__.r(__webpack_exports__);
       item: [],
       restaurants: [],
       categoriaRistorante: [],
-      categories_id: [],
-      aaa: false
+      categories_id: []
     };
   },
-  watch: {},
-  created: function created() {
-    this.aaa = true;
-    console.log('aaa', this.aaa);
+  watch: {
+    categoriaRistorante: function categoriaRistorante() {
+      if (this.categoriaRistorante) {
+        this.ristorantiFiltrati;
+      }
+    }
   },
+  created: function created() {},
   methods: {
     // questa funzione serve come toggle per le checkbox
     categoriaSelezionata: function categoriaSelezionata(categoria) {
       this.categoriaRistorante = categoria;
       console.log('categoriaRistorante trasmissione', this.categoriaRistorante);
       return this.categoriaRistorante;
-    },
-    comparatoreArray: function comparatoreArray(array1, array2) {
-      return array2.every(function (element) {
-        return array1.includes(element);
-      });
     }
   },
   computed: {
     ristorantiFiltrati: function ristorantiFiltrati() {
       var _this = this;
 
-      console.log('aaa', this.aaa);
-      this.categoriaRistorante;
-      this.aaa = true;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/users/ricerca', {
         params: {
           str: JSON.stringify(this.categoriaRistorante)
@@ -59818,7 +59812,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Davide\Boolean-htdocs\Deliveboo-Classe62-Team3\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\zefir\Desktop\Git\Classe-62-Team-3\Deliveboo-Classe62-Team3\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
